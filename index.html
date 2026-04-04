@@ -587,8 +587,11 @@
         @media (max-width: 640px) {
             html, body { overflow-x: hidden; }
             .nav-links a { display: none; }
-            .hero { min-height: auto; }
+            .hero { min-height: auto; padding-top: 120px; padding-bottom: 48px; justify-content: flex-end; }
             .hero h1 { font-size: 2em; }
+            .hero .subtitle { margin-bottom: 16px; }
+            .hero .install-box { margin-bottom: 0; }
+            .hero .install-note { margin-top: 14px; }
             .features { grid-template-columns: 1fr; }
             .flow { flex-direction: column; align-items: center; }
             .flow-step { max-width: 100%; min-width: auto; }
