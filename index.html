@@ -598,9 +598,9 @@
     <div class="nav-inner">
         <div class="logo"><span>multi</span>agent</div>
         <div class="nav-links">
-            <a href="#how">작동 방식</a>
-            <a href="#guide">가이드</a>
-            <a href="#install">설치</a>
+            <a href="#how"><span class="txt-ko">작동 방식</span><span class="txt-en" style="display:none;">How</span></a>
+            <a href="#guide"><span class="txt-ko">가이드</span><span class="txt-en" style="display:none;">Guide</span></a>
+            <a href="#install"><span class="txt-ko">설치</span><span class="txt-en" style="display:none;">Install</span></a>
             <button class="theme-toggle" onclick="toggleTheme()" title="테마 변경">
                 <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                 <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -613,19 +613,15 @@
     <h1 class="hero-title-ko">나를 돕는 <span class="accent">AI팀</span> 만들기</h1>
     <h1 class="hero-title-en" style="display:none;">Build Your Own <span class="accent">AI Team</span></h1>
     <p class="subtitle">
-        <span class="txt-ko">터미널, 로컬 서버, 복잡한 설정. 개발자만 쓸 수 있던 AI 에이전트 환경을<br>한 줄로 누구나 시작할 수 있게 만들었습니다.</span>
+        <span class="txt-ko">터미널, 로컬 서버, 복잡한 설정. 개발자만 쓸 수 있던 AI 에이전트 환경을<br>한 줄로 누구나 시작할 수 있게 만든 오픈소스 프로젝트!</span>
         <span class="txt-en" style="display:none;">Terminal, local server, complex setup. We made AI agent environments<br>accessible to everyone with a single command.</span>
-    </p>
-    <p style="color:var(--text-muted); font-size:17px; margin-bottom:48px;">
-        <span class="txt-ko">변호사, 변리사, 회계사, 마케터 &mdash; 일손이 부족한 전문직을 위한 AI 팀. 오픈소스 프로젝트입니다.</span>
-        <span class="txt-en" style="display:none;">Lawyers, accountants, marketers &mdash; an AI team for busy professionals. Open source project.</span>
     </p>
     <div class="install-box">
         <div class="label">Install</div>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sL https://geekalexy.github.io/install.sh | bash');this.innerHTML='<svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;#22C55E&quot; stroke-width=&quot;2.5&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>this.textContent='Copy',2000);">Copy</button>
         <code>curl -sL https://geekalexy.github.io/install.sh | bash</code>
     </div>
-    <p class="install-note">Mac 터미널에 붙여넣기 &middot; 나머지는 자동 &middot; <a href="#install">자세히 보기</a></p>
+    <p class="install-note"><span class="txt-ko">Mac 터미널에 붙여넣기 &middot; 나머지는 자동 &middot; <a href="#install">자세히 보기</a></span><span class="txt-en" style="display:none;">Paste in Mac Terminal &middot; everything else is automatic &middot; <a href="#install">Learn more</a></span></p>
 </div>
 
 <hr class="sep">
@@ -671,6 +667,7 @@
 <div class="section">
     <div class="container">
         <h2><span class="txt-ko">주요 <span class="accent">기능</span></span><span class="txt-en" style="display:none;">Key <span class="accent">Features</span></span></h2>
+        <p class="section-sub"><span class="txt-ko">변호사, 변리사, 회계사, 마케터 등 일손이 부족한 전문직,<br>회사를 운영하는 대표를 위한 AI 팀을 만들어 보세요.</span><span class="txt-en" style="display:none;">Build an AI team for lawyers, accountants, marketers, and business owners<br>who need extra hands.</span></p>
         <div class="features">
             <div class="feature-card">
                 <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -701,8 +698,8 @@
     <div class="container">
         <h2><span class="txt-ko">AI <span class="accent">팀</span> 구성</span><span class="txt-en" style="display:none;">AI <span class="accent">Team</span> Structure</span></h2>
         <div class="org-task-block">
-            <div class="task-cmd">❯ CEO에게 마케팅팀을 구성해줘</div>
-            <div class="task-result">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</div>
+            <div class="task-cmd"><span class="txt-ko">❯ CEO에게 마케팅팀을 구성해줘</span><span class="txt-en" style="display:none;">❯ Ask CEO to build a marketing team</span></div>
+            <div class="task-result"><span class="txt-ko">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</span><span class="txt-en" style="display:none;">→ CEO assigns CMO and auto-builds the team.</span></div>
         </div>
 
         <div class="org-chart">
@@ -711,7 +708,7 @@
             <div class="org-row">
                 <div class="org-card">
                     <div class="org-avatar ceo">C</div>
-                    <div class="org-info"><div class="name">CEO</div><div class="role">총괄 경영</div></div>
+                    <div class="org-info"><div class="name">CEO</div><div class="role"><span class="txt-ko">총괄 경영</span><span class="txt-en" style="display:none;">General Management</span></div></div>
                     <div class="org-status"></div>
                 </div>
             </div>
@@ -719,7 +716,7 @@
             <div class="org-row">
                 <div class="org-card">
                     <div class="org-avatar cmo">M</div>
-                    <div class="org-info"><div class="name">CMO</div><div class="role">마케팅 전략</div></div>
+                    <div class="org-info"><div class="name">CMO</div><div class="role"><span class="txt-ko">마케팅 전략</span><span class="txt-en" style="display:none;">Marketing Strategy</span></div></div>
                     <div class="org-status"></div>
                 </div>
             </div>
@@ -727,22 +724,22 @@
             <div class="org-row">
                 <div class="org-card">
                     <div class="org-avatar ad">A</div>
-                    <div class="org-info"><div class="name">Ad Sales</div><div class="role">광고 영업</div></div>
+                    <div class="org-info"><div class="name">Ad Sales</div><div class="role"><span class="txt-ko">광고 영업</span><span class="txt-en" style="display:none;">Ad Sales</span></div></div>
                     <div class="org-status"></div>
                 </div>
                 <div class="org-card">
                     <div class="org-avatar content">C</div>
-                    <div class="org-info"><div class="name">Content</div><div class="role">콘텐츠</div></div>
+                    <div class="org-info"><div class="name">Content</div><div class="role"><span class="txt-ko">콘텐츠</span><span class="txt-en" style="display:none;">Content</span></div></div>
                     <div class="org-status"></div>
                 </div>
                 <div class="org-card">
                     <div class="org-avatar perf">P</div>
-                    <div class="org-info"><div class="name">Performance</div><div class="role">퍼포먼스</div></div>
+                    <div class="org-info"><div class="name">Performance</div><div class="role"><span class="txt-ko">퍼포먼스</span><span class="txt-en" style="display:none;">Performance</span></div></div>
                     <div class="org-status"></div>
                 </div>
                 <div class="org-card">
                     <div class="org-avatar perf" style="background:#6366F1;">R</div>
-                    <div class="org-info"><div class="name">Researcher</div><div class="role">리서치</div></div>
+                    <div class="org-info"><div class="name">Researcher</div><div class="role"><span class="txt-ko">리서치</span><span class="txt-en" style="display:none;">Research</span></div></div>
                     <div class="org-status"></div>
                 </div>
             </div>
@@ -755,18 +752,18 @@
 <div class="section" id="guide">
     <div class="container">
         <h2><span class="txt-ko">텔레그램 <span class="accent">가이드</span></span><span class="txt-en" style="display:none;">Telegram <span class="accent">Guide</span></span></h2>
-        <p class="section-sub">명령어로 AI 팀을 제어합니다.</p>
+        <p class="section-sub"><span class="txt-ko">명령어로 AI 팀을 제어합니다.</span><span class="txt-en" style="display:none;">Control your AI team with commands.</span></p>
         <table class="guide-table">
             <thead>
-                <tr><th>명령어</th><th>설명</th></tr>
+                <tr><th><span class="txt-ko">명령어</span><span class="txt-en" style="display:none;">Command</span></th><th><span class="txt-ko">설명</span><span class="txt-en" style="display:none;">Description</span></th></tr>
             </thead>
             <tbody>
-                <tr><td><code>/iss</code></td><td>이슈(업무) 목록 보기</td></tr>
-                <tr><td><code>/iss SOC-XX</code></td><td>특정 이슈 상세 보기</td></tr>
-                <tr><td><code>/newiss</code></td><td>새 이슈(업무) 만들기</td></tr>
-                <tr><td><code>/inbox</code></td><td>알림 확인 &mdash; 에이전트 보고</td></tr>
-                <tr><td><code>/heartbeat</code></td><td>에이전트 활동 시작</td></tr>
-                <tr><td>일반 메시지</td><td>AI 비서에게 자유롭게 질문하거나 지시</td></tr>
+                <tr><td><code>/iss</code></td><td><span class="txt-ko">이슈(업무) 목록 보기</span><span class="txt-en" style="display:none;">View issue list</span></td></tr>
+                <tr><td><code>/iss SOC-XX</code></td><td><span class="txt-ko">특정 이슈 상세 보기</span><span class="txt-en" style="display:none;">View issue details</span></td></tr>
+                <tr><td><code>/newiss</code></td><td><span class="txt-ko">새 이슈(업무) 만들기</span><span class="txt-en" style="display:none;">Create new issue</span></td></tr>
+                <tr><td><code>/inbox</code></td><td><span class="txt-ko">알림 확인 &mdash; 에이전트 보고</span><span class="txt-en" style="display:none;">Check notifications</span></td></tr>
+                <tr><td><code>/heartbeat</code></td><td><span class="txt-ko">에이전트 활동 시작</span><span class="txt-en" style="display:none;">Start agent activity</span></td></tr>
+                <tr><td><span class="txt-ko">일반 메시지</span><span class="txt-en" style="display:none;">Message</span></td><td><span class="txt-ko">AI 비서에게 자유롭게 질문하거나 지시</span><span class="txt-en" style="display:none;">Ask or instruct your AI assistant</span></td></tr>
             </tbody>
         </table>
     </div>
@@ -777,7 +774,7 @@
 <div class="section" id="demo">
     <div class="container">
         <h2><span class="txt-ko">5분 <span class="accent">데모</span></span><span class="txt-en" style="display:none;">5-Min <span class="accent">Demo</span></span></h2>
-        <p class="section-sub">텔레그램에서 이렇게 진행됩니다.</p>
+        <p class="section-sub"><span class="txt-ko">텔레그램에서 이렇게 진행됩니다.</span><span class="txt-en" style="display:none;">This is how it works on Telegram.</span></p>
 
         <div class="terminal">
             <div class="terminal-bar">
@@ -790,25 +787,25 @@
                 <div class="t-step">
                     <div class="t-label">Step 1 &mdash; 연결</div>
                     <div class="t-user">/start</div>
-                    <div class="t-bot">연결 완료. AI 팀이 대기 중입니다.</div>
+                    <div class="t-bot"><span class="txt-ko">연결 완료. AI 팀이 대기 중입니다.</span><span class="txt-en" style="display:none;">Connected. Your AI team is ready.</span></div>
                 </div>
                 <div class="t-step">
                     <div class="t-label">Step 2 &mdash; 현황 확인</div>
-                    <div class="t-user">지금 뭐하고 있어?</div>
+                    <div class="t-user"><span class="txt-ko">지금 뭐하고 있어?</span><span class="txt-en" style="display:none;">What are you working on?</span></div>
                     <div class="t-bot">CEO 대기 중 &middot; CMO 마케팅 전략 수립 중 &middot; Content Marketer 블로그 초안 작성 중</div>
                 </div>
                 <div class="t-step">
                     <div class="t-label">Step 3 &mdash; 업무 지시</div>
                     <div class="t-user">/newiss</div>
-                    <div class="t-bot">담당자를 선택해주세요 <span class="t-action">CMO</span> <span class="t-action">Content</span> <span class="t-action">Performance</span></div>
-                    <div class="t-user">인스타그램 마케팅 전략 기획해줘</div>
-                    <div class="t-bot">이슈 생성 완료. CMO가 작업을 시작합니다.</div>
+                    <div class="t-bot"><span class="txt-ko">담당자를 선택해주세요</span><span class="txt-en" style="display:none;">Select assignee</span> <span class="t-action">CMO</span> <span class="t-action">Content</span> <span class="t-action">Performance</span></div>
+                    <div class="t-user"><span class="txt-ko">인스타그램 마케팅 전략 기획해줘</span><span class="txt-en" style="display:none;">Plan an Instagram marketing strategy</span></div>
+                    <div class="t-bot"><span class="txt-ko">이슈 생성 완료. CMO가 작업을 시작합니다.</span><span class="txt-en" style="display:none;">Issue created. CMO starts working.</span></div>
                 </div>
                 <div class="t-step">
                     <div class="t-label">Step 4 &mdash; 승인</div>
-                    <div class="t-bot">CMO가 마케팅 전략 초안을 완료했어요. 확인해주세요.</div>
-                    <div class="t-user"><span class="t-action">승인</span></div>
-                    <div class="t-bot">승인 완료. 다음 단계를 진행합니다.</div>
+                    <div class="t-bot"><span class="txt-ko">CMO가 마케팅 전략 초안을 완료했어요. 확인해주세요.</span><span class="txt-en" style="display:none;">CMO completed the marketing strategy draft. Please review.</span></div>
+                    <div class="t-user"><span class="t-action"><span class="txt-ko">승인</span><span class="txt-en" style="display:none;">Approve</span></span></div>
+                    <div class="t-bot"><span class="txt-ko">승인 완료. 다음 단계를 진행합니다.</span><span class="txt-en" style="display:none;">Approved. Proceeding to next step.</span></div>
                 </div>
             </div>
         </div>
@@ -820,7 +817,7 @@
 <div class="section" id="install">
     <div class="container">
         <h2><span class="txt-ko"><span class="accent">설치</span></span><span class="txt-en" style="display:none;"><span class="accent">Install</span></span></h2>
-        <p class="section-sub">개발 환경 구축, 서버 세팅, 포트 설정 같은 건 없습니다.<br>터미널에 한 줄 붙여넣으면 AI 에이전트 팀이 구성됩니다.</p>
+        <p class="section-sub"><span class="txt-ko">개발 환경 구축, 서버 세팅, 포트 설정 같은 건 없습니다.</span><span class="txt-en" style="display:none;">No dev environment, server setup, or port configuration needed.</span><br><span class="txt-ko">터미널에 한 줄 붙여넣으면 AI 에이전트 팀이 구성됩니다.</span><span class="txt-en" style="display:none;">Paste one line in terminal and your AI team is ready.</span></p>
 
         <div class="install-box" style="margin-bottom:40px;">
             <div class="label">Terminal</div>
@@ -829,16 +826,16 @@
         </div>
 
         <div class="info-card">
-            <strong>필요한 것</strong>
-            <p>Mac 컴퓨터 (항시 가동) + 텔레그램 앱 + Claude 구독 (Pro, Max 이상)</p>
+            <strong><span class="txt-ko">필요한 것</span><span class="txt-en" style="display:none;">Requirements</span></strong>
+            <p><span class="txt-ko">Mac 컴퓨터 (항시 가동) + 텔레그램 앱 + Claude 구독 (Pro, Max 이상)</span><span class="txt-en" style="display:none;">Mac (always on) + Telegram app + Claude subscription (Pro, Max or above)</span></p>
         </div>
         <div class="info-card">
-            <strong>설치 과정</strong>
-            <p>프로젝트명과 텔레그램 봇 토큰만 입력하면 됩니다. 나머지는 스크립트가 알아서 합니다.</p>
+            <strong><span class="txt-ko">설치 과정</span><span class="txt-en" style="display:none;">Process</span></strong>
+            <p><span class="txt-ko">프로젝트명과 텔레그램 봇 토큰만 입력하면 됩니다. 나머지는 스크립트가 알아서 합니다.</span><span class="txt-en" style="display:none;">Just enter project name and Telegram bot token. The script handles the rest.</span></p>
         </div>
         <div class="info-card">
-            <strong>처음이라 어렵다면</strong>
-            <p>AI 직원 구성부터 첫 업무 세팅까지 도와드립니다. 아래로 연락주세요.</p>
+            <strong><span class="txt-ko">처음이라 어렵다면</span><span class="txt-en" style="display:none;">Need help?</span></strong>
+            <p><span class="txt-ko">AI 직원 구성부터 첫 업무 세팅까지 도와드립니다. 아래로 연락주세요.</span><span class="txt-en" style="display:none;">We help with AI team setup and first task configuration. Contact below.</span></p>
         </div>
     </div>
 </div>
@@ -850,20 +847,20 @@
         <h2><span class="txt-ko">자주 묻는 <span class="accent">질문</span></span><span class="txt-en" style="display:none;"><span class="accent">FAQ</span></span></h2>
         <div style="margin-top:32px;">
             <div class="info-card">
-                <strong>프로그래밍 지식이 필요한가요?</strong>
-                <p>전혀 필요 없습니다. 텔레그램으로 대화하듯이 사용합니다.</p>
+                <strong><span class="txt-ko">프로그래밍 지식이 필요한가요?</span><span class="txt-en" style="display:none;">Do I need programming knowledge?</span></strong>
+                <p><span class="txt-ko">전혀 필요 없습니다. 텔레그램으로 대화하듯이 사용합니다.</span><span class="txt-en" style="display:none;">Not at all. Use it like chatting on Telegram.</span></p>
             </div>
             <div class="info-card">
-                <strong>AI 직원은 몇 명까지 가능한가요?</strong>
-                <p>CEO, CMO, 마케터, 영업 등 업종에 맞게 자유롭게 구성합니다.</p>
+                <strong><span class="txt-ko">AI 직원은 몇 명까지 가능한가요?</span><span class="txt-en" style="display:none;">How many AI employees can I have?</span></strong>
+                <p><span class="txt-ko">CEO, CMO, 마케터, 영업 등 업종에 맞게 자유롭게 구성합니다.</span><span class="txt-en" style="display:none;">Freely compose CEO, CMO, marketers, sales — tailored to your industry.</span></p>
             </div>
             <div class="info-card">
-                <strong>비용은 얼마인가요?</strong>
-                <p>오픈소스이므로 무료입니다. Claude 구독(Pro, Max 이상)만 있으면 됩니다.</p>
+                <strong><span class="txt-ko">비용은 얼마인가요?</span><span class="txt-en" style="display:none;">How much does it cost?</span></strong>
+                <p><span class="txt-ko">오픈소스이므로 무료입니다. Claude 구독(Pro, Max 이상)만 있으면 됩니다.</span><span class="txt-en" style="display:none;">Free and open source. Only Claude subscription (Pro, Max or above) required.</span></p>
             </div>
             <div class="info-card">
-                <strong>모바일에서도 되나요?</strong>
-                <p>텔레그램은 물론, 대시보드도 모바일에서 접속 가능합니다.</p>
+                <strong><span class="txt-ko">모바일에서도 되나요?</span><span class="txt-en" style="display:none;">Does it work on mobile?</span></strong>
+                <p><span class="txt-ko">텔레그램은 물론, 대시보드도 모바일에서 접속 가능합니다.</span><span class="txt-en" style="display:none;">Yes. Telegram and dashboard both work on mobile.</span></p>
             </div>
         </div>
     </div>
@@ -871,7 +868,7 @@
 
 <div class="footer">
     <a href="https://github.com/geekalexy/geekalexy.github.io" class="btn-primary" style="margin-bottom:20px;">GitHub</a>
-    <a href="https://t.me/geekalexy" class="btn-ghost">텔레그램 문의</a>
+    <a href="https://t.me/geekalexy" class="btn-ghost"><span class="txt-ko">텔레그램 문의</span><span class="txt-en" style="display:none;">Telegram</span></a>
     <p style="margin-top:40px;">&copy; 2026 multiagent &middot; Open Source Project</p>
 </div>
 
