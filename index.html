@@ -270,6 +270,143 @@
         .feature-card h3 { font-size: 1rem; color: var(--text-white); margin-bottom: 10px; font-weight: 600; }
         .feature-card p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
 
+        /* Org chart */
+        .org-section {
+            background: #1C1C1E;
+            padding: 96px 24px;
+        }
+        .org-section h2 { color: #fff; }
+        .org-section .section-sub { color: #A1A1AA; }
+        .org-goal {
+            max-width: 540px;
+            margin: 0 auto 56px;
+            background: #2C2C2E;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .org-goal .goal-label {
+            font-size: 12px;
+            color: #71717A;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .org-goal .goal-text {
+            font-family: 'SF Mono', ui-monospace, monospace;
+            font-size: 14px;
+            color: #60A5FA;
+            line-height: 1.8;
+        }
+        .org-goal .goal-result {
+            color: #A1A1AA;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .org-chart {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .org-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #2C2C2E;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 14px 20px;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+        .org-card:hover { border-color: rgba(59,130,246,0.3); }
+        .org-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .org-avatar.ceo { background: #3B82F6; }
+        .org-avatar.cmo { background: #8B5CF6; }
+        .org-avatar.ad { background: #F59E0B; }
+        .org-avatar.content { background: #10B981; }
+        .org-avatar.perf { background: #EF4444; }
+        .org-avatar.board { background: #6366F1; }
+        .org-info { text-align: left; }
+        .org-info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .org-info .role {
+            font-size: 12px;
+            color: #71717A;
+        }
+        .org-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22C55E;
+            position: absolute;
+            bottom: 14px;
+            left: 40px;
+            border: 2px solid #2C2C2E;
+        }
+        .org-line-v {
+            width: 1px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            margin: 0 auto;
+        }
+        .org-line-h {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 0;
+            margin: 0 auto;
+            position: relative;
+        }
+        .org-line-h::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+        .org-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .org-branch .org-line-v {
+            height: 24px;
+        }
+        .org-team {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0;
+        }
+        .org-you {
+            font-size: 13px;
+            color: #A1A1AA;
+            margin-bottom: 8px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
         /* Guide table */
         .guide-table {
             width: 100%;
@@ -534,6 +671,96 @@
                 <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
                 <h3>실시간 알림</h3>
                 <p>에이전트가 작업을 완료하거나 승인이 필요하면 텔레그램으로 즉시 알립니다.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Org Chart -->
+<div class="org-section">
+    <div class="container" style="text-align:center;">
+        <h2>AI 팀이 당신의 <span class="accent" style="color:#60A5FA;">목표</span>를 실행합니다</h2>
+        <p class="section-sub">회사의 Goal을 설정하면, CEO가 팀을 구성하고 업무를 분배합니다.</p>
+
+        <div class="org-goal">
+            <div class="goal-label">Task</div>
+            <div class="goal-text">❯ CEO에게 마케팅팀을 구성해줘</div>
+            <div class="goal-result">→ CEO가 CMO를 배치하고, 4명의 실무 에이전트를 구성합니다.</div>
+        </div>
+
+        <div class="org-chart">
+            <!-- Board -->
+            <div class="org-you">Board (당신)</div>
+            <div class="org-line-v"></div>
+
+            <!-- CEO -->
+            <div class="org-card">
+                <div class="org-avatar ceo">C</div>
+                <div class="org-info">
+                    <div class="name">CEO</div>
+                    <div class="role">총괄 경영</div>
+                </div>
+                <div class="org-status"></div>
+            </div>
+            <div class="org-line-v"></div>
+
+            <!-- CMO -->
+            <div class="org-card">
+                <div class="org-avatar cmo">M</div>
+                <div class="org-info">
+                    <div class="name">CMO</div>
+                    <div class="role">마케팅 전략</div>
+                </div>
+                <div class="org-status"></div>
+            </div>
+            <div class="org-line-v"></div>
+
+            <!-- Team row -->
+            <div class="org-team">
+                <div class="org-branch">
+                    <div class="org-line-v"></div>
+                    <div class="org-card">
+                        <div class="org-avatar ad">A</div>
+                        <div class="org-info">
+                            <div class="name">Ad Sales</div>
+                            <div class="role">광고 영업</div>
+                        </div>
+                        <div class="org-status"></div>
+                    </div>
+                </div>
+                <div class="org-branch">
+                    <div class="org-line-v"></div>
+                    <div class="org-card">
+                        <div class="org-avatar content">C</div>
+                        <div class="org-info">
+                            <div class="name">Content</div>
+                            <div class="role">콘텐츠 제작</div>
+                        </div>
+                        <div class="org-status"></div>
+                    </div>
+                </div>
+                <div class="org-branch">
+                    <div class="org-line-v"></div>
+                    <div class="org-card">
+                        <div class="org-avatar perf">P</div>
+                        <div class="org-info">
+                            <div class="name">Performance</div>
+                            <div class="role">퍼포먼스 마케팅</div>
+                        </div>
+                        <div class="org-status"></div>
+                    </div>
+                </div>
+                <div class="org-branch">
+                    <div class="org-line-v"></div>
+                    <div class="org-card">
+                        <div class="org-avatar ad">A</div>
+                        <div class="org-info">
+                            <div class="name">Ad Sales 2</div>
+                            <div class="role">광고주 발굴</div>
+                        </div>
+                        <div class="org-status"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
