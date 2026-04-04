@@ -4,45 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멀티에이전트 AI 회사</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: #e2e8f0;
-            line-height: 1.7;
-            background: #0a0a0f;
+        :root {
+            color-scheme: dark;
+            --bg-primary: #0F0F0F;
+            --bg-secondary: #1F1F1F;
+            --bg-hover: #262626;
+            --border: rgba(255,255,255,0.05);
+            --border-hover: rgba(59,130,246,0.3);
+            --text-white: #FFFFFF;
+            --text-normal: #E5E5E5;
+            --text-muted: #BCBCBC;
+            --text-faint: #A3A3A3;
+            --accent: #3B82F6;
+            --accent-hover: #60A5FA;
+            --accent-glow: rgba(59,130,246,0.15);
         }
-        a { color: #60a5fa; text-decoration: none; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+            color: var(--text-normal);
+            line-height: 1.6;
+            background: var(--bg-primary);
+            font-size: 16px;
+        }
+        a { color: var(--accent-hover); text-decoration: none; transition: color 0.2s; }
         a:hover { color: #93bbfc; }
+        ::selection { background: rgba(59,130,246,0.3); }
+
+        /* Container */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
         /* Nav */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 16px 32px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            z-index: 50;
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--bg-hover);
+            transition: all 0.25s ease;
+        }
+        .nav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .logo {
             font-size: 1.1em;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-white);
             letter-spacing: -0.5px;
         }
-        .logo span { color: #3b82f6; }
-        .nav-links { display: flex; gap: 24px; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 4px; }
         .nav-links a {
-            color: #94a3b8;
-            font-size: 0.9em;
-            transition: color 0.2s;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
         }
-        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover { color: var(--text-white); background: var(--bg-hover); }
 
         /* Hero */
         .hero {
@@ -52,481 +91,503 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px 80px;
+            padding: 96px 24px 64px;
             position: relative;
-            overflow: hidden;
         }
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+            width: 900px;
+            height: 600px;
+            background: radial-gradient(ellipse at 50% 30%, rgba(59,130,246,0.06) 0%, transparent 70%);
             pointer-events: none;
         }
         .hero h1 {
-            font-size: clamp(2.5em, 8vw, 4.5em);
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: -2px;
+            font-size: clamp(2.75rem, 10vw, 4.5rem);
+            font-weight: 700;
+            color: var(--text-white);
+            letter-spacing: -0.02em;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
-        .hero h1 .accent { color: #3b82f6; }
+        .hero h1 .accent { color: var(--accent); }
         .hero .subtitle {
-            font-size: 1.2em;
-            color: #64748b;
-            max-width: 540px;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 560px;
             margin-bottom: 48px;
+            line-height: 1.7;
         }
 
         /* Install box */
         .install-box {
-            background: #111118;
-            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px 28px;
-            max-width: 600px;
+            padding: 24px 28px;
+            max-width: 620px;
             width: 100%;
             text-align: left;
             position: relative;
+            box-shadow: inset 0 1px 0 1px rgba(255,255,255,0.025);
         }
         .install-box .label {
-            font-size: 0.75em;
-            color: #64748b;
+            font-size: 13px;
+            color: var(--text-faint);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            font-weight: 500;
         }
         .install-box code {
             display: block;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            font-size: 0.95em;
-            color: #60a5fa;
-            background: rgba(59,130,246,0.08);
-            padding: 14px 18px;
+            font-family: 'SF Mono', ui-monospace, monospace;
+            font-size: 15px;
+            color: var(--accent-hover);
+            background: rgba(59,130,246,0.06);
+            padding: 16px 20px;
             border-radius: 8px;
+            border: 1px solid rgba(59,130,246,0.1);
             overflow-x: auto;
             white-space: nowrap;
         }
-        .install-box .copy-btn {
+        .copy-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #94a3b8;
-            padding: 6px 14px;
+            top: 24px;
+            right: 24px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-faint);
+            padding: 6px 16px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8em;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
             transition: all 0.2s;
         }
-        .install-box .copy-btn:hover {
-            background: rgba(59,130,246,0.15);
-            color: #60a5fa;
-        }
+        .copy-btn:hover { background: var(--accent-glow); color: var(--accent-hover); border-color: rgba(59,130,246,0.2); }
         .install-note {
-            color: #475569;
-            font-size: 0.85em;
-            margin-top: 16px;
+            color: var(--text-faint);
+            font-size: 14px;
+            margin-top: 20px;
             text-align: center;
         }
 
         /* Section */
         .section {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 80px 20px;
+            padding: 96px 0;
         }
         .section h2 {
-            font-size: 2em;
+            font-size: 2.25rem;
             font-weight: 700;
-            color: #fff;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
+            color: var(--text-white);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
         }
-        .section h2 .accent { color: #3b82f6; }
+        .section h2 .accent { color: var(--accent); }
         .section-sub {
-            color: #64748b;
-            margin-bottom: 40px;
-            font-size: 1.05em;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-size: 1.125rem;
         }
 
         /* Separator */
         .sep {
-            max-width: 860px;
+            max-width: 1120px;
             margin: 0 auto;
             border: none;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid var(--border);
         }
 
         /* Flow */
         .flow {
             display: flex;
             gap: 16px;
-            margin: 40px 0;
+            margin: 48px 0 0;
             flex-wrap: wrap;
             justify-content: center;
         }
         .flow-step {
-            background: #111118;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 16px;
-            padding: 28px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px 28px;
             flex: 1;
-            min-width: 200px;
-            max-width: 240px;
+            min-width: 220px;
+            max-width: 260px;
             text-align: center;
             transition: border-color 0.3s;
+            box-shadow: inset 0 1px 0 1px rgba(255,255,255,0.025);
         }
-        .flow-step:hover { border-color: rgba(59,130,246,0.3); }
-        .flow-step .icon { font-size: 2em; margin-bottom: 12px; }
-        .flow-step h3 { font-size: 1em; color: #fff; margin-bottom: 8px; }
-        .flow-step p { color: #64748b; font-size: 0.9em; }
-        .flow-arrow { display: flex; align-items: center; color: #334155; font-size: 1.2em; }
+        .flow-step:hover { border-color: var(--border-hover); }
+        .flow-step .icon { font-size: 2em; margin-bottom: 16px; }
+        .flow-step h3 { font-size: 1rem; color: var(--text-white); margin-bottom: 8px; font-weight: 600; }
+        .flow-step p { color: var(--text-muted); font-size: 15px; }
+        .flow-arrow { display: flex; align-items: center; color: #333; font-size: 1.2em; }
 
         /* Features */
         .features {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-top: 40px;
+            margin-top: 48px;
         }
         .feature-card {
-            background: #111118;
-            border: 1px solid rgba(255,255,255,0.06);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 28px;
             transition: border-color 0.3s;
+            box-shadow: inset 0 1px 0 1px rgba(255,255,255,0.025);
         }
-        .feature-card:hover { border-color: rgba(59,130,246,0.3); }
-        .feature-card h3 { font-size: 1em; color: #fff; margin-bottom: 8px; }
-        .feature-card p { color: #64748b; font-size: 0.9em; }
+        .feature-card:hover { border-color: var(--border-hover); }
+        .feature-card h3 { font-size: 1rem; color: var(--text-white); margin-bottom: 10px; font-weight: 600; }
+        .feature-card p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
 
         /* Guide table */
         .guide-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 24px;
-            background: #111118;
+            margin-top: 32px;
+            background: var(--bg-secondary);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid var(--border);
         }
         .guide-table th {
-            background: rgba(255,255,255,0.03);
-            padding: 14px 20px;
+            background: rgba(255,255,255,0.02);
+            padding: 16px 24px;
             text-align: left;
             font-weight: 600;
-            color: #94a3b8;
-            font-size: 0.85em;
+            color: var(--text-faint);
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
         .guide-table td {
-            padding: 14px 20px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            color: #cbd5e1;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-normal);
+            font-size: 15px;
         }
         .guide-table code {
-            background: rgba(59,130,246,0.1);
-            color: #60a5fa;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-family: 'SF Mono', monospace;
-            font-size: 0.9em;
+            background: rgba(59,130,246,0.08);
+            color: var(--accent-hover);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-family: 'SF Mono', ui-monospace, monospace;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         /* Demo */
         .demo-step {
-            background: #111118;
-            border: 1px solid rgba(255,255,255,0.06);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 28px;
             margin-bottom: 16px;
-            border-left: 3px solid #3b82f6;
+            border-left: 3px solid var(--accent);
+            box-shadow: inset 0 1px 0 1px rgba(255,255,255,0.025);
         }
-        .demo-step .step-num {
-            display: inline-block;
-            background: #3b82f6;
-            color: #fff;
-            width: 26px;
-            height: 26px;
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--text-white);
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            text-align: center;
-            line-height: 26px;
-            font-size: 0.8em;
+            font-size: 13px;
             font-weight: 700;
-            margin-right: 8px;
+            margin-right: 10px;
         }
-        .demo-step h3 { display: inline; font-size: 1em; color: #fff; }
-        .demo-step p { color: #64748b; margin-top: 8px; font-size: 0.9em; }
+        .demo-step h3 { display: inline; font-size: 1rem; color: var(--text-white); font-weight: 600; }
+        .demo-step p { color: var(--text-muted); margin-top: 10px; font-size: 15px; }
         .chat-example {
             background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 14px 18px;
-            margin-top: 12px;
-            font-family: 'SF Mono', monospace;
-            font-size: 0.85em;
-            color: #94a3b8;
-            line-height: 1.8;
+            padding: 16px 20px;
+            margin-top: 14px;
+            font-family: 'SF Mono', ui-monospace, monospace;
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 2;
         }
-        .chat-example .user { color: #60a5fa; }
-        .chat-example .bot { color: #a78bfa; }
+        .chat-example .user { color: var(--accent-hover); font-weight: 500; }
+        .chat-example .bot { color: #a78bfa; font-weight: 500; }
 
-        /* FAQ */
-        .faq-item {
-            background: #111118;
-            border: 1px solid rgba(255,255,255,0.06);
+        /* Info cards */
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 24px 28px;
             margin-bottom: 12px;
+            box-shadow: inset 0 1px 0 1px rgba(255,255,255,0.025);
         }
-        .faq-item strong { color: #fff; font-size: 0.95em; }
-        .faq-item p { color: #64748b; margin-top: 6px; font-size: 0.9em; }
+        .info-card strong { color: var(--text-white); font-size: 15px; }
+        .info-card p { color: var(--text-muted); margin-top: 6px; font-size: 15px; line-height: 1.7; }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--text-white);
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover { background: #2563eb; color: var(--text-white); }
+        .btn-ghost {
+            display: inline-block;
+            color: var(--text-faint);
+            padding: 12px 24px;
+            font-size: 15px;
+            transition: color 0.2s;
+        }
+        .btn-ghost:hover { color: var(--text-white); }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 80px 24px;
+            border-top: 1px solid var(--border);
         }
-        .footer p { color: #475569; font-size: 0.85em; }
-
-        /* CTA button */
-        .btn-primary {
-            display: inline-block;
-            background: #3b82f6;
-            color: #fff;
-            padding: 14px 36px;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-primary:hover { background: #2563eb; color: #fff; }
-        .btn-ghost {
-            display: inline-block;
-            color: #64748b;
-            padding: 14px 24px;
-            font-size: 0.95em;
-            transition: color 0.2s;
-        }
-        .btn-ghost:hover { color: #fff; }
+        .footer p { color: var(--text-faint); font-size: 14px; }
 
         /* Mobile */
         @media (max-width: 640px) {
-            nav { padding: 12px 16px; }
-            .nav-links { gap: 16px; }
+            .nav-links { gap: 0; }
+            .nav-links a { padding: 8px 8px; font-size: 13px; }
+            .hero { padding: 80px 20px 48px; }
             .hero h1 { font-size: 2.2em; }
+            .hero .subtitle { font-size: 1.1rem; }
+            .section { padding: 64px 0; }
+            .section h2 { font-size: 1.75rem; }
             .features { grid-template-columns: 1fr; }
             .flow { flex-direction: column; align-items: center; }
             .flow-arrow { transform: rotate(90deg); }
-            .install-box { padding: 16px; }
-            .install-box code { font-size: 0.8em; }
+            .install-box { padding: 20px; }
+            .install-box code { font-size: 13px; }
+            .container { padding: 0 16px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Nav -->
 <nav>
-    <div class="logo"><span>multi</span>agent</div>
-    <div class="nav-links">
-        <a href="#how">작동 방식</a>
-        <a href="#guide">가이드</a>
-        <a href="#install">설치</a>
+    <div class="nav-inner">
+        <div class="logo"><span>multi</span>agent</div>
+        <div class="nav-links">
+            <a href="#how">작동 방식</a>
+            <a href="#guide">가이드</a>
+            <a href="#install">설치</a>
+        </div>
     </div>
 </nav>
 
-<!-- Hero -->
 <div class="hero">
-    <h1>나를 돕는<br><span class="accent">멀티에이전트</span> AI 회사</h1>
-    <p class="subtitle">AI 직원(CEO, CMO, 어시스턴트)이 24시간 일하는 나만의 회사를 만들어보세요. 텔레그램으로 지시하고 승인하면 됩니다.</p>
-
+    <h1><span class="accent">멀티에이전트</span> AI 회사</h1>
+    <p class="subtitle">터미널, 로컬 서버, 복잡한 설정.<br>개발자만 쓸 수 있던 AI 에이전트 환경을<br>한 줄로 누구나 시작할 수 있게 만들었습니다.<br>오픈소스 프로젝트입니다.</p>
     <div class="install-box">
-        <div class="label">Get Started</div>
+        <div class="label">Install</div>
         <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sL https://geekalexy.github.io/install.sh | bash');this.textContent='Copied!';">Copy</button>
         <code>curl -sL https://geekalexy.github.io/install.sh | bash</code>
     </div>
-    <p class="install-note">Mac 터미널에 붙여넣기하면 자동 설치됩니다. <a href="#install">자세히 보기</a></p>
+    <p class="install-note">Mac 터미널에 붙여넣기 &middot; 나머지는 자동 &middot; <a href="#install">자세히 보기</a></p>
 </div>
 
-<!-- How it works -->
 <hr class="sep">
+
 <div class="section" id="how">
-    <h2>어떻게 <span class="accent">작동</span>하나요</h2>
-    <p class="section-sub">복잡한 설정 없이 텔레그램 하나로 AI 팀을 운영합니다.</p>
-    <div class="flow">
-        <div class="flow-step">
-            <div class="icon">💬</div>
-            <h3>텔레그램으로 지시</h3>
-            <p>"마케팅 전략 기획해줘"</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-            <div class="icon">🤖</div>
-            <h3>AI 팀이 실행</h3>
-            <p>CEO, CMO, 마케터가 업무 수행</p>
-        </div>
-        <div class="flow-arrow">→</div>
-        <div class="flow-step">
-            <div class="icon">✅</div>
-            <h3>결과 보고</h3>
-            <p>텔레그램으로 보고, 터치 한 번 승인</p>
+    <div class="container">
+        <h2>어떻게 <span class="accent">작동</span>하나요</h2>
+        <p class="section-sub">AI 직원(CEO, CMO, 마케터)에게 텔레그램으로 일을 시키고, 결과를 받습니다.</p>
+        <div class="flow">
+            <div class="flow-step">
+                <div class="icon">💬</div>
+                <h3>텔레그램으로 지시</h3>
+                <p>"마케팅 전략 기획해줘"</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="icon">🤖</div>
+                <h3>AI 팀이 실행</h3>
+                <p>CEO, CMO, 마케터가 업무를 수행합니다</p>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+                <div class="icon">✅</div>
+                <h3>결과 보고</h3>
+                <p>텔레그램으로 보고, 터치 한 번으로 승인</p>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Features -->
 <hr class="sep">
+
 <div class="section">
-    <h2>주요 <span class="accent">기능</span></h2>
-    <div class="features">
-        <div class="feature-card">
-            <h3>🏢 멀티에이전트 팀</h3>
-            <p>CEO, CMO, 콘텐츠 마케터, 퍼포먼스 마케터, 영업 담당 등 AI 직원을 자유롭게 구성합니다.</p>
-        </div>
-        <div class="feature-card">
-            <h3>📱 텔레그램 원격 제어</h3>
-            <p>이동 중에도 스마트폰으로 지시, 확인, 승인. 어디서든 회사를 운영합니다.</p>
-        </div>
-        <div class="feature-card">
-            <h3>📋 이슈 기반 업무 관리</h3>
-            <p>이슈를 만들고 담당자를 지정하면 AI가 자동으로 작업을 시작합니다.</p>
-        </div>
-        <div class="feature-card">
-            <h3>🔔 실시간 알림</h3>
-            <p>에이전트가 작업을 완료하거나 승인이 필요하면 텔레그램으로 즉시 알립니다.</p>
+    <div class="container">
+        <h2>주요 <span class="accent">기능</span></h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>🏢 멀티에이전트 팀</h3>
+                <p>CEO, CMO, 콘텐츠 마케터, 퍼포먼스 마케터, 영업 담당 등 AI 직원을 자유롭게 구성합니다.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📱 텔레그램 원격 제어</h3>
+                <p>이동 중에도 스마트폰으로 지시, 확인, 승인. 어디서든 회사를 운영합니다.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📋 이슈 기반 업무 관리</h3>
+                <p>이슈를 만들고 담당자를 지정하면 AI가 자동으로 작업을 시작합니다.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔔 실시간 알림</h3>
+                <p>에이전트가 작업을 완료하거나 승인이 필요하면 텔레그램으로 즉시 알립니다.</p>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Guide -->
 <hr class="sep">
+
 <div class="section" id="guide">
-    <h2>텔레그램 <span class="accent">가이드</span></h2>
-    <p class="section-sub">명령어로 AI 팀을 제어합니다.</p>
-    <table class="guide-table">
-        <thead>
-            <tr><th>명령어</th><th>설명</th></tr>
-        </thead>
-        <tbody>
-            <tr><td><code>/iss</code></td><td>이슈(업무) 목록 보기</td></tr>
-            <tr><td><code>/iss SOC-XX</code></td><td>특정 이슈 상세 보기</td></tr>
-            <tr><td><code>/newiss</code></td><td>새 이슈(업무) 만들기</td></tr>
-            <tr><td><code>/inbox</code></td><td>알림 확인 (에이전트 보고)</td></tr>
-            <tr><td><code>/heartbeat</code></td><td>에이전트 활동 시작</td></tr>
-            <tr><td>일반 메시지</td><td>AI 비서에게 자유롭게 질문/지시</td></tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h2>텔레그램 <span class="accent">가이드</span></h2>
+        <p class="section-sub">명령어로 AI 팀을 제어합니다.</p>
+        <table class="guide-table">
+            <thead>
+                <tr><th>명령어</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>/iss</code></td><td>이슈(업무) 목록 보기</td></tr>
+                <tr><td><code>/iss SOC-XX</code></td><td>특정 이슈 상세 보기</td></tr>
+                <tr><td><code>/newiss</code></td><td>새 이슈(업무) 만들기</td></tr>
+                <tr><td><code>/inbox</code></td><td>알림 확인 &mdash; 에이전트 보고</td></tr>
+                <tr><td><code>/heartbeat</code></td><td>에이전트 활동 시작</td></tr>
+                <tr><td>일반 메시지</td><td>AI 비서에게 자유롭게 질문하거나 지시</td></tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<!-- Demo -->
 <hr class="sep">
+
 <div class="section" id="demo">
-    <h2>5분 <span class="accent">데모</span></h2>
-    <p class="section-sub">이렇게 사용합니다.</p>
+    <div class="container">
+        <h2>5분 <span class="accent">데모</span></h2>
+        <p class="section-sub">이렇게 사용합니다.</p>
 
-    <div class="demo-step">
-        <span class="step-num">1</span><h3>텔레그램 연결</h3>
-        <p>봇을 추가하고 /start 입력하면 끝.</p>
-        <div class="chat-example">
-            <span class="user">나:</span> /start<br>
-            <span class="bot">봇:</span> 연결 완료! AI 팀이 대기 중입니다.
+        <div class="demo-step">
+            <span class="step-num">1</span><h3>텔레그램 연결</h3>
+            <p>봇을 추가하고 /start 입력하면 끝.</p>
+            <div class="chat-example">
+                <span class="user">나</span> /start<br>
+                <span class="bot">봇</span> 연결 완료! AI 팀이 대기 중입니다.
+            </div>
         </div>
-    </div>
-    <div class="demo-step">
-        <span class="step-num">2</span><h3>현황 확인</h3>
-        <p>한 마디로 회사 전체를 파악합니다.</p>
-        <div class="chat-example">
-            <span class="user">나:</span> 지금 뭐하고 있어?<br>
-            <span class="bot">봇:</span> CEO 대기 중, CMO 마케팅 전략 수립 중...
+        <div class="demo-step">
+            <span class="step-num">2</span><h3>현황 확인</h3>
+            <p>한 마디로 회사 전체를 파악합니다.</p>
+            <div class="chat-example">
+                <span class="user">나</span> 지금 뭐하고 있어?<br>
+                <span class="bot">봇</span> CEO 대기 중, CMO 마케팅 전략 수립 중...
+            </div>
         </div>
-    </div>
-    <div class="demo-step">
-        <span class="step-num">3</span><h3>업무 지시</h3>
-        <p>이슈를 만들면 AI가 알아서 일합니다.</p>
-        <div class="chat-example">
-            <span class="user">나:</span> /newiss → [CMO] → [마케팅]<br>
-            <span class="user">나:</span> 인스타그램 마케팅 전략 기획해줘<br>
-            <span class="bot">봇:</span> 이슈 생성 완료!
+        <div class="demo-step">
+            <span class="step-num">3</span><h3>업무 지시</h3>
+            <p>이슈를 만들면 AI가 알아서 일합니다.</p>
+            <div class="chat-example">
+                <span class="user">나</span> /newiss → [CMO] → [마케팅]<br>
+                <span class="user">나</span> 인스타그램 마케팅 전략 기획해줘<br>
+                <span class="bot">봇</span> 이슈 생성 완료!
+            </div>
         </div>
-    </div>
-    <div class="demo-step">
-        <span class="step-num">4</span><h3>결과 확인 + 승인</h3>
-        <p>보고가 오면 확인하고 승인합니다.</p>
-        <div class="chat-example">
-            <span class="bot">봇:</span> 승인 요청이 들어왔어요~ [승인]<br>
-            <span class="user">나:</span> [승인] 클릭<br>
-            <span class="bot">봇:</span> 승인 완료!
+        <div class="demo-step">
+            <span class="step-num">4</span><h3>결과 확인 + 승인</h3>
+            <p>보고가 오면 확인하고 승인합니다.</p>
+            <div class="chat-example">
+                <span class="bot">봇</span> 승인 요청이 들어왔어요~ [승인]<br>
+                <span class="user">나</span> [승인] 클릭<br>
+                <span class="bot">봇</span> 승인 완료!
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Install -->
 <hr class="sep">
+
 <div class="section" id="install">
-    <h2><span class="accent">설치</span></h2>
-    <p class="section-sub">Mac 터미널에서 한 줄로 시작합니다.</p>
+    <div class="container">
+        <h2><span class="accent">설치</span></h2>
+        <p class="section-sub">개발 환경 구축, 서버 세팅, 포트 설정 같은 건 없습니다.<br>터미널에 한 줄 붙여넣으면 AI 에이전트 팀이 구성됩니다.</p>
 
-    <div class="install-box" style="margin-bottom:32px;">
-        <div class="label">Terminal</div>
-        <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sL https://geekalexy.github.io/install.sh | bash');this.textContent='Copied!';">Copy</button>
-        <code>curl -sL https://geekalexy.github.io/install.sh | bash</code>
-    </div>
+        <div class="install-box" style="margin-bottom:40px;">
+            <div class="label">Terminal</div>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText('curl -sL https://geekalexy.github.io/install.sh | bash');this.textContent='Copied!';">Copy</button>
+            <code>curl -sL https://geekalexy.github.io/install.sh | bash</code>
+        </div>
 
-    <div class="faq-item">
-        <strong>필요한 것</strong>
-        <p>Mac 컴퓨터 (항시 가동) + 텔레그램 앱 + Anthropic API 키</p>
-    </div>
-    <div class="faq-item">
-        <strong>설치 과정</strong>
-        <p>스크립트가 자동으로 AI 에이전트 환경을 구성합니다. 텔레그램 봇 토큰만 입력하면 됩니다.</p>
-    </div>
-    <div class="faq-item">
-        <strong>초기 세팅 지원</strong>
-        <p>AI 직원 구성, 업무 설정 등 초기 세팅을 도와드립니다. 아래로 문의해주세요.</p>
+        <div class="info-card">
+            <strong>필요한 것</strong>
+            <p>Mac 컴퓨터 (항시 가동) + 텔레그램 앱 + Claude 구독 (Pro, Max 이상)</p>
+        </div>
+        <div class="info-card">
+            <strong>설치 과정</strong>
+            <p>프로젝트명과 텔레그램 봇 토큰만 입력하면 됩니다. 나머지는 스크립트가 알아서 합니다.</p>
+        </div>
+        <div class="info-card">
+            <strong>처음이라 어렵다면</strong>
+            <p>AI 직원 구성부터 첫 업무 세팅까지 도와드립니다. 아래로 연락주세요.</p>
+        </div>
     </div>
 </div>
 
-<!-- FAQ -->
 <hr class="sep">
+
 <div class="section">
-    <h2>자주 묻는 <span class="accent">질문</span></h2>
-    <div style="margin-top:24px;">
-        <div class="faq-item">
-            <strong>프로그래밍 지식이 필요한가요?</strong>
-            <p>전혀 필요 없습니다. 텔레그램으로 대화하듯이 사용합니다.</p>
-        </div>
-        <div class="faq-item">
-            <strong>AI 직원은 몇 명까지 가능한가요?</strong>
-            <p>CEO, CMO, 마케터, 영업 등 업종에 맞게 자유롭게 구성합니다.</p>
-        </div>
-        <div class="faq-item">
-            <strong>비용은 얼마인가요?</strong>
-            <p>초기 세팅 무료. AI 사용량에 따른 API 비용만 발생합니다.</p>
-        </div>
-        <div class="faq-item">
-            <strong>모바일에서도 되나요?</strong>
-            <p>텔레그램은 물론, 대시보드도 모바일에서 접속 가능합니다.</p>
+    <div class="container">
+        <h2>자주 묻는 <span class="accent">질문</span></h2>
+        <div style="margin-top:32px;">
+            <div class="info-card">
+                <strong>프로그래밍 지식이 필요한가요?</strong>
+                <p>전혀 필요 없습니다. 텔레그램으로 대화하듯이 사용합니다.</p>
+            </div>
+            <div class="info-card">
+                <strong>AI 직원은 몇 명까지 가능한가요?</strong>
+                <p>CEO, CMO, 마케터, 영업 등 업종에 맞게 자유롭게 구성합니다.</p>
+            </div>
+            <div class="info-card">
+                <strong>비용은 얼마인가요?</strong>
+                <p>오픈소스이므로 무료입니다. Claude 구독(Pro, Max 이상)만 있으면 됩니다.</p>
+            </div>
+            <div class="info-card">
+                <strong>모바일에서도 되나요?</strong>
+                <p>텔레그램은 물론, 대시보드도 모바일에서 접속 가능합니다.</p>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Footer -->
 <div class="footer">
-    <a href="https://t.me/geekalexy" class="btn-primary" style="margin-bottom:16px;">텔레그램 문의하기</a>
-    <br>
-    <a href="mailto:geekalexy@gmail.com" class="btn-ghost">geekalexy@gmail.com</a>
-    <p style="margin-top:32px;">&copy; 2026 multiagent. All rights reserved.</p>
+    <a href="https://github.com/geekalexy/geekalexy.github.io" class="btn-primary" style="margin-bottom:20px;">GitHub</a>
+    <a href="https://t.me/geekalexy" class="btn-ghost">텔레그램 문의</a>
+    <p style="margin-top:40px;">&copy; 2026 multiagent &middot; Open Source Project</p>
 </div>
 
 </body>
