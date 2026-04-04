@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
+        :root, [data-theme="light"] {
             color-scheme: light;
             --bg-primary: #F8F9FA;
             --bg-secondary: #FFFFFF;
@@ -21,6 +21,27 @@
             --accent: #2563EB;
             --accent-hover: #1D4ED8;
             --accent-glow: rgba(37,99,235,0.08);
+            --nav-bg: rgba(248, 249, 250, 0.85);
+            --terminal-bg: #1C1C1E;
+            --terminal-bar: #2C2C2E;
+        }
+        [data-theme="dark"] {
+            color-scheme: dark;
+            --bg-primary: #0F0F0F;
+            --bg-secondary: #1A1A1D;
+            --bg-hover: #262626;
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(59,130,246,0.3);
+            --text-white: #FFFFFF;
+            --text-normal: #E5E5E5;
+            --text-muted: #A1A1AA;
+            --text-faint: #71717A;
+            --accent: #3B82F6;
+            --accent-hover: #60A5FA;
+            --accent-glow: rgba(59,130,246,0.12);
+            --nav-bg: rgba(15, 15, 15, 0.85);
+            --terminal-bg: #111113;
+            --terminal-bar: #1C1C1E;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -51,7 +72,7 @@
             display: flex;
             align-items: center;
             z-index: 50;
-            background: rgba(248, 249, 250, 0.85);
+            background: var(--nav-bg);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             transition: all 0.25s ease;
@@ -82,6 +103,22 @@
             transition: all 0.2s;
         }
         .nav-links a:hover { color: var(--text-white); background: rgba(0,0,0,0.04); }
+        [data-theme="dark"] .nav-links a:hover { background: var(--bg-hover); }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            margin-left: 8px;
+        }
+        .theme-toggle:hover { color: var(--text-white); border-color: var(--border-hover); }
 
         /* Hero */
         .hero {
@@ -274,27 +311,18 @@
         .org-section {
             padding: 96px 0;
         }
-        .org-header {
-            display: flex;
-            align-items: baseline;
-            gap: 20px;
+        .org-task-block {
             margin-bottom: 40px;
-            flex-wrap: wrap;
         }
-        .org-header h2 { margin-bottom: 0; }
-        .org-task-inline {
+        .org-task-block .task-cmd {
             font-family: 'SF Mono', ui-monospace, monospace;
             font-size: 14px;
             color: var(--accent);
-            background: var(--accent-glow);
-            padding: 6px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(37,99,235,0.1);
         }
-        .org-task-result {
+        .org-task-block .task-result {
             color: var(--text-muted);
             font-size: 15px;
-            margin-bottom: 36px;
+            margin-top: 4px;
         }
         .org-chart {
             display: flex;
@@ -426,7 +454,7 @@
 
         /* Demo — Terminal mockup */
         .terminal {
-            background: #1C1C1E;
+            background: var(--terminal-bg);
             border: 1px solid rgba(0,0,0,0.12);
             border-radius: 12px;
             overflow: hidden;
@@ -434,7 +462,7 @@
             margin: 0 auto;
         }
         .terminal-bar {
-            background: #2C2C2E;
+            background: var(--terminal-bar);
             padding: 12px 16px;
             display: flex;
             align-items: center;
@@ -573,6 +601,10 @@
             <a href="#how">작동 방식</a>
             <a href="#guide">가이드</a>
             <a href="#install">설치</a>
+            <button class="theme-toggle" onclick="toggleTheme()" title="테마 변경">
+                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
         </div>
     </div>
 </nav>
@@ -660,11 +692,11 @@
 <!-- Org Chart -->
 <div class="org-section">
     <div class="container">
-        <div class="org-header">
-            <h2>AI <span class="accent">팀</span> 구성</h2>
-            <span class="org-task-inline">❯ CEO에게 마케팅팀을 구성해줘</span>
+        <h2>AI <span class="accent">팀</span> 구성</h2>
+        <div class="org-task-block">
+            <div class="task-cmd">❯ CEO에게 마케팅팀을 구성해줘</div>
+            <div class="task-result">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</div>
         </div>
-        <p class="org-task-result">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</p>
 
         <div class="org-chart">
             <div class="org-you">Board (당신)</div>
@@ -702,8 +734,8 @@
                     <div class="org-status"></div>
                 </div>
                 <div class="org-card">
-                    <div class="org-avatar ad">A</div>
-                    <div class="org-info"><div class="name">Ad Sales 2</div><div class="role">광고주 발굴</div></div>
+                    <div class="org-avatar perf" style="background:#6366F1;">R</div>
+                    <div class="org-info"><div class="name">Researcher</div><div class="role">리서치</div></div>
                     <div class="org-status"></div>
                 </div>
             </div>
@@ -836,5 +868,32 @@
     <p style="margin-top:40px;">&copy; 2026 multiagent &middot; Open Source Project</p>
 </div>
 
+<script>
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme') || 'light';
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateIcon(next);
+}
+function updateIcon(theme) {
+    const sun = document.querySelector('.icon-sun');
+    const moon = document.querySelector('.icon-moon');
+    if (theme === 'dark') {
+        sun.style.display = 'none';
+        moon.style.display = 'block';
+    } else {
+        sun.style.display = 'block';
+        moon.style.display = 'none';
+    }
+}
+// 저장된 테마 로드
+(function() {
+    const saved = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    updateIcon(saved);
+})();
+</script>
 </body>
 </html>
