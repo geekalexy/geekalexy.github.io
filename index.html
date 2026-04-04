@@ -332,18 +332,18 @@
         }
         .org-row {
             display: flex;
-            gap: 12px;
+            gap: 24px;
             justify-content: center;
             flex-wrap: wrap;
         }
         .org-card {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 10px 16px;
+            padding: 14px 22px;
             position: relative;
             transition: border-color 0.3s;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
@@ -388,15 +388,15 @@
         }
         .org-line-v {
             width: 1px;
-            height: 20px;
-            background: var(--border);
+            height: 32px;
+            background: rgba(59,130,246,0.25);
             margin: 0 auto;
         }
         .org-connector {
             display: flex;
             justify-content: center;
             position: relative;
-            height: 20px;
+            height: 32px;
             margin: 0 auto;
             width: 60%;
         }
@@ -407,7 +407,16 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: var(--border);
+            background: rgba(59,130,246,0.25);
+        }
+        .org-connector::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 100%;
+            background: rgba(59,130,246,0.25);
         }
         .org-you {
             font-size: 12px;
