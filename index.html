@@ -577,16 +577,53 @@
         /* Mobile */
         @media (max-width: 640px) {
             .nav-links { gap: 0; }
-            .nav-links a { padding: 8px 8px; font-size: 13px; }
-            .hero { padding: 80px 20px 48px; }
-            .hero h1 { font-size: 2.2em; }
-            .hero .subtitle { font-size: 1.1rem; }
-            .section { padding: 64px 0; }
-            .section h2 { font-size: 1.75rem; }
+            .nav-links a { padding: 6px 6px; font-size: 12px; }
+            .theme-toggle { width: 32px; height: 32px; margin-left: 4px; }
+            .hero { padding: 80px 16px 40px; min-height: auto; }
+            .hero h1 { font-size: 1.8em; letter-spacing: -1px; }
+            .hero .subtitle { font-size: 1rem; margin-bottom: 16px; }
+            .section { padding: 48px 0; }
+            .section h2 { font-size: 1.5rem; }
+            .section-sub { font-size: 0.95rem; margin-bottom: 28px; }
             .features { grid-template-columns: 1fr; }
-            .flow { flex-direction: column; align-items: center; }
+            .feature-card { padding: 20px; }
+            .flow { flex-direction: column; align-items: center; gap: 8px; }
+            .flow-step { max-width: 100%; min-width: auto; padding: 20px; }
             .flow-arrow { transform: rotate(90deg); }
-            .install-box { padding: 20px; }
+            .flow-arrow svg { width: 18px; height: 18px; }
+            .install-box { padding: 16px; }
+            .install-box code { font-size: 11px; padding: 12px 14px; }
+            .install-box .label { font-size: 11px; }
+            .copy-btn { padding: 4px 10px; font-size: 11px; top: 16px; right: 16px; }
+            .install-note { font-size: 12px; }
+            .container { padding: 0 16px; }
+            /* Org chart mobile */
+            .org-task-block .task-cmd { font-size: 12px; }
+            .org-task-block .task-result { font-size: 13px; }
+            .org-row { gap: 8px; }
+            .org-card { padding: 8px 12px; gap: 8px; }
+            .org-avatar { width: 28px; height: 28px; font-size: 11px; }
+            .org-info .name { font-size: 12px; }
+            .org-info .role { font-size: 10px; }
+            .org-status { width: 6px; height: 6px; left: 30px; bottom: 8px; }
+            .org-connector { width: 90%; }
+            /* Guide table mobile */
+            .guide-table th, .guide-table td { padding: 12px 14px; font-size: 13px; }
+            .guide-table code { font-size: 12px; padding: 3px 8px; }
+            /* Terminal demo mobile */
+            .terminal { border-radius: 8px; }
+            .terminal-body { padding: 16px; font-size: 12px; line-height: 2; }
+            .t-label { font-size: 10px; }
+            .t-step { margin-bottom: 14px; padding-bottom: 14px; }
+            .t-action { font-size: 11px; padding: 2px 8px; }
+            /* Info cards mobile */
+            .info-card { padding: 18px 20px; }
+            .info-card strong { font-size: 14px; }
+            .info-card p { font-size: 13px; }
+            /* Footer mobile */
+            .footer { padding: 48px 16px; }
+            .btn-primary { padding: 12px 28px; font-size: 0.95rem; }
+            .btn-ghost { font-size: 13px; }
             .install-box code { font-size: 13px; }
             .container { padding: 0 16px; }
         }
