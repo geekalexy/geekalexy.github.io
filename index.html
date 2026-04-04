@@ -272,64 +272,63 @@
 
         /* Org chart */
         .org-section {
-            background: #1C1C1E;
-            padding: 96px 24px;
+            padding: 96px 0;
         }
-        .org-section h2 { color: #fff; }
-        .org-section .section-sub { color: #A1A1AA; }
-        .org-goal {
-            max-width: 540px;
-            margin: 0 auto 56px;
-            background: #2C2C2E;
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px;
-            padding: 20px 24px;
-            text-align: center;
+        .org-header {
+            display: flex;
+            align-items: baseline;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
-        .org-goal .goal-label {
-            font-size: 12px;
-            color: #71717A;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .org-goal .goal-text {
+        .org-header h2 { margin-bottom: 0; }
+        .org-task-inline {
             font-family: 'SF Mono', ui-monospace, monospace;
             font-size: 14px;
-            color: #60A5FA;
-            line-height: 1.8;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(37,99,235,0.1);
         }
-        .org-goal .goal-result {
-            color: #A1A1AA;
-            font-size: 14px;
-            margin-top: 8px;
+        .org-task-result {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 36px;
         }
         .org-chart {
-            max-width: 720px;
-            margin: 0 auto;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .org-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         .org-card {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 12px;
-            background: #2C2C2E;
-            border: 1px solid rgba(255,255,255,0.06);
+            gap: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 14px 20px;
+            padding: 10px 16px;
             position: relative;
             transition: border-color 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
-        .org-card:hover { border-color: rgba(59,130,246,0.3); }
+        .org-card:hover { border-color: var(--border-hover); }
         .org-avatar {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: #fff;
             flex-shrink: 0;
@@ -339,70 +338,52 @@
         .org-avatar.ad { background: #F59E0B; }
         .org-avatar.content { background: #10B981; }
         .org-avatar.perf { background: #EF4444; }
-        .org-avatar.board { background: #6366F1; }
         .org-info { text-align: left; }
         .org-info .name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: #fff;
+            color: var(--text-white);
         }
         .org-info .role {
-            font-size: 12px;
-            color: #71717A;
+            font-size: 11px;
+            color: var(--text-faint);
         }
         .org-status {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: #22C55E;
             position: absolute;
-            bottom: 14px;
-            left: 40px;
-            border: 2px solid #2C2C2E;
+            bottom: 10px;
+            left: 36px;
+            border: 2px solid var(--bg-secondary);
         }
         .org-line-v {
             width: 1px;
-            height: 32px;
-            background: rgba(255,255,255,0.1);
+            height: 20px;
+            background: var(--border);
             margin: 0 auto;
         }
-        .org-line-h {
+        .org-connector {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            gap: 0;
-            margin: 0 auto;
             position: relative;
+            height: 20px;
+            margin: 0 auto;
+            width: 60%;
         }
-        .org-line-h::before {
+        .org-connector::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: 1px;
-            background: rgba(255,255,255,0.1);
-        }
-        .org-branch {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .org-branch .org-line-v {
-            height: 24px;
-        }
-        .org-team {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 0;
+            background: var(--border);
         }
         .org-you {
-            font-size: 13px;
-            color: #A1A1AA;
-            margin-bottom: 8px;
+            font-size: 12px;
+            color: var(--text-faint);
             font-weight: 500;
             letter-spacing: 0.5px;
         }
@@ -678,88 +659,52 @@
 
 <!-- Org Chart -->
 <div class="org-section">
-    <div class="container" style="text-align:center;">
-        <h2>AI 팀이 당신의 <span class="accent" style="color:#60A5FA;">목표</span>를 실행합니다</h2>
-        <p class="section-sub">회사의 Goal을 설정하면, CEO가 팀을 구성하고 업무를 분배합니다.</p>
-
-        <div class="org-goal">
-            <div class="goal-label">Task</div>
-            <div class="goal-text">❯ CEO에게 마케팅팀을 구성해줘</div>
-            <div class="goal-result">→ CEO가 CMO를 배치하고, 4명의 실무 에이전트를 구성합니다.</div>
+    <div class="container">
+        <div class="org-header">
+            <h2>AI <span class="accent">팀</span> 구성</h2>
+            <span class="org-task-inline">❯ CEO에게 마케팅팀을 구성해줘</span>
         </div>
+        <p class="org-task-result">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</p>
 
         <div class="org-chart">
-            <!-- Board -->
             <div class="org-you">Board (당신)</div>
             <div class="org-line-v"></div>
-
-            <!-- CEO -->
-            <div class="org-card">
-                <div class="org-avatar ceo">C</div>
-                <div class="org-info">
-                    <div class="name">CEO</div>
-                    <div class="role">총괄 경영</div>
+            <div class="org-row">
+                <div class="org-card">
+                    <div class="org-avatar ceo">C</div>
+                    <div class="org-info"><div class="name">CEO</div><div class="role">총괄 경영</div></div>
+                    <div class="org-status"></div>
                 </div>
-                <div class="org-status"></div>
             </div>
             <div class="org-line-v"></div>
-
-            <!-- CMO -->
-            <div class="org-card">
-                <div class="org-avatar cmo">M</div>
-                <div class="org-info">
-                    <div class="name">CMO</div>
-                    <div class="role">마케팅 전략</div>
+            <div class="org-row">
+                <div class="org-card">
+                    <div class="org-avatar cmo">M</div>
+                    <div class="org-info"><div class="name">CMO</div><div class="role">마케팅 전략</div></div>
+                    <div class="org-status"></div>
                 </div>
-                <div class="org-status"></div>
             </div>
-            <div class="org-line-v"></div>
-
-            <!-- Team row -->
-            <div class="org-team">
-                <div class="org-branch">
-                    <div class="org-line-v"></div>
-                    <div class="org-card">
-                        <div class="org-avatar ad">A</div>
-                        <div class="org-info">
-                            <div class="name">Ad Sales</div>
-                            <div class="role">광고 영업</div>
-                        </div>
-                        <div class="org-status"></div>
-                    </div>
+            <div class="org-connector"></div>
+            <div class="org-row">
+                <div class="org-card">
+                    <div class="org-avatar ad">A</div>
+                    <div class="org-info"><div class="name">Ad Sales</div><div class="role">광고 영업</div></div>
+                    <div class="org-status"></div>
                 </div>
-                <div class="org-branch">
-                    <div class="org-line-v"></div>
-                    <div class="org-card">
-                        <div class="org-avatar content">C</div>
-                        <div class="org-info">
-                            <div class="name">Content</div>
-                            <div class="role">콘텐츠 제작</div>
-                        </div>
-                        <div class="org-status"></div>
-                    </div>
+                <div class="org-card">
+                    <div class="org-avatar content">C</div>
+                    <div class="org-info"><div class="name">Content</div><div class="role">콘텐츠</div></div>
+                    <div class="org-status"></div>
                 </div>
-                <div class="org-branch">
-                    <div class="org-line-v"></div>
-                    <div class="org-card">
-                        <div class="org-avatar perf">P</div>
-                        <div class="org-info">
-                            <div class="name">Performance</div>
-                            <div class="role">퍼포먼스 마케팅</div>
-                        </div>
-                        <div class="org-status"></div>
-                    </div>
+                <div class="org-card">
+                    <div class="org-avatar perf">P</div>
+                    <div class="org-info"><div class="name">Performance</div><div class="role">퍼포먼스</div></div>
+                    <div class="org-status"></div>
                 </div>
-                <div class="org-branch">
-                    <div class="org-line-v"></div>
-                    <div class="org-card">
-                        <div class="org-avatar ad">A</div>
-                        <div class="org-info">
-                            <div class="name">Ad Sales 2</div>
-                            <div class="role">광고주 발굴</div>
-                        </div>
-                        <div class="org-status"></div>
-                    </div>
+                <div class="org-card">
+                    <div class="org-avatar ad">A</div>
+                    <div class="org-info"><div class="name">Ad Sales 2</div><div class="role">광고주 발굴</div></div>
+                    <div class="org-status"></div>
                 </div>
             </div>
         </div>
