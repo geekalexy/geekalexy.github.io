@@ -583,6 +583,117 @@
         }
         .footer p { color: var(--text-faint); font-size: 14px; }
 
+        /* Jarvis Section */
+        .jarvis-section {
+            padding: 96px 0;
+        }
+        .jarvis-headline {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-white);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+        .jarvis-headline .accent { color: var(--accent); }
+        .jarvis-sub {
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+        .jarvis-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        .jarvis-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .jarvis-card:hover { border-color: var(--border-hover); }
+        .jarvis-card .jc-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(37,99,235,0.06);
+            border: 1px solid rgba(37,99,235,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .jarvis-card h3 { font-size: 17px; color: var(--text-white); margin-bottom: 10px; font-weight: 600; }
+        .jarvis-card p { color: var(--text-muted); font-size: 16px; line-height: 1.7; }
+        .jarvis-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .jarvis-flow-node {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 160px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .jarvis-flow-node.highlight {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
+        }
+        .jarvis-flow-node .jf-label {
+            font-size: 12px;
+            color: var(--text-faint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .jarvis-flow-node .jf-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+        .jarvis-flow-node .jf-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .jarvis-flow-arrow {
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .jarvis-flow-arrow .arrow-label {
+            font-size: 11px;
+            color: var(--text-faint);
+            font-weight: 500;
+        }
+        .jarvis-punchline {
+            text-align: center;
+            padding: 24px;
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
+            border: 1px solid var(--border-hover);
+            border-radius: 12px;
+        }
+        .jarvis-punchline p {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-white);
+        }
+        .jarvis-punchline .em { color: var(--accent); }
+
         /* Mobile */
         @media (max-width: 640px) {
             html, body { overflow-x: hidden; }
@@ -599,6 +710,10 @@
             .flow { flex-direction: column; align-items: center; }
             .flow-step { max-width: 100%; min-width: auto; }
             .flow-arrow { transform: rotate(90deg); }
+            .jarvis-cards { grid-template-columns: 1fr; }
+            .jarvis-flow { flex-direction: column; }
+            .jarvis-flow-arrow { transform: rotate(90deg); }
+            .jarvis-flow-node { min-width: auto; width: 100%; }
             .install-box code { font-size: 12px; }
             .org-row { gap: 8px; }
             .org-connector { width: 90%; }
@@ -614,6 +729,7 @@
         <div class="logo"><span>my</span>crew</div>
         <div class="nav-links">
             <a href="#how"><span class="txt-ko">작동 방식</span><span class="txt-en" style="display:none;">How</span></a>
+            <a href="#jarvis"><span class="txt-ko">자비스</span><span class="txt-en" style="display:none;">Jarvis</span></a>
             <a href="#guide"><span class="txt-ko">가이드</span><span class="txt-en" style="display:none;">Guide</span></a>
             <a href="#install"><span class="txt-ko">설치</span><span class="txt-en" style="display:none;">Install</span></a>
             <button class="theme-toggle" onclick="toggleTheme()" title="테마 변경">
@@ -674,6 +790,79 @@
                 <h3><span class="txt-ko">보고</span><span class="txt-en" style="display:none;">Report</span></h3>
                 <p><span class="txt-ko">텔레그램으로 결과 보고, 터치 한 번으로 승인</span><span class="txt-en" style="display:none;">Get reports on Telegram, approve with one tap</span></p>
             </div>
+        </div>
+    </div>
+</div>
+
+<hr class="sep">
+
+<!-- 자비스(C2) 기능 소개 -->
+<div class="jarvis-section" id="jarvis">
+    <div class="container">
+        <h2 class="jarvis-headline">
+            <span class="txt-ko"><span class="accent">자비스</span> — AI가 AI를 관리합니다</span>
+            <span class="txt-en" style="display:none;"><span class="accent">Jarvis</span> — AI That Manages AI</span>
+        </h2>
+        <p class="jarvis-sub">
+            <span class="txt-ko">사람이 병목이 되지 않도록, 자비스(C2)는 당신의 AI 팀을 24시간 감독하고,<br>작업을 분배하며, 문제가 생기면 스스로 복구합니다.</span>
+            <span class="txt-en" style="display:none;">Jarvis (C2) supervises your AI team 24/7, distributes tasks,<br>and auto-recovers when problems occur — so you're never the bottleneck.</span>
+        </p>
+
+        <div class="jarvis-cards">
+            <div class="jarvis-card">
+                <div class="jc-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                </div>
+                <h3><span class="txt-ko">자동 작업 분배</span><span class="txt-en" style="display:none;">Auto Task Distribution</span></h3>
+                <p><span class="txt-ko">CEO 에이전트가 업무를 분석하고, 적합한 하위 에이전트에게 자동으로 위임합니다. 직접 하나하나 지시할 필요가 없습니다.</span><span class="txt-en" style="display:none;">The CEO agent analyzes tasks and automatically delegates to the right sub-agents. No need to instruct each one individually.</span></p>
+            </div>
+            <div class="jarvis-card">
+                <div class="jc-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3><span class="txt-ko">장애 자동 복구</span><span class="txt-en" style="display:none;">Auto Failure Recovery</span></h3>
+                <p><span class="txt-ko">에이전트 이상을 감지하면 자동으로 재시작하고 보고합니다. 당신이 잠든 사이에도 팀은 멈추지 않습니다.</span><span class="txt-en" style="display:none;">Detects agent failures, auto-restarts and reports. Your team keeps running even while you sleep.</span></p>
+            </div>
+            <div class="jarvis-card">
+                <div class="jc-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                </div>
+                <h3><span class="txt-ko">승인 워크플로</span><span class="txt-en" style="display:none;">Approval Workflows</span></h3>
+                <p><span class="txt-ko">중요한 결정은 텔레그램으로 당신의 승인을 받은 후 진행합니다. 완전 자율이 아닌, 사람이 통제하는 AI팀입니다.</span><span class="txt-en" style="display:none;">Critical decisions require your approval via Telegram before proceeding. Not fully autonomous — a human-controlled AI team.</span></p>
+            </div>
+        </div>
+
+        <div class="jarvis-flow">
+            <div class="jarvis-flow-node">
+                <div class="jf-label"><span class="txt-ko">당신</span><span class="txt-en" style="display:none;">You</span></div>
+                <div class="jf-name">Board</div>
+                <div class="jf-desc"><span class="txt-ko">텔레그램으로 지시</span><span class="txt-en" style="display:none;">Instruct via Telegram</span></div>
+            </div>
+            <div class="jarvis-flow-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <span class="arrow-label"><span class="txt-ko">지시</span><span class="txt-en" style="display:none;">Instruct</span></span>
+            </div>
+            <div class="jarvis-flow-node highlight">
+                <div class="jf-label"><span class="txt-ko">AI 관리자</span><span class="txt-en" style="display:none;">AI Manager</span></div>
+                <div class="jf-name"><span class="txt-ko">자비스 (C2)</span><span class="txt-en" style="display:none;">Jarvis (C2)</span></div>
+                <div class="jf-desc"><span class="txt-ko">24시간 감독 · 분배 · 복구</span><span class="txt-en" style="display:none;">24/7 Supervise · Distribute · Recover</span></div>
+            </div>
+            <div class="jarvis-flow-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <span class="arrow-label"><span class="txt-ko">위임</span><span class="txt-en" style="display:none;">Delegate</span></span>
+            </div>
+            <div class="jarvis-flow-node">
+                <div class="jf-label"><span class="txt-ko">실무</span><span class="txt-en" style="display:none;">Workers</span></div>
+                <div class="jf-name"><span class="txt-ko">에이전트 팀</span><span class="txt-en" style="display:none;">Agent Team</span></div>
+                <div class="jf-desc"><span class="txt-ko">CEO · CMO · 마케터 · 리서처</span><span class="txt-en" style="display:none;">CEO · CMO · Marketer · Researcher</span></div>
+            </div>
+        </div>
+
+        <div class="jarvis-punchline">
+            <p>
+                <span class="txt-ko">다른 도구는 에이전트를 만들어주지만,<br>mycrew는 에이전트를 <span class="em">관리</span>해줍니다.</span>
+                <span class="txt-en" style="display:none;">Other tools create agents for you.<br>mycrew <span class="em">manages</span> them.</span>
+            </p>
         </div>
     </div>
 </div>
