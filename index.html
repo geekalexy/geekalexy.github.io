@@ -844,54 +844,56 @@
 
         /* Before/After Compare Section */
         .compare-section { padding: 80px 0; }
-        .compare-headline { font-size: 2em; font-weight: 800; color: var(--text-white); text-align: center; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .compare-headline { font-size: 2.25em; font-weight: 700; color: var(--text-white); letter-spacing: -0.02em; margin-bottom: 12px; }
         .compare-headline .accent { color: var(--accent); }
-        .compare-sub { text-align: center; color: var(--text-muted); font-size: 17px; margin-bottom: 32px; }
-        .compare-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; }
-        .compare-tab {
-            padding: 10px 28px;
-            border-radius: 24px;
-            border: 1px solid var(--border);
+        .compare-sub { color: var(--text-muted); font-size: 1.125rem; margin-bottom: 48px; }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
             background: var(--bg-secondary);
-            color: var(--text-muted);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s;
-        }
-        .compare-tab:hover { border-color: var(--border-hover); }
-        .compare-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-        .compare-tab.active-before { background: #EF4444; color: #fff; border-color: #EF4444; }
-        .compare-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-        .compare-card {
-            padding: 24px;
             border-radius: 12px;
+            overflow: hidden;
             border: 1px solid var(--border);
-            background: var(--bg-secondary);
-            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
-        .compare-card:hover { border-color: var(--border-hover); }
-        .compare-card .cc-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .compare-table thead th {
+            padding: 20px 24px;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+        }
+        .compare-table thead th:first-child {
+            background: transparent;
             color: var(--text-faint);
-            margin-bottom: 8px;
-            font-weight: 600;
+            width: 25%;
         }
-        .compare-card h3 {
-            font-size: 16px;
+        .compare-table thead th.col-before {
+            background: rgba(239,68,68,0.04);
+            color: #EF4444;
+            width: 37.5%;
+        }
+        .compare-table thead th.col-after {
+            background: rgba(34,197,94,0.04);
+            color: #22C55E;
+            width: 37.5%;
+        }
+        .compare-table tbody td {
+            padding: 18px 24px;
+            font-size: 15px;
+            color: var(--text-normal);
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        .compare-table tbody td:first-child {
+            font-weight: 600;
             color: var(--text-white);
-            margin-bottom: 8px;
-            font-weight: 600;
+            font-size: 14px;
         }
-        .compare-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
-        .compare-card.before { border-left: 3px solid #EF4444; }
-        .compare-card.after { border-left: 3px solid #22C55E; }
+        .compare-table tbody td.td-before { color: var(--text-muted); }
+        .compare-table tbody td.td-after { color: var(--text-white); font-weight: 500; }
+        .compare-table tbody tr:last-child td { border-bottom: none; }
         .compare-punchline {
             text-align: center;
             margin-top: 40px;
@@ -902,6 +904,9 @@
         }
         .compare-punchline p { font-size: 17px; color: var(--text-white); font-weight: 500; line-height: 1.7; }
         .compare-punchline .em { color: var(--accent); font-weight: 700; }
+        @media (max-width: 640px) {
+            .compare-table thead th, .compare-table tbody td { padding: 12px 14px; font-size: 13px; }
+        }
 
         /* Use Cases Section */
         .usecase-section { padding: 96px 0; }
@@ -1181,93 +1186,50 @@
         </h2>
         <p class="compare-sub">
             <span class="txt-ko">에이전트만 쓸 때와, AI 비서가 관리할 때의 차이</span>
-            <span class="txt-en" style="display:none;">The difference between using agents alone vs. having AI assistant manage them</span>
+            <span class="txt-en" style="display:none;">The difference between agents alone vs. AI assistant managing them</span>
         </p>
 
-        <div class="compare-tabs">
-            <button class="compare-tab active-before" data-view="before" onclick="switchCompare('before')">
-                <span class="txt-ko">Before — 에이전트만</span>
-                <span class="txt-en" style="display:none;">Before — Agents Only</span>
-            </button>
-            <button class="compare-tab active" data-view="after" onclick="switchCompare('after')">
-                <span class="txt-ko">After — mycrew + AI 비서</span>
-                <span class="txt-en" style="display:none;">After — mycrew + AI assistant</span>
-            </button>
-        </div>
-
-        <div class="compare-grid">
-            <!-- 에이전트 관리 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">에이전트 관리</span><span class="txt-en" style="display:none;">Agent Management</span></div>
-                <h3><span class="txt-ko">수동으로 각 에이전트에 지시</span><span class="txt-en" style="display:none;">Manually instruct each agent</span></h3>
-                <p><span class="txt-ko">5개 에이전트에 개별적으로 작업을 배분하고, 진행 상황을 하나씩 확인해야 합니다.</span><span class="txt-en" style="display:none;">Distribute tasks to 5 agents individually and check progress one by one.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">에이전트 관리</span><span class="txt-en" style="display:none;">Agent Management</span></div>
-                <h3><span class="txt-ko">AI 비서가 자동 분배 및 관리</span><span class="txt-en" style="display:none;">AI assistant auto-distributes & manages</span></h3>
-                <p><span class="txt-ko">한 번 지시하면 AI 비서가 적절한 에이전트에 작업을 배분하고 진행을 감독합니다.</span><span class="txt-en" style="display:none;">One instruction and AI assistant assigns tasks to the right agents and supervises progress.</span></p>
-            </div>
-
-            <!-- 장애 대응 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">장애 대응</span><span class="txt-en" style="display:none;">Failure Response</span></div>
-                <h3><span class="txt-ko">직접 확인하고 재시작</span><span class="txt-en" style="display:none;">Manually check & restart</span></h3>
-                <p><span class="txt-ko">에이전트가 멈추면 대시보드에서 직접 확인하고 수동으로 재시작해야 합니다.</span><span class="txt-en" style="display:none;">When an agent stops, you must check the dashboard and manually restart.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">장애 대응</span><span class="txt-en" style="display:none;">Failure Response</span></div>
-                <h3><span class="txt-ko">자동 감지 및 복구</span><span class="txt-en" style="display:none;">Auto-detect & recover</span></h3>
-                <p><span class="txt-ko">AI 비서가 이상을 감지하면 자동으로 복구하고, 텔레그램으로 결과를 보고합니다.</span><span class="txt-en" style="display:none;">AI assistant auto-recovers on detection and reports via Telegram.</span></p>
-            </div>
-
-            <!-- 업무 보고 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">업무 보고</span><span class="txt-en" style="display:none;">Work Reports</span></div>
-                <h3><span class="txt-ko">대시보드에서 직접 확인</span><span class="txt-en" style="display:none;">Check dashboard manually</span></h3>
-                <p><span class="txt-ko">각 에이전트의 진행 상황을 보려면 대시보드에 접속해서 하나씩 확인해야 합니다.</span><span class="txt-en" style="display:none;">To see progress, you must log into the dashboard and check each agent.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">업무 보고</span><span class="txt-en" style="display:none;">Work Reports</span></div>
-                <h3><span class="txt-ko">텔레그램으로 자동 보고</span><span class="txt-en" style="display:none;">Auto-report via Telegram</span></h3>
-                <p><span class="txt-ko">작업 완료, 진행 상황, 이슈 발생 시 텔레그램으로 자동 알림이 옵니다.</span><span class="txt-en" style="display:none;">Get automatic notifications for completions, progress, and issues via Telegram.</span></p>
-            </div>
-
-            <!-- 승인 프로세스 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">승인 프로세스</span><span class="txt-en" style="display:none;">Approval Process</span></div>
-                <h3><span class="txt-ko">대시보드 접속 후 승인</span><span class="txt-en" style="display:none;">Log in to dashboard to approve</span></h3>
-                <p><span class="txt-ko">승인 요청이 오면 PC에서 대시보드에 접속해서 처리해야 합니다.</span><span class="txt-en" style="display:none;">Approval requests require logging into the dashboard on PC.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">승인 프로세스</span><span class="txt-en" style="display:none;">Approval Process</span></div>
-                <h3><span class="txt-ko">텔레그램에서 원탭 승인</span><span class="txt-en" style="display:none;">One-tap approval on Telegram</span></h3>
-                <p><span class="txt-ko">이동 중에도 텔레그램 알림에서 바로 승인/반려할 수 있습니다.</span><span class="txt-en" style="display:none;">Approve or reject on the go, right from Telegram notifications.</span></p>
-            </div>
-
-            <!-- 설정 난이도 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">설정 난이도</span><span class="txt-en" style="display:none;">Setup Difficulty</span></div>
-                <h3><span class="txt-ko">CLI 지식 필요</span><span class="txt-en" style="display:none;">CLI knowledge required</span></h3>
-                <p><span class="txt-ko">에이전트 설정, 연결, 환경 구성에 개발 지식이 필요합니다.</span><span class="txt-en" style="display:none;">Development knowledge needed for agent setup, connection, and environment configuration.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">설정 난이도</span><span class="txt-en" style="display:none;">Setup Difficulty</span></div>
-                <h3><span class="txt-ko">원클릭 설치, 자연어 지시</span><span class="txt-en" style="display:none;">One-click install, natural language</span></h3>
-                <p><span class="txt-ko">터미널에 한 줄 붙여넣으면 끝. 이후엔 텔레그램으로 자연어 지시만 하면 됩니다.</span><span class="txt-en" style="display:none;">Paste one line in terminal. After that, just give natural language instructions via Telegram.</span></p>
-            </div>
-
-            <!-- 팀 확장 -->
-            <div class="compare-card before" style="display:none;">
-                <div class="cc-label"><span class="txt-ko">팀 확장</span><span class="txt-en" style="display:none;">Team Scaling</span></div>
-                <h3><span class="txt-ko">수동 에이전트 추가</span><span class="txt-en" style="display:none;">Manual agent addition</span></h3>
-                <p><span class="txt-ko">새 에이전트가 필요하면 직접 설정하고 역할을 배정해야 합니다.</span><span class="txt-en" style="display:none;">When you need new agents, you must configure and assign roles manually.</span></p>
-            </div>
-            <div class="compare-card after">
-                <div class="cc-label"><span class="txt-ko">팀 확장</span><span class="txt-en" style="display:none;">Team Scaling</span></div>
-                <h3><span class="txt-ko">AI 비서가 팀 구성 제안</span><span class="txt-en" style="display:none;">AI assistant suggests team composition</span></h3>
-                <p><span class="txt-ko">목표를 말하면 AI 비서가 최적의 팀 구성을 제안하고, 승인하면 자동 구성됩니다.</span><span class="txt-en" style="display:none;">State your goal and AI assistant suggests the optimal team — approve and it's auto-configured.</span></p>
-            </div>
-        </div>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-before"><span class="txt-ko">에이전트만</span><span class="txt-en" style="display:none;">Agents Only</span></th>
+                    <th class="col-after"><span class="txt-ko">mycrew + AI 비서</span><span class="txt-en" style="display:none;">mycrew + AI Assistant</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="txt-ko">업무 분배</span><span class="txt-en" style="display:none;">Task Distribution</span></td>
+                    <td class="td-before"><span class="txt-ko">에이전트마다 개별 지시</span><span class="txt-en" style="display:none;">Instruct each agent individually</span></td>
+                    <td class="td-after"><span class="txt-ko">한 번 말하면 자동 분배</span><span class="txt-en" style="display:none;">One instruction, auto-distributed</span></td>
+                </tr>
+                <tr>
+                    <td><span class="txt-ko">장애 대응</span><span class="txt-en" style="display:none;">Failure</span></td>
+                    <td class="td-before"><span class="txt-ko">직접 확인 후 재시작</span><span class="txt-en" style="display:none;">Manual check & restart</span></td>
+                    <td class="td-after"><span class="txt-ko">자동 감지 + 복구 + 보고</span><span class="txt-en" style="display:none;">Auto-detect, recover & report</span></td>
+                </tr>
+                <tr>
+                    <td><span class="txt-ko">보고</span><span class="txt-en" style="display:none;">Reports</span></td>
+                    <td class="td-before"><span class="txt-ko">대시보드에서 직접 확인</span><span class="txt-en" style="display:none;">Check dashboard manually</span></td>
+                    <td class="td-after"><span class="txt-ko">텔레그램으로 자동 알림</span><span class="txt-en" style="display:none;">Auto-notification via Telegram</span></td>
+                </tr>
+                <tr>
+                    <td><span class="txt-ko">승인</span><span class="txt-en" style="display:none;">Approval</span></td>
+                    <td class="td-before"><span class="txt-ko">PC에서 대시보드 접속</span><span class="txt-en" style="display:none;">Log into dashboard on PC</span></td>
+                    <td class="td-after"><span class="txt-ko">텔레그램에서 원탭 승인</span><span class="txt-en" style="display:none;">One-tap approval on Telegram</span></td>
+                </tr>
+                <tr>
+                    <td><span class="txt-ko">설치</span><span class="txt-en" style="display:none;">Setup</span></td>
+                    <td class="td-before"><span class="txt-ko">CLI 지식 필요</span><span class="txt-en" style="display:none;">CLI knowledge required</span></td>
+                    <td class="td-after"><span class="txt-ko">원클릭 설치, 자연어 지시</span><span class="txt-en" style="display:none;">One-click install, natural language</span></td>
+                </tr>
+                <tr>
+                    <td><span class="txt-ko">팀 확장</span><span class="txt-en" style="display:none;">Scaling</span></td>
+                    <td class="td-before"><span class="txt-ko">수동 설정 + 역할 배정</span><span class="txt-en" style="display:none;">Manual config & role assignment</span></td>
+                    <td class="td-after"><span class="txt-ko">AI 비서가 팀 구성 제안</span><span class="txt-en" style="display:none;">AI assistant suggests team composition</span></td>
+                </tr>
+            </tbody>
+        </table>
 
         <div class="compare-punchline">
             <p>
