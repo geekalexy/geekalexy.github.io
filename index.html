@@ -324,19 +324,21 @@
             font-size: 15px;
             margin-top: 4px;
         }
-        .org-chart {
+        /* Orchestration Flow */
+        .orch-flow {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0;
+            position: relative;
         }
-        .org-row {
+        .orch-row {
             display: flex;
             gap: 24px;
             justify-content: center;
             flex-wrap: wrap;
         }
-        .org-card {
+        .orch-card {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -345,11 +347,20 @@
             border-radius: 10px;
             padding: 14px 22px;
             position: relative;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            cursor: pointer;
+            user-select: none;
         }
-        .org-card:hover { border-color: var(--border-hover); }
-        .org-avatar {
+        .orch-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 2px 12px var(--accent-glow);
+        }
+        .orch-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-glow), 0 2px 12px var(--accent-glow);
+        }
+        .orch-avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -361,22 +372,24 @@
             color: #fff;
             flex-shrink: 0;
         }
-        .org-avatar.ceo { background: #3B82F6; }
-        .org-avatar.cmo { background: #8B5CF6; }
-        .org-avatar.ad { background: #F59E0B; }
-        .org-avatar.content { background: #10B981; }
-        .org-avatar.perf { background: #EF4444; }
-        .org-info { text-align: left; }
-        .org-info .name {
+        .orch-avatar.board { background: #64748B; }
+        .orch-avatar.ceo { background: #3B82F6; }
+        .orch-avatar.cmo { background: #8B5CF6; }
+        .orch-avatar.ad { background: #F59E0B; }
+        .orch-avatar.content { background: #10B981; }
+        .orch-avatar.perf { background: #EF4444; }
+        .orch-avatar.research { background: #6366F1; }
+        .orch-info { text-align: left; }
+        .orch-info .name {
             font-size: 13px;
             font-weight: 600;
             color: var(--text-white);
         }
-        .org-info .role {
+        .orch-info .role {
             font-size: 11px;
             color: var(--text-faint);
         }
-        .org-status {
+        .orch-status {
             width: 7px;
             height: 7px;
             border-radius: 50%;
@@ -386,43 +399,178 @@
             left: 36px;
             border: 2px solid var(--bg-secondary);
         }
-        .org-line-v {
-            width: 1px;
-            height: 32px;
-            background: rgba(59,130,246,0.25);
-            margin: 0 auto;
+        /* Animated arrow connector */
+        .orch-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            height: 48px;
+            justify-content: center;
         }
-        .org-connector {
+        .orch-arrow-line {
+            width: 2px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background: rgba(59,130,246,0.15);
+            border-radius: 1px;
+        }
+        .orch-arrow-line::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, transparent, var(--accent));
+            animation: flowDown 1.8s ease-in-out infinite;
+        }
+        @keyframes flowDown {
+            0% { top: -50%; opacity: 0; }
+            30% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .orch-arrow-label {
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translate(100%, -50%);
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0.8;
+        }
+        .orch-arrow-head {
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 6px solid var(--accent);
+            flex-shrink: 0;
+        }
+        /* Return arrow (upward) */
+        .orch-arrow.return .orch-arrow-line::after {
+            animation: flowUp 2.2s ease-in-out infinite;
+            background: linear-gradient(0deg, transparent, #22C55E);
+        }
+        .orch-arrow.return .orch-arrow-head {
+            border-top: none;
+            border-bottom: 6px solid #22C55E;
+            order: -1;
+        }
+        .orch-arrow.return .orch-arrow-label {
+            color: #22C55E;
+        }
+        @keyframes flowUp {
+            0% { top: 100%; opacity: 0; }
+            30% { opacity: 1; }
+            100% { top: -50%; opacity: 0; }
+        }
+        /* Horizontal connector */
+        .orch-h-connector {
             display: flex;
             justify-content: center;
             position: relative;
-            height: 32px;
+            height: 40px;
             margin: 0 auto;
-            width: 60%;
+            width: 70%;
         }
-        .org-connector::before {
+        .orch-h-connector::before {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: rgba(59,130,246,0.25);
+            height: 2px;
+            background: rgba(59,130,246,0.15);
         }
-        .org-connector::after {
+        .orch-h-connector::after {
             content: '';
             position: absolute;
             top: 0;
             left: 50%;
-            width: 1px;
+            width: 2px;
             height: 100%;
-            background: rgba(59,130,246,0.25);
+            background: rgba(59,130,246,0.15);
         }
-        .org-you {
-            font-size: 12px;
-            color: var(--text-faint);
-            font-weight: 500;
-            letter-spacing: 0.5px;
+        /* Approval badge */
+        .orch-approval {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #F59E0B;
+            background: rgba(245,158,11,0.08);
+            border: 1px solid rgba(245,158,11,0.2);
+            margin: 4px 0;
+            animation: approvalPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes approvalPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.15); }
+            50% { box-shadow: 0 0 0 6px rgba(245,158,11,0); }
+        }
+        /* Detail tooltip */
+        .orch-detail {
+            display: none;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-hover);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            max-width: 480px;
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: detailFadeIn 0.2s ease;
+        }
+        .orch-detail.show { display: block; }
+        @keyframes detailFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .orch-detail-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 6px;
+        }
+        .orch-detail-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        /* Staggered entrance animation */
+        .orch-flow .orch-row,
+        .orch-flow .orch-arrow,
+        .orch-flow .orch-h-connector,
+        .orch-flow .orch-approval {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        .orch-flow.animate .orch-row,
+        .orch-flow.animate .orch-arrow,
+        .orch-flow.animate .orch-h-connector,
+        .orch-flow.animate .orch-approval {
+            animation: staggerIn 0.4s ease forwards;
+        }
+        .orch-flow.animate > :nth-child(1) { animation-delay: 0s; }
+        .orch-flow.animate > :nth-child(2) { animation-delay: 0.1s; }
+        .orch-flow.animate > :nth-child(3) { animation-delay: 0.2s; }
+        .orch-flow.animate > :nth-child(4) { animation-delay: 0.3s; }
+        .orch-flow.animate > :nth-child(5) { animation-delay: 0.4s; }
+        .orch-flow.animate > :nth-child(6) { animation-delay: 0.5s; }
+        .orch-flow.animate > :nth-child(7) { animation-delay: 0.6s; }
+        .orch-flow.animate > :nth-child(8) { animation-delay: 0.7s; }
+        .orch-flow.animate > :nth-child(9) { animation-delay: 0.8s; }
+        .orch-flow.animate > :nth-child(10) { animation-delay: 0.9s; }
+        .orch-flow.animate > :nth-child(11) { animation-delay: 1.0s; }
+        @keyframes staggerIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Guide table */
@@ -694,6 +842,143 @@
         }
         .jarvis-punchline .em { color: var(--accent); }
 
+        /* Before/After Compare Section */
+        .compare-section { padding: 80px 0; }
+        .compare-headline { font-size: 2em; font-weight: 800; color: var(--text-white); text-align: center; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .compare-headline .accent { color: var(--accent); }
+        .compare-sub { text-align: center; color: var(--text-muted); font-size: 17px; margin-bottom: 32px; }
+        .compare-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 32px; }
+        .compare-tab {
+            padding: 10px 28px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .compare-tab:hover { border-color: var(--border-hover); }
+        .compare-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .compare-tab.active-before { background: #EF4444; color: #fff; border-color: #EF4444; }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .compare-card {
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            transition: all 0.3s;
+        }
+        .compare-card:hover { border-color: var(--border-hover); }
+        .compare-card .cc-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-faint);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .compare-card h3 {
+            font-size: 16px;
+            color: var(--text-white);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .compare-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+        .compare-card.before { border-left: 3px solid #EF4444; }
+        .compare-card.after { border-left: 3px solid #22C55E; }
+        .compare-punchline {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-hover);
+        }
+        .compare-punchline p { font-size: 17px; color: var(--text-white); font-weight: 500; line-height: 1.7; }
+        .compare-punchline .em { color: var(--accent); font-weight: 700; }
+
+        /* Use Cases Section */
+        .usecase-section { padding: 96px 0; }
+        .usecase-section h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--text-white);
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .usecase-section h2 .accent { color: var(--accent); }
+        .usecase-sub {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            margin-bottom: 48px;
+        }
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .usecase-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: border-color 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .usecase-card:hover { border-color: var(--border-hover); }
+        .usecase-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(37,99,235,0.06);
+            border: 1px solid rgba(37,99,235,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 1.5em;
+        }
+        .usecase-card h3 { font-size: 17px; color: var(--text-white); margin-bottom: 8px; font-weight: 600; }
+        .usecase-card p { color: var(--text-muted); font-size: 15px; line-height: 1.7; margin-bottom: 12px; }
+        .usecase-team {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .usecase-team span {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid rgba(37,99,235,0.12);
+        }
+        .usecase-cta {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .usecase-cta:hover { color: var(--accent-hover); }
+        .usecase-bottom-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
         /* Mobile */
         @media (max-width: 640px) {
             html, body { overflow-x: hidden; }
@@ -714,9 +999,25 @@
             .jarvis-flow { flex-direction: column; }
             .jarvis-flow-arrow { transform: rotate(90deg); }
             .jarvis-flow-node { min-width: auto; width: 100%; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .compare-headline { font-size: 1.5em; }
+            .usecase-grid { grid-template-columns: 1fr; }
+            .usecase-bottom-row { grid-template-columns: 1fr; }
+            .usecase-section h2 { font-size: 1.5em; }
             .install-box code { font-size: 12px; }
-            .org-row { gap: 8px; }
-            .org-connector { width: 90%; }
+            .orch-row { gap: 8px; }
+            .orch-h-connector { width: 90%; }
+            .orch-card { padding: 10px 14px; }
+            .orch-arrow-label { font-size: 10px; }
+            .orch-detail { max-width: 100%; }
+            .orch-flow .orch-row,
+            .orch-flow .orch-arrow,
+            .orch-flow .orch-h-connector,
+            .orch-flow .orch-approval {
+                opacity: 1;
+                transform: none;
+                animation: none !important;
+            }
             .install-box code { font-size: 13px; }
             .container { padding: 0 16px; }
         }
@@ -729,7 +1030,9 @@
         <div class="logo"><span>my</span>crew</div>
         <div class="nav-links">
             <a href="#how"><span class="txt-ko">작동 방식</span><span class="txt-en" style="display:none;">How</span></a>
-            <a href="#jarvis"><span class="txt-ko">자비스</span><span class="txt-en" style="display:none;">Jarvis</span></a>
+            <a href="#jarvis"><span class="txt-ko">자비스(가칭)</span><span class="txt-en" style="display:none;">Jarvis</span></a>
+            <a href="#compare"><span class="txt-ko">비교</span><span class="txt-en" style="display:none;">Compare</span></a>
+            <a href="#usecases"><span class="txt-ko">활용</span><span class="txt-en" style="display:none;">Use Cases</span></a>
             <a href="#guide"><span class="txt-ko">가이드</span><span class="txt-en" style="display:none;">Guide</span></a>
             <a href="#install"><span class="txt-ko">설치</span><span class="txt-en" style="display:none;">Install</span></a>
             <button class="theme-toggle" onclick="toggleTheme()" title="테마 변경">
@@ -753,7 +1056,7 @@
         <code>curl -sL https://geekalexy.github.io/install.sh | bash</code>
     </div>
     <p class="install-note"><span class="txt-ko">Mac 터미널에 붙여넣기 &middot; 나머지는 자동 &middot; <a href="#install">자세히 보기</a></span><span class="txt-en" style="display:none;">Paste in Mac Terminal &middot; everything else is automatic &middot; <a href="#install">Learn more</a></span></p>
-    <p style="margin-top:12px;display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-glow);border:1px solid var(--border-hover);letter-spacing:0.3px;"><span class="txt-ko">자비스 포함 &middot; 무료</span><span class="txt-en" style="display:none;">Jarvis included &middot; Free</span></p>
+    <p style="margin-top:12px;display:inline-block;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-glow);border:1px solid var(--border-hover);letter-spacing:0.3px;"><span class="txt-ko">자비스(가칭) 포함 &middot; 무료</span><span class="txt-en" style="display:none;">Jarvis included &middot; Free</span></p>
 </div>
 
 <hr class="sep">
@@ -800,11 +1103,11 @@
 <div class="jarvis-section" id="jarvis">
     <div class="container">
         <h2 class="jarvis-headline">
-            <span class="txt-ko"><span class="accent">자비스</span> — AI가 AI를 관리합니다</span>
+            <span class="txt-ko"><span class="accent">자비스(가칭)</span> — AI가 AI를 관리합니다</span>
             <span class="txt-en" style="display:none;"><span class="accent">Jarvis</span> — AI That Manages AI</span>
         </h2>
         <p class="jarvis-sub">
-            <span class="txt-ko">사람이 병목이 되지 않도록, 자비스(C2)는 당신의 AI 팀을 24시간 감독하고,<br>작업을 분배하며, 문제가 생기면 스스로 복구합니다.</span>
+            <span class="txt-ko">사람이 병목이 되지 않도록, 자비스(가칭)는 당신의 AI 팀을 24시간 감독하고,<br>작업을 분배하며, 문제가 생기면 스스로 복구합니다.</span>
             <span class="txt-en" style="display:none;">Jarvis (C2) supervises your AI team 24/7, distributes tasks,<br>and auto-recovers when problems occur — so you're never the bottleneck.</span>
         </p>
 
@@ -813,8 +1116,8 @@
                 <div class="jc-icon">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
                 </div>
-                <h3><span class="txt-ko">자동 작업 분배</span><span class="txt-en" style="display:none;">Auto Task Distribution</span></h3>
-                <p><span class="txt-ko">CEO 에이전트가 업무를 분석하고, 적합한 하위 에이전트에게 자동으로 위임합니다. 직접 하나하나 지시할 필요가 없습니다.</span><span class="txt-en" style="display:none;">The CEO agent analyzes tasks and automatically delegates to the right sub-agents. No need to instruct each one individually.</span></p>
+                <h3><span class="txt-ko">보드의 두번째 뇌</span><span class="txt-en" style="display:none;">Your Board's Second Brain</span></h3>
+                <p><span class="txt-ko">대표님의 의도를 이해하고, 적합한 에이전트에게 업무를 분배합니다. 목표만 제시하면 나머지는 자비스(가칭)가 알아서 합니다.</span><span class="txt-en" style="display:none;">Understands your intent and distributes work to the right agents. Just set the goal — Jarvis handles the rest.</span></p>
             </div>
             <div class="jarvis-card">
                 <div class="jc-icon">
@@ -844,7 +1147,7 @@
             </div>
             <div class="jarvis-flow-node highlight">
                 <div class="jf-label"><span class="txt-ko">AI 관리자</span><span class="txt-en" style="display:none;">AI Manager</span></div>
-                <div class="jf-name"><span class="txt-ko">자비스 (C2)</span><span class="txt-en" style="display:none;">Jarvis (C2)</span></div>
+                <div class="jf-name"><span class="txt-ko">자비스(가칭)</span><span class="txt-en" style="display:none;">Jarvis</span></div>
                 <div class="jf-desc"><span class="txt-ko">24시간 감독 · 분배 · 복구</span><span class="txt-en" style="display:none;">24/7 Supervise · Distribute · Recover</span></div>
             </div>
             <div class="jarvis-flow-arrow">
@@ -863,6 +1166,199 @@
                 <span class="txt-ko">다른 도구는 에이전트를 만들어주지만,<br>mycrew는 에이전트를 <span class="em">관리</span>해줍니다.</span>
                 <span class="txt-en" style="display:none;">Other tools create agents for you.<br>mycrew <span class="em">manages</span> them.</span>
             </p>
+        </div>
+    </div>
+</div>
+
+<hr class="sep">
+
+<!-- Before/After 비교 섹션 -->
+<div class="compare-section" id="compare">
+    <div class="container">
+        <h2 class="compare-headline">
+            <span class="txt-ko"><span class="accent">전</span>과 <span class="accent">후</span></span>
+            <span class="txt-en" style="display:none;"><span class="accent">Before</span> & <span class="accent">After</span></span>
+        </h2>
+        <p class="compare-sub">
+            <span class="txt-ko">에이전트만 쓸 때와, 자비스(가칭)가 관리할 때의 차이</span>
+            <span class="txt-en" style="display:none;">The difference between using agents alone vs. having Jarvis manage them</span>
+        </p>
+
+        <div class="compare-tabs">
+            <button class="compare-tab active-before" data-view="before" onclick="switchCompare('before')">
+                <span class="txt-ko">Before — 에이전트만</span>
+                <span class="txt-en" style="display:none;">Before — Agents Only</span>
+            </button>
+            <button class="compare-tab active" data-view="after" onclick="switchCompare('after')">
+                <span class="txt-ko">After — mycrew + 자비스(가칭)</span>
+                <span class="txt-en" style="display:none;">After — mycrew + Jarvis</span>
+            </button>
+        </div>
+
+        <div class="compare-grid">
+            <!-- 에이전트 관리 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">에이전트 관리</span><span class="txt-en" style="display:none;">Agent Management</span></div>
+                <h3><span class="txt-ko">수동으로 각 에이전트에 지시</span><span class="txt-en" style="display:none;">Manually instruct each agent</span></h3>
+                <p><span class="txt-ko">5개 에이전트에 개별적으로 작업을 배분하고, 진행 상황을 하나씩 확인해야 합니다.</span><span class="txt-en" style="display:none;">Distribute tasks to 5 agents individually and check progress one by one.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">에이전트 관리</span><span class="txt-en" style="display:none;">Agent Management</span></div>
+                <h3><span class="txt-ko">자비스(가칭)가 자동 분배 및 관리</span><span class="txt-en" style="display:none;">Jarvis auto-distributes & manages</span></h3>
+                <p><span class="txt-ko">한 번 지시하면 자비스(가칭)가 적절한 에이전트에 작업을 배분하고 진행을 감독합니다.</span><span class="txt-en" style="display:none;">One instruction and Jarvis assigns tasks to the right agents and supervises progress.</span></p>
+            </div>
+
+            <!-- 장애 대응 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">장애 대응</span><span class="txt-en" style="display:none;">Failure Response</span></div>
+                <h3><span class="txt-ko">직접 확인하고 재시작</span><span class="txt-en" style="display:none;">Manually check & restart</span></h3>
+                <p><span class="txt-ko">에이전트가 멈추면 대시보드에서 직접 확인하고 수동으로 재시작해야 합니다.</span><span class="txt-en" style="display:none;">When an agent stops, you must check the dashboard and manually restart.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">장애 대응</span><span class="txt-en" style="display:none;">Failure Response</span></div>
+                <h3><span class="txt-ko">자동 감지 및 복구</span><span class="txt-en" style="display:none;">Auto-detect & recover</span></h3>
+                <p><span class="txt-ko">자비스(가칭)가 이상을 감지하면 자동으로 복구하고, 텔레그램으로 결과를 보고합니다.</span><span class="txt-en" style="display:none;">Jarvis auto-recovers on detection and reports via Telegram.</span></p>
+            </div>
+
+            <!-- 업무 보고 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">업무 보고</span><span class="txt-en" style="display:none;">Work Reports</span></div>
+                <h3><span class="txt-ko">대시보드에서 직접 확인</span><span class="txt-en" style="display:none;">Check dashboard manually</span></h3>
+                <p><span class="txt-ko">각 에이전트의 진행 상황을 보려면 대시보드에 접속해서 하나씩 확인해야 합니다.</span><span class="txt-en" style="display:none;">To see progress, you must log into the dashboard and check each agent.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">업무 보고</span><span class="txt-en" style="display:none;">Work Reports</span></div>
+                <h3><span class="txt-ko">텔레그램으로 자동 보고</span><span class="txt-en" style="display:none;">Auto-report via Telegram</span></h3>
+                <p><span class="txt-ko">작업 완료, 진행 상황, 이슈 발생 시 텔레그램으로 자동 알림이 옵니다.</span><span class="txt-en" style="display:none;">Get automatic notifications for completions, progress, and issues via Telegram.</span></p>
+            </div>
+
+            <!-- 승인 프로세스 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">승인 프로세스</span><span class="txt-en" style="display:none;">Approval Process</span></div>
+                <h3><span class="txt-ko">대시보드 접속 후 승인</span><span class="txt-en" style="display:none;">Log in to dashboard to approve</span></h3>
+                <p><span class="txt-ko">승인 요청이 오면 PC에서 대시보드에 접속해서 처리해야 합니다.</span><span class="txt-en" style="display:none;">Approval requests require logging into the dashboard on PC.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">승인 프로세스</span><span class="txt-en" style="display:none;">Approval Process</span></div>
+                <h3><span class="txt-ko">텔레그램에서 원탭 승인</span><span class="txt-en" style="display:none;">One-tap approval on Telegram</span></h3>
+                <p><span class="txt-ko">이동 중에도 텔레그램 알림에서 바로 승인/반려할 수 있습니다.</span><span class="txt-en" style="display:none;">Approve or reject on the go, right from Telegram notifications.</span></p>
+            </div>
+
+            <!-- 설정 난이도 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">설정 난이도</span><span class="txt-en" style="display:none;">Setup Difficulty</span></div>
+                <h3><span class="txt-ko">CLI 지식 필요</span><span class="txt-en" style="display:none;">CLI knowledge required</span></h3>
+                <p><span class="txt-ko">에이전트 설정, 연결, 환경 구성에 개발 지식이 필요합니다.</span><span class="txt-en" style="display:none;">Development knowledge needed for agent setup, connection, and environment configuration.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">설정 난이도</span><span class="txt-en" style="display:none;">Setup Difficulty</span></div>
+                <h3><span class="txt-ko">원클릭 설치, 자연어 지시</span><span class="txt-en" style="display:none;">One-click install, natural language</span></h3>
+                <p><span class="txt-ko">터미널에 한 줄 붙여넣으면 끝. 이후엔 텔레그램으로 자연어 지시만 하면 됩니다.</span><span class="txt-en" style="display:none;">Paste one line in terminal. After that, just give natural language instructions via Telegram.</span></p>
+            </div>
+
+            <!-- 팀 확장 -->
+            <div class="compare-card before" style="display:none;">
+                <div class="cc-label"><span class="txt-ko">팀 확장</span><span class="txt-en" style="display:none;">Team Scaling</span></div>
+                <h3><span class="txt-ko">수동 에이전트 추가</span><span class="txt-en" style="display:none;">Manual agent addition</span></h3>
+                <p><span class="txt-ko">새 에이전트가 필요하면 직접 설정하고 역할을 배정해야 합니다.</span><span class="txt-en" style="display:none;">When you need new agents, you must configure and assign roles manually.</span></p>
+            </div>
+            <div class="compare-card after">
+                <div class="cc-label"><span class="txt-ko">팀 확장</span><span class="txt-en" style="display:none;">Team Scaling</span></div>
+                <h3><span class="txt-ko">자비스(가칭)가 팀 구성 제안</span><span class="txt-en" style="display:none;">Jarvis suggests team composition</span></h3>
+                <p><span class="txt-ko">목표를 말하면 자비스(가칭)가 최적의 팀 구성을 제안하고, 승인하면 자동 구성됩니다.</span><span class="txt-en" style="display:none;">State your goal and Jarvis suggests the optimal team — approve and it's auto-configured.</span></p>
+            </div>
+        </div>
+
+        <div class="compare-punchline">
+            <p>
+                <span class="txt-ko">기존: 대표님이 5개 에이전트에 <span class="em">개별 지시</span><br>개선: 자비스(가칭)에 <span class="em">한 번 말하면</span> 팀 관리</span>
+                <span class="txt-en" style="display:none;">Before: Instruct 5 agents <span class="em">individually</span><br>After: Tell Jarvis <span class="em">once</span> and the team is managed</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="sep">
+
+<!-- 업종별 유즈케이스 섹션 -->
+<div class="usecase-section" id="usecases">
+    <div class="container">
+        <h2>
+            <span class="txt-ko">이런 분들이 <span class="accent">사용</span>합니다</span>
+            <span class="txt-en" style="display:none;">Who <span class="accent">Uses</span> mycrew</span>
+        </h2>
+        <p class="usecase-sub">
+            <span class="txt-ko">업종별 맞춤 AI팀이 반복 업무를 대신합니다</span>
+            <span class="txt-en" style="display:none;">Custom AI teams handle repetitive work for every industry</span>
+        </p>
+
+        <div class="usecase-grid">
+            <!-- 쇼핑몰 -->
+            <div class="usecase-card">
+                <div class="usecase-icon">🛒</div>
+                <h3><span class="txt-ko">쇼핑몰 운영자</span><span class="txt-en" style="display:none;">E-Commerce Operator</span></h3>
+                <p><span class="txt-ko">고객 문의에 24시간 자동 응답하고, 주문 상태를 추적하며, 리뷰를 분석해 상품 개선 인사이트를 제공합니다.</span><span class="txt-en" style="display:none;">Auto-respond to customer inquiries 24/7, track order status, and analyze reviews for product improvement insights.</span></p>
+                <div class="usecase-team">
+                    <span>CS 매니저</span>
+                    <span>주문 관리</span>
+                    <span>리뷰 분석가</span>
+                </div>
+                <a href="#install" class="usecase-cta"><span class="txt-ko">AI팀 만들기 →</span><span class="txt-en" style="display:none;">Build AI team →</span></a>
+            </div>
+
+            <!-- 법률사무소 -->
+            <div class="usecase-card">
+                <div class="usecase-icon">⚖️</div>
+                <h3><span class="txt-ko">법률사무소</span><span class="txt-en" style="display:none;">Law Firm</span></h3>
+                <p><span class="txt-ko">관련 판례를 빠르게 검색하고, 계약서 초안을 검토하며, 소송 일정과 기일을 자동으로 관리합니다.</span><span class="txt-en" style="display:none;">Quickly search relevant case law, review contract drafts, and automatically manage litigation schedules and deadlines.</span></p>
+                <div class="usecase-team">
+                    <span>판례 리서처</span>
+                    <span>계약서 검토</span>
+                    <span>일정 관리</span>
+                </div>
+                <a href="#install" class="usecase-cta"><span class="txt-ko">AI팀 만들기 →</span><span class="txt-en" style="display:none;">Build AI team →</span></a>
+            </div>
+
+            <!-- 회계사무소 -->
+            <div class="usecase-card">
+                <div class="usecase-icon">📊</div>
+                <h3><span class="txt-ko">회계사무소</span><span class="txt-en" style="display:none;">Accounting Firm</span></h3>
+                <p><span class="txt-ko">영수증과 증빙을 자동 분류하고, 세무 신고 기한을 알려주며, 월간 보고서 초안을 작성합니다.</span><span class="txt-en" style="display:none;">Auto-classify receipts and documents, alert on tax filing deadlines, and draft monthly reports.</span></p>
+                <div class="usecase-team">
+                    <span>증빙 분류</span>
+                    <span>세무 알림</span>
+                    <span>보고서 작성</span>
+                </div>
+                <a href="#install" class="usecase-cta"><span class="txt-ko">AI팀 만들기 →</span><span class="txt-en" style="display:none;">Build AI team →</span></a>
+            </div>
+        </div>
+
+        <div class="usecase-bottom-row">
+            <!-- 1인 창업자 -->
+            <div class="usecase-card">
+                <div class="usecase-icon">🚀</div>
+                <h3><span class="txt-ko">1인 창업자</span><span class="txt-en" style="display:none;">Solo Founder</span></h3>
+                <p><span class="txt-ko">마케팅 콘텐츠를 자동 생성하고, SNS 채널을 관리하며, 고객 피드백을 수집·분석해 제품을 개선합니다.</span><span class="txt-en" style="display:none;">Auto-generate marketing content, manage social channels, and collect & analyze customer feedback for product improvement.</span></p>
+                <div class="usecase-team">
+                    <span>콘텐츠 마케터</span>
+                    <span>SNS 매니저</span>
+                    <span>피드백 분석</span>
+                </div>
+                <a href="#install" class="usecase-cta"><span class="txt-ko">AI팀 만들기 →</span><span class="txt-en" style="display:none;">Build AI team →</span></a>
+            </div>
+
+            <!-- 부동산 -->
+            <div class="usecase-card">
+                <div class="usecase-icon">🏠</div>
+                <h3><span class="txt-ko">부동산 중개</span><span class="txt-en" style="display:none;">Real Estate Agency</span></h3>
+                <p><span class="txt-ko">매물 정보를 자동 정리하고, 고객 문의에 즉시 응답하며, 지역별 시장 동향을 분석해 리포트를 제공합니다.</span><span class="txt-en" style="display:none;">Auto-organize property listings, respond to inquiries instantly, and analyze regional market trends for reports.</span></p>
+                <div class="usecase-team">
+                    <span>매물 관리</span>
+                    <span>고객 응대</span>
+                    <span>시장 분석</span>
+                </div>
+                <a href="#install" class="usecase-cta"><span class="txt-ko">AI팀 만들기 →</span><span class="txt-en" style="display:none;">Build AI team →</span></a>
+            </div>
         </div>
     </div>
 </div>
@@ -898,8 +1394,8 @@
     </div>
 </div>
 
-<!-- Org Chart -->
-<div class="org-section">
+<!-- Orchestration Flow -->
+<div class="org-section" id="team">
     <div class="container">
         <h2><span class="txt-ko">AI <span class="accent">팀</span> 구성</span><span class="txt-en" style="display:none;">AI <span class="accent">Team</span> Structure</span></h2>
         <div class="org-task-block">
@@ -907,48 +1403,90 @@
             <div class="task-result"><span class="txt-ko">→ CEO가 CMO를 배치하고, 실무 에이전트를 자동 구성합니다.</span><span class="txt-en" style="display:none;">→ CEO assigns CMO and auto-builds the team.</span></div>
         </div>
 
-        <div class="org-chart">
-            <div class="org-you"><span class="txt-ko">Board (당신)</span><span class="txt-en" style="display:none;">Board (You)</span></div>
-            <div class="org-line-v"></div>
-            <div class="org-row">
-                <div class="org-card">
-                    <div class="org-avatar ceo">C</div>
-                    <div class="org-info"><div class="name">CEO</div><div class="role"><span class="txt-ko">총괄 경영</span><span class="txt-en" style="display:none;">General Management</span></div></div>
-                    <div class="org-status"></div>
+        <div class="orch-flow" id="orchFlow">
+            <!-- Board -->
+            <div class="orch-row">
+                <div class="orch-card" data-detail="board" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar board">B</div>
+                    <div class="orch-info"><div class="name"><span class="txt-ko">Board (당신)</span><span class="txt-en" style="display:none;">Board (You)</span></div><div class="role"><span class="txt-ko">텔레그램으로 지시 및 승인</span><span class="txt-en" style="display:none;">Instruct &amp; approve via Telegram</span></div></div>
                 </div>
             </div>
-            <div class="org-line-v"></div>
-            <div class="org-row">
-                <div class="org-card">
-                    <div class="org-avatar cmo">M</div>
-                    <div class="org-info"><div class="name">CMO</div><div class="role"><span class="txt-ko">마케팅 전략</span><span class="txt-en" style="display:none;">Marketing Strategy</span></div></div>
-                    <div class="org-status"></div>
+
+            <!-- Board → CEO arrow -->
+            <div class="orch-arrow">
+                <div class="orch-arrow-line"></div>
+                <div class="orch-arrow-head"></div>
+                <div class="orch-arrow-label"><span class="txt-ko">지시</span><span class="txt-en" style="display:none;">Instruct</span></div>
+            </div>
+
+            <!-- Approval badge -->
+            <div class="orch-approval" style="align-self:center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                <span class="txt-ko">텔레그램으로 승인 요청</span><span class="txt-en" style="display:none;">Approval via Telegram</span>
+            </div>
+
+            <!-- CEO -->
+            <div class="orch-row">
+                <div class="orch-card" data-detail="ceo" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar ceo">C</div>
+                    <div class="orch-info"><div class="name">CEO</div><div class="role"><span class="txt-ko">총괄 경영 · 업무 분배</span><span class="txt-en" style="display:none;">General Management · Task Distribution</span></div></div>
+                    <div class="orch-status"></div>
                 </div>
             </div>
-            <div class="org-connector"></div>
-            <div class="org-row">
-                <div class="org-card">
-                    <div class="org-avatar ad">A</div>
-                    <div class="org-info"><div class="name">Ad Sales</div><div class="role"><span class="txt-ko">광고 영업</span><span class="txt-en" style="display:none;">Ad Sales</span></div></div>
-                    <div class="org-status"></div>
+
+            <!-- CEO → CMO arrow -->
+            <div class="orch-arrow">
+                <div class="orch-arrow-line"></div>
+                <div class="orch-arrow-head"></div>
+                <div class="orch-arrow-label"><span class="txt-ko">업무 위임</span><span class="txt-en" style="display:none;">Delegate</span></div>
+            </div>
+
+            <!-- CMO -->
+            <div class="orch-row">
+                <div class="orch-card" data-detail="cmo" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar cmo">M</div>
+                    <div class="orch-info"><div class="name">CMO</div><div class="role"><span class="txt-ko">마케팅 전략 수립</span><span class="txt-en" style="display:none;">Marketing Strategy</span></div></div>
+                    <div class="orch-status"></div>
                 </div>
-                <div class="org-card">
-                    <div class="org-avatar content">C</div>
-                    <div class="org-info"><div class="name">Content</div><div class="role"><span class="txt-ko">콘텐츠</span><span class="txt-en" style="display:none;">Content</span></div></div>
-                    <div class="org-status"></div>
+            </div>
+
+            <!-- CMO → Workers connector -->
+            <div class="orch-h-connector"></div>
+
+            <!-- Workers -->
+            <div class="orch-row">
+                <div class="orch-card" data-detail="ad" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar ad">A</div>
+                    <div class="orch-info"><div class="name">Ad Sales</div><div class="role"><span class="txt-ko">광고 영업</span><span class="txt-en" style="display:none;">Ad Sales</span></div></div>
+                    <div class="orch-status"></div>
                 </div>
-                <div class="org-card">
-                    <div class="org-avatar perf">P</div>
-                    <div class="org-info"><div class="name">Performance</div><div class="role"><span class="txt-ko">퍼포먼스</span><span class="txt-en" style="display:none;">Performance</span></div></div>
-                    <div class="org-status"></div>
+                <div class="orch-card" data-detail="content" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar content">C</div>
+                    <div class="orch-info"><div class="name">Content</div><div class="role"><span class="txt-ko">콘텐츠 제작</span><span class="txt-en" style="display:none;">Content Creation</span></div></div>
+                    <div class="orch-status"></div>
                 </div>
-                <div class="org-card">
-                    <div class="org-avatar perf" style="background:#6366F1;">R</div>
-                    <div class="org-info"><div class="name">Researcher</div><div class="role"><span class="txt-ko">리서치</span><span class="txt-en" style="display:none;">Research</span></div></div>
-                    <div class="org-status"></div>
+                <div class="orch-card" data-detail="perf" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar perf">P</div>
+                    <div class="orch-info"><div class="name">Performance</div><div class="role"><span class="txt-ko">퍼포먼스 분석</span><span class="txt-en" style="display:none;">Performance Analytics</span></div></div>
+                    <div class="orch-status"></div>
                 </div>
+                <div class="orch-card" data-detail="research" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar research">R</div>
+                    <div class="orch-info"><div class="name">Researcher</div><div class="role"><span class="txt-ko">시장 리서치</span><span class="txt-en" style="display:none;">Market Research</span></div></div>
+                    <div class="orch-status"></div>
+                </div>
+            </div>
+
+            <!-- Return arrow -->
+            <div class="orch-arrow return">
+                <div class="orch-arrow-line"></div>
+                <div class="orch-arrow-head"></div>
+                <div class="orch-arrow-label"><span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span></div>
             </div>
         </div>
+
+        <!-- Detail panel (shown on card click) -->
+        <div class="orch-detail" id="orchDetail"></div>
     </div>
 </div>
 
@@ -1031,7 +1569,7 @@
         </div>
 
         <div class="info-card" style="background: linear-gradient(135deg, var(--accent-glow), transparent); border: 1px solid var(--border-hover);">
-            <strong><span class="txt-ko">&#10003; \uc790\ube44\uc2a4(AI \uad00\ub9ac\uc790) \ud3ec\ud568</span><span class="txt-en" style="display:none;">&#10003; Jarvis (AI Manager) Included</span></strong>
+            <strong><span class="txt-ko">&#10003; \uc790\ube44\uc2a4(\uac00\uce6d) \ud3ec\ud568</span><span class="txt-en" style="display:none;">&#10003; Jarvis (AI Manager) Included</span></strong>
             <p><span class="txt-ko">AI\ud300 \uc790\ub3d9 \uad00\ub9ac \u00b7 \uc7a5\uc560 \ubcf5\uad6c \u00b7 \uc2b9\uc778 \uc6cc\ud06c\ud50c\ub85c \u2014 \ubaa8\ub450 \ubb34\ub8cc\uc5d0 \ud3ec\ud568</span><span class="txt-en" style="display:none;">Auto team management \u00b7 Failure recovery \u00b7 Approval workflows \u2014 all included free</span></p>
         </div>
         <div class="info-card">
@@ -1069,11 +1607,11 @@
             </div>
             <div class="info-card">
                 <strong><span class="txt-ko">비용은 얼마인가요?</span><span class="txt-en" style="display:none;">How much does it cost?</span></strong>
-                <p><span class="txt-ko">오픈소스이므로 무료입니다. 자비스(AI 관리자) 기능이 무료에 포함되어 있습니다. Claude 계정(Pro, Max 이상 혹은 API키)만 있으면 됩니다.</span><span class="txt-en" style="display:none;">Free and open source. Jarvis (AI manager) is included for free. Only a Claude account (Pro, Max or above, or API key) is required.</span></p>
+                <p><span class="txt-ko">오픈소스이므로 무료입니다. 자비스(가칭) 기능이 무료에 포함되어 있습니다. Claude 계정(Pro, Max 이상 혹은 API키)만 있으면 됩니다.</span><span class="txt-en" style="display:none;">Free and open source. Jarvis (AI manager) is included for free. Only a Claude account (Pro, Max or above, or API key) is required.</span></p>
             </div>
             <div class="info-card">
-                <strong><span class="txt-ko">자비스(C2) 기능은 유료인가요?</span><span class="txt-en" style="display:none;">Is the Jarvis (C2) feature paid?</span></strong>
-                <p><span class="txt-ko">아닙니다. 자비스는 mycrew의 핵심 기능으로, 무료 설치에 모두 포함됩니다. AI팀 자동 관리, 장애 복구, 승인 워크플로 모두 추가 비용 없이 사용할 수 있습니다.</span><span class="txt-en" style="display:none;">No. Jarvis is a core feature of mycrew, fully included in the free installation. Automatic AI team management, failure recovery, and approval workflows are all available at no extra cost.</span></p>
+                <strong><span class="txt-ko">자비스(가칭) 기능은 유료인가요?</span><span class="txt-en" style="display:none;">Is the Jarvis (C2) feature paid?</span></strong>
+                <p><span class="txt-ko">아닙니다. 자비스(가칭)는 mycrew의 핵심 기능으로, 무료 설치에 모두 포함됩니다. AI팀 자동 관리, 장애 복구, 승인 워크플로 모두 추가 비용 없이 사용할 수 있습니다.</span><span class="txt-en" style="display:none;">No. Jarvis is a core feature of mycrew, fully included in the free installation. Automatic AI team management, failure recovery, and approval workflows are all available at no extra cost.</span></p>
             </div>
             <div class="info-card">
                 <strong><span class="txt-ko">모바일에서도 되나요?</span><span class="txt-en" style="display:none;">Does it work on mobile?</span></strong>
@@ -1090,6 +1628,20 @@
 </div>
 
 <script>
+function switchCompare(view) {
+    document.querySelectorAll('.compare-tab').forEach(function(t) {
+        t.classList.remove('active', 'active-before');
+    });
+    var activeTab = document.querySelector('.compare-tab[data-view="' + view + '"]');
+    activeTab.classList.add(view === 'before' ? 'active-before' : 'active');
+    document.querySelectorAll('.compare-card').forEach(function(c) {
+        if (c.classList.contains(view)) {
+            c.style.display = 'block';
+        } else {
+            c.style.display = 'none';
+        }
+    });
+}
 function toggleTheme() {
     const html = document.documentElement;
     const current = html.getAttribute('data-theme') || 'light';
@@ -1125,6 +1677,73 @@ function applyTheme(theme) {
     const saved = localStorage.getItem('theme') || 'light';
     document.documentElement.setAttribute('data-theme', saved);
     applyTheme(saved);
+})();
+
+/* Orchestration detail data */
+var orchDetails = {
+    board: {
+        ko: { title: 'Board (당신)', desc: '텔레그램 메신저를 통해 AI 팀에 지시를 내리고, 중요한 결정에 대해 승인/반려를 합니다. 복잡한 대시보드 없이 메시지 한 줄로 회사를 운영�� 수 있습니다.' },
+        en: { title: 'Board (You)', desc: 'Give instructions and approve/reject important decisions through Telegram. Run your company with a single message — no complex dashboards needed.' }
+    },
+    ceo: {
+        ko: { title: 'CEO 에이전트', desc: '전체 업무를 파악하고 하위 에이전트에게 적절히 분배합니다. 장애 발생 시 자동 복구하고, 진행 상황을 Board에 보고합니다. 자비스(가칭)가 이 역할을 24시간 감독합니다.' },
+        en: { title: 'CEO Agent', desc: 'Oversees all tasks and delegates to subordinate agents. Auto-recovers on failure and reports progress to the Board. Jarvis (C2) supervises this role 24/7.' }
+    },
+    cmo: {
+        ko: { title: 'CMO 에이전트', desc: 'CEO로부터 마케팅 목표를 받아 전략을 수립하고, 실무 에이전트(콘텐츠, 광고, 퍼포먼스, 리서치)에게 구체적인 업무를 위임합니다.' },
+        en: { title: 'CMO Agent', desc: 'Receives marketing goals from the CEO, builds strategy, and delegates specific tasks to worker agents (Content, Ads, Performance, Research).' }
+    },
+    ad: {
+        ko: { title: 'Ad Sales ���이전트', desc: '광고 소재 기획, 타겟 오디언스 분석, 광고 캠페인 성과 모니터링 등 광고 영업 관련 업무를 수행합니다.' },
+        en: { title: 'Ad Sales Agent', desc: 'Handles ad creative planning, target audience analysis, and campaign performance monitoring.' }
+    },
+    content: {
+        ko: { title: 'Content 에이전트', desc: '블로그, SNS 포스트, 뉴스레터 등 마케팅 콘텐츠를 작성합니다. CMO의 전략 방향에 맞춰 일관된 메시지를 생산합니��.' },
+        en: { title: 'Content Agent', desc: 'Creates blogs, social posts, newsletters aligned with the CMO\'s strategic direction.' }
+    },
+    perf: {
+        ko: { title: 'Performance 에이전트', desc: '마케팅 캠페인 데이터를 분석하고, KPI 추적 및 최적화 제안을 수행합니다. 결과를 CMO에게 보고합니다.' },
+        en: { title: 'Performance Agent', desc: 'Analyzes campaign data, tracks KPIs, and suggests optimizations. Reports results to the CMO.' }
+    },
+    research: {
+        ko: { title: 'Researcher 에이전트', desc: '시장 동향, 경쟁사 분석, 고객 피드백 수집 등 리서치 업무를 담당합니다. 데이터 기반 의사결정을 지원합니다.' },
+        en: { title: 'Researcher Agent', desc: 'Handles market trends, competitor analysis, and customer feedback collection. Supports data-driven decisions.' }
+    }
+};
+
+function toggleOrchDetail(card) {
+    var key = card.getAttribute('data-detail');
+    var panel = document.getElementById('orchDetail');
+    var allCards = document.querySelectorAll('.orch-card');
+    var isEn = document.documentElement.getAttribute('data-theme') === 'dark';
+    var lang = isEn ? 'en' : 'ko';
+    var info = orchDetails[key];
+    if (!info) return;
+
+    if (card.classList.contains('active')) {
+        card.classList.remove('active');
+        panel.classList.remove('show');
+        return;
+    }
+    allCards.forEach(function(c) { c.classList.remove('active'); });
+    card.classList.add('active');
+    panel.innerHTML = '<div class="orch-detail-title">' + info[lang].title + '</div><div class="orch-detail-desc">' + info[lang].desc + '</div>';
+    panel.classList.add('show');
+}
+
+/* Scroll-triggered entrance animation for orchestration flow */
+(function() {
+    var flow = document.getElementById('orchFlow');
+    if (!flow) return;
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                flow.classList.add('animate');
+                observer.unobserve(flow);
+            }
+        });
+    }, { threshold: 0.15 });
+    observer.observe(flow);
 })();
 </script>
 </body>
