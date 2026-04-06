@@ -1370,15 +1370,20 @@
             <div class="orch-row" style="gap:12px;align-items:center;justify-content:center;flex-wrap:nowrap;">
                 <div class="orch-card" data-detail="board" onclick="toggleOrchDetail(this)">
                     <div class="orch-avatar board" style="position:relative;">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" style="position:absolute;top:-7px;right:-5px;"><path d="M2 4l3 12h14l3-12-5 4-5-4-5 4z"/><path d="M5 16v4h14v-4"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="1" style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);"><path d="M2 4l3 12h14l3-12-5 4-5-4-5 4z"/><path d="M5 16v4h14v-4"/></svg>
                         B
                     </div>
                     <div class="orch-info"><div class="name"><span class="txt-ko">Board (당신)</span><span class="txt-en" style="display:none;">Board (You)</span></div><div class="role"><span class="txt-ko">의사결정 · 승인</span><span class="txt-en" style="display:none;">Decision · Approval</span></div></div>
                 </div>
 
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" style="flex-shrink:0;opacity:0.6;"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                <!-- 양방향 화살표 + 텔레그램 아이콘 -->
+                <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="1.5"><path d="M19 12H5M5 12l4-4M5 12l4 4"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" style="opacity:0.7;"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="1.5"><path d="M5 12h14M19 12l-4-4M19 12l-4 4"/></svg>
+                </div>
 
-                <div class="orch-card" data-detail="assistant" onclick="toggleOrchDetail(this)" style="border-color:var(--accent);background:var(--accent-glow);">
+                <div class="orch-card" data-detail="assistant" onclick="toggleOrchDetail(this)">
                     <div class="orch-avatar" style="background:var(--accent);">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     </div>
@@ -1450,11 +1455,16 @@
                 </div>
             </div>
 
-            <!-- Return arrow -->
-            <div class="orch-arrow return">
-                <div class="orch-arrow-line"></div>
-                <div class="orch-arrow-head"></div>
-                <div class="orch-arrow-label"><span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span></div>
+            <!-- 결과 보고 (양옆 화살표) -->
+            <div style="display:flex;justify-content:space-between;align-items:center;max-width:700px;margin:16px auto 0;padding:0 20px;">
+                <div style="display:flex;align-items:center;gap:4px;color:var(--text-faint);font-size:12px;font-weight:500;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M5 12h14M19 12l-4-4M19 12l-4 4"/></svg>
+                    <span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:4px;color:var(--text-faint);font-size:12px;font-weight:500;">
+                    <span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M19 12H5M5 12l4-4M5 12l4 4"/></svg>
+                </div>
             </div>
         </div>
 
