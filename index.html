@@ -390,15 +390,14 @@
             color: var(--text-faint);
         }
         .orch-status {
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            background: var(--accent);
+            background: #22C55E;
             position: absolute;
-            top: 8px;
-            right: 8px;
+            bottom: 12px;
+            left: 38px;
             border: 2px solid var(--bg-secondary);
-            box-shadow: 0 0 0 1px var(--accent);
         }
         /* Animated arrow connector */
         .orch-arrow {
@@ -1379,9 +1378,9 @@
 
                 <!-- 양방향 화살표 + 텔레그램 아이콘 -->
                 <div style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="1.5"><path d="M19 12H5M5 12l4-4M5 12l4 4"/></svg>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" style="opacity:0.7;"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-faint)" stroke-width="1.5"><path d="M5 12h14M19 12l-4-4M19 12l-4 4"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"><path d="M19 12H5M5 12l4-4M5 12l4 4"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.4)" stroke-width="1.5" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(59,130,246,0.4)" stroke-width="1.5"><path d="M5 12h14M19 12l-4-4M19 12l-4 4"/></svg>
                 </div>
 
                 <div class="orch-card" data-detail="assistant" onclick="toggleOrchDetail(this)">
@@ -1456,17 +1455,6 @@
                 </div>
             </div>
 
-            <!-- 결과 보고 (양옆 화살표) -->
-            <div style="display:flex;justify-content:space-between;align-items:center;max-width:700px;margin:16px auto 0;padding:0 20px;">
-                <div style="display:flex;align-items:center;gap:4px;color:var(--text-faint);font-size:12px;font-weight:500;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M5 12h14M19 12l-4-4M19 12l-4 4"/></svg>
-                    <span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:4px;color:var(--text-faint);font-size:12px;font-weight:500;">
-                    <span class="txt-ko">결과 보고</span><span class="txt-en" style="display:none;">Report</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M19 12H5M5 12l4-4M5 12l4 4"/></svg>
-                </div>
-            </div>
         </div>
 
         <!-- Detail panel (shown on card click) -->
