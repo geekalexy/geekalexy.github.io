@@ -393,11 +393,14 @@
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: #22C55E;
+            background: var(--accent);
             position: absolute;
-            bottom: 12px;
-            left: 38px;
+            bottom: 10px;
+            left: 42px;
             border: 2px solid var(--bg-secondary);
+        }
+        .orch-status.idle {
+            background: #F59E0B;
         }
         /* Animated arrow connector */
         .orch-arrow {
@@ -1436,7 +1439,7 @@
                 <div class="orch-card" data-detail="designer" onclick="toggleOrchDetail(this)">
                     <div class="orch-avatar" style="background:#EC4899;">D</div>
                     <div class="orch-info"><div class="name">Designer</div><div class="role"><span class="txt-ko">디자인</span><span class="txt-en" style="display:none;">Design</span></div></div>
-                    <div class="orch-status"></div>
+                    <div class="orch-status idle"></div>
                 </div>
                 <div class="orch-card" data-detail="content" onclick="toggleOrchDetail(this)">
                     <div class="orch-avatar content">C</div>
@@ -1451,7 +1454,7 @@
                 <div class="orch-card" data-detail="analyst" onclick="toggleOrchDetail(this)">
                     <div class="orch-avatar research">A</div>
                     <div class="orch-info"><div class="name">Analyst</div><div class="role"><span class="txt-ko">시장 분석</span><span class="txt-en" style="display:none;">Market Analysis</span></div></div>
-                    <div class="orch-status"></div>
+                    <div class="orch-status idle"></div>
                 </div>
             </div>
 
