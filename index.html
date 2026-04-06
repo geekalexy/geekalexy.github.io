@@ -1369,22 +1369,35 @@
             <!-- Board -->
             <div class="orch-row">
                 <div class="orch-card" data-detail="board" onclick="toggleOrchDetail(this)">
-                    <div class="orch-avatar board">B</div>
-                    <div class="orch-info"><div class="name"><span class="txt-ko">Board (당신)</span><span class="txt-en" style="display:none;">Board (You)</span></div><div class="role"><span class="txt-ko">텔레그램으로 지시 및 승인</span><span class="txt-en" style="display:none;">Instruct &amp; approve via Telegram</span></div></div>
+                    <div class="orch-avatar board" style="position:relative;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" style="position:absolute;top:-6px;right:-6px;"><path d="M2 4l3 12h14l3-12-5 4-5-4-5 4z"/><path d="M5 16v4h14v-4"/></svg>
+                        B
+                    </div>
+                    <div class="orch-info"><div class="name"><span class="txt-ko">Board (당신)</span><span class="txt-en" style="display:none;">Board (You)</span></div><div class="role"><span class="txt-ko">의사결정 · 승인</span><span class="txt-en" style="display:none;">Decision · Approval</span></div></div>
                 </div>
             </div>
 
-            <!-- Board → CEO arrow -->
+            <!-- Board → AI 비서 arrow -->
             <div class="orch-arrow">
                 <div class="orch-arrow-line"></div>
                 <div class="orch-arrow-head"></div>
-                <div class="orch-arrow-label"><span class="txt-ko">지시</span><span class="txt-en" style="display:none;">Instruct</span></div>
             </div>
 
-            <!-- Approval badge -->
-            <div class="orch-approval" style="align-self:center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
-                <span class="txt-ko">텔레그램으로 승인 요청</span><span class="txt-en" style="display:none;">Approval via Telegram</span>
+            <!-- AI 비서 -->
+            <div class="orch-row">
+                <div class="orch-card" data-detail="assistant" onclick="toggleOrchDetail(this)" style="border-color:var(--accent);background:var(--accent-glow);">
+                    <div class="orch-avatar" style="background:var(--accent);position:relative;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+                    </div>
+                    <div class="orch-info"><div class="name"><span class="txt-ko">AI 비서</span><span class="txt-en" style="display:none;">AI Assistant</span></div><div class="role"><span class="txt-ko">팀 감독 · 업무 분배 · 보고</span><span class="txt-en" style="display:none;">Supervise · Distribute · Report</span></div></div>
+                    <div class="orch-status"></div>
+                </div>
+            </div>
+
+            <!-- AI 비서 → CEO arrow -->
+            <div class="orch-arrow">
+                <div class="orch-arrow-line"></div>
+                <div class="orch-arrow-head"></div>
             </div>
 
             <!-- CEO -->
@@ -1418,8 +1431,8 @@
             <!-- Workers -->
             <div class="orch-row">
                 <div class="orch-card" data-detail="ad" onclick="toggleOrchDetail(this)">
-                    <div class="orch-avatar ad">A</div>
-                    <div class="orch-info"><div class="name">Ad Sales</div><div class="role"><span class="txt-ko">광고 영업</span><span class="txt-en" style="display:none;">Ad Sales</span></div></div>
+                    <div class="orch-avatar ad">M</div>
+                    <div class="orch-info"><div class="name">Manager</div><div class="role"><span class="txt-ko">광고 영업</span><span class="txt-en" style="display:none;">Ad Sales</span></div></div>
                     <div class="orch-status"></div>
                 </div>
                 <div class="orch-card" data-detail="content" onclick="toggleOrchDetail(this)">
@@ -1432,9 +1445,9 @@
                     <div class="orch-info"><div class="name">Performance</div><div class="role"><span class="txt-ko">퍼포먼스 분석</span><span class="txt-en" style="display:none;">Performance Analytics</span></div></div>
                     <div class="orch-status"></div>
                 </div>
-                <div class="orch-card" data-detail="research" onclick="toggleOrchDetail(this)">
-                    <div class="orch-avatar research">R</div>
-                    <div class="orch-info"><div class="name">Researcher</div><div class="role"><span class="txt-ko">시장 리서치</span><span class="txt-en" style="display:none;">Market Research</span></div></div>
+                <div class="orch-card" data-detail="analyst" onclick="toggleOrchDetail(this)">
+                    <div class="orch-avatar research">A</div>
+                    <div class="orch-info"><div class="name">Analyst</div><div class="role"><span class="txt-ko">시장 분석</span><span class="txt-en" style="display:none;">Market Analysis</span></div></div>
                     <div class="orch-status"></div>
                 </div>
             </div>
