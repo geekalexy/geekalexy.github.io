@@ -1030,45 +1030,35 @@
             .install-box code { font-size: 13px; }
             .container { padding: 0 16px; }
             .apply-form .form-grid { grid-template-columns: 1fr; }
+            .apply-form .form-card { padding: 24px; }
             .task-grid { grid-template-columns: 1fr; }
             .char-grid { grid-template-columns: repeat(3, 1fr); }
-            .wizard-header, .wizard-body, .wizard-footer { padding-left: 20px; padding-right: 20px; }
             .char-card .char-avatar { width: 48px; height: 48px; }
+            .step-label { display: none; }
+            .step-line { width: 24px; }
         }
 
-        /* Apply Form Section — Wizard */
+        /* Apply Form Section — 시안 A */
         .apply-form { padding: 96px 0; }
         .apply-form h2 { font-size: 2.25rem; font-weight: 700; color: var(--text-white); letter-spacing: -0.02em; margin-bottom: 12px; }
         .apply-form h2 .accent { color: var(--accent); }
         .apply-form .form-sub { color: var(--text-muted); margin-bottom: 48px; font-size: 1.125rem; line-height: 1.7; }
 
-        /* Progress dots */
-        .wizard-progress { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 32px; }
-        .wizard-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: all 0.3s; }
-        .wizard-dot.active { background: var(--accent); transform: scale(1.2); }
-        .wizard-dot.completed { background: var(--accent); opacity: 0.5; }
+        /* Step progress bar */
+        .step-progress { display: flex; align-items: center; justify-content: center; gap: 0; margin-bottom: 32px; }
+        .step-item { display: flex; align-items: center; gap: 8px; }
+        .step-circle { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--text-muted); transition: all 0.3s; flex-shrink: 0; }
+        .step-item.active .step-circle { border-color: var(--accent); background: var(--accent); color: #fff; }
+        .step-label { font-size: 13px; font-weight: 600; color: var(--text-faint); }
+        .step-item.active .step-label { color: var(--accent); }
+        .step-line { width: 40px; height: 2px; background: var(--border); margin: 0 8px; }
 
-        /* Wizard card */
-        .wizard-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); overflow: hidden; }
-        .wizard-header { padding: 32px 40px 20px; }
-        .wizard-step-label { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 8px; }
-        .wizard-header h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-bottom: 6px; }
-        .wizard-header h3 .accent { color: var(--accent); }
-        .wizard-header p { color: var(--text-muted); font-size: 0.95rem; }
-        .wizard-body { padding: 0 40px 32px; }
-        .wizard-footer { display: flex; justify-content: space-between; padding: 0 40px 32px; gap: 12px; }
-        .wizard-footer .btn-prev, .wizard-footer .btn-next {
-            padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; border: none;
-        }
-        .wizard-footer .btn-prev { background: var(--bg-primary); color: var(--text-muted); border: 1px solid var(--border); }
-        .wizard-footer .btn-prev:hover { border-color: var(--border-hover); color: var(--text-normal); }
-        .wizard-footer .btn-prev:disabled { opacity: 0; pointer-events: none; }
-        .wizard-footer .btn-next { background: var(--accent); color: #fff; margin-left: auto; }
-        .wizard-footer .btn-next:hover { background: var(--accent-hover); }
-
-        /* Wizard step content */
-        .wizard-step { display: none; }
-        .wizard-step.active { display: block; }
+        /* Form card */
+        .form-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 40px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+        .form-section-title { font-size: 1.125rem; font-weight: 700; color: var(--text-white); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+        .form-section-title .accent { color: var(--accent); }
+        .form-section-title .section-icon { margin-right: 6px; }
+        .form-section-gap { margin-top: 40px; }
 
         /* Form elements (shared) */
         .apply-form .form-group { margin-bottom: 20px; }
@@ -1114,6 +1104,11 @@
         .char-card .char-name { font-size: 15px; font-weight: 700; color: var(--text-white); margin-bottom: 2px; }
         .char-card .char-default { font-size: 11px; color: var(--accent); font-weight: 700; }
         .char-card .char-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Submit button */
+        .apply-form .submit-btn { display: block; width: 100%; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.2s; margin-top: 32px; }
+        .apply-form .submit-btn:hover { background: var(--accent-hover); }
+        .apply-form .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         /* Success */
         .apply-form .form-success { display: none; text-align: center; padding: 48px 24px; }
@@ -1696,196 +1691,174 @@
 
 <hr class="sep">
 
-<!-- AI팀 세팅 신청 폼 — 멀티스텝 위자드 -->
+<!-- AI팀 세팅 신청 폼 — 시안 A: 프로그레스 바 + 캐릭터 카드 -->
 <div class="apply-form section" id="apply">
     <div class="container">
         <h2><span class="txt-ko">AI팀 세팅 <span class="accent">신청</span></span><span class="txt-en" style="display:none;">AI Team Setup <span class="accent">Application</span></span></h2>
-        <p class="form-sub"><span class="txt-ko">아래 질문에 답변해주시면 맞춤형 AI 팀을 세팅해드립니다.</span><span class="txt-en" style="display:none;">Answer the questions below and we'll set up a custom AI team for you.</span></p>
+        <p class="form-sub"><span class="txt-ko">아래 질문에 답변해주시면 맞춤형 AI 팀을 세팅해드립니다. 모르는 항목은 비워두셔도 됩니다.</span><span class="txt-en" style="display:none;">Answer the questions below and we'll set up a custom AI team for you. Feel free to leave unknown fields blank.</span></p>
 
-        <!-- 프로그레스 도트 -->
-        <div class="wizard-progress" id="wizardProgress">
-            <div class="wizard-dot active"></div>
-            <div class="wizard-dot"></div>
-            <div class="wizard-dot"></div>
-            <div class="wizard-dot"></div>
+        <!-- 프로그레스 바 -->
+        <div class="step-progress">
+            <div class="step-item active"><div class="step-circle">1</div><span class="step-label"><span class="txt-ko">환경 확인</span><span class="txt-en" style="display:none;">Environment</span></span></div>
+            <div class="step-line"></div>
+            <div class="step-item"><div class="step-circle">2</div><span class="step-label"><span class="txt-ko">회사 정보</span><span class="txt-en" style="display:none;">Company</span></span></div>
+            <div class="step-line"></div>
+            <div class="step-item"><div class="step-circle">3</div><span class="step-label"><span class="txt-ko">AI 팀 업무</span><span class="txt-en" style="display:none;">Tasks</span></span></div>
+            <div class="step-line"></div>
+            <div class="step-item"><div class="step-circle">4</div><span class="step-label"><span class="txt-ko">캐릭터 선택</span><span class="txt-en" style="display:none;">Character</span></span></div>
         </div>
 
-        <form id="applyForm" onsubmit="return submitApplyForm(event)">
-        <div class="wizard-card" id="wizardCard">
+        <div class="form-card">
+            <form id="applyForm" onsubmit="return submitApplyForm(event)">
 
-            <!-- Step 1: 환경 확인 -->
-            <div class="wizard-step active" data-step="1">
-                <div class="wizard-header">
-                    <div class="wizard-step-label"><span class="txt-ko">1단계 / 4</span><span class="txt-en" style="display:none;">1 of 4</span></div>
-                    <h3><span class="txt-ko"><span class="accent">환경</span> 확인</span><span class="txt-en" style="display:none;"><span class="accent">Environment</span> Check</span></h3>
-                    <p><span class="txt-ko">mycrew 설치에 필요한 기본 환경을 확인합니다.</span><span class="txt-en" style="display:none;">Let's check the basics needed to install mycrew.</span></p>
-                </div>
-                <div class="wizard-body">
-                    <div class="form-group">
-                        <label><span class="txt-ko">Mac을 사용하고 계신가요?</span><span class="txt-en" style="display:none;">Are you using a Mac?</span> <span class="required">*</span></label>
-                        <div class="radio-group" data-field="useMac">
-                            <label class="radio-option"><input type="radio" name="useMac" value="Yes" required>Yes</label>
-                            <label class="radio-option"><input type="radio" name="useMac" value="No">No</label>
-                        </div>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><span class="txt-ko">macOS 버전</span><span class="txt-en" style="display:none;">macOS Version</span></label>
-                            <input type="text" name="macosVersion" placeholder="예: Sequoia 15.4">
-                        </div>
-                        <div class="form-group">
-                            <label><span class="txt-ko">텔레그램 ID</span><span class="txt-en" style="display:none;">Telegram ID</span></label>
-                            <input type="text" name="telegramId" placeholder="@username">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><span class="txt-ko">Claude 구독 플랜</span><span class="txt-en" style="display:none;">Claude Subscription Plan</span></label>
-                        <div class="radio-group" data-field="claudePlan">
-                            <label class="radio-option"><input type="radio" name="claudePlan" value="무료">무료 / Free</label>
-                            <label class="radio-option"><input type="radio" name="claudePlan" value="Pro">Pro ($20)</label>
-                            <label class="radio-option"><input type="radio" name="claudePlan" value="Max">Max ($100)</label>
-                            <label class="radio-option"><input type="radio" name="claudePlan" value="Team">Team</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label><span class="txt-ko">구글 워크스페이스 연동 필요 여부</span><span class="txt-en" style="display:none;">Need Google Workspace integration?</span></label>
-                        <div class="radio-group" data-field="needGWS">
-                            <label class="radio-option"><input type="radio" name="needGWS" value="Yes">Yes</label>
-                            <label class="radio-option"><input type="radio" name="needGWS" value="No">No</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <!-- 섹션 1: 환경 확인 -->
+                <div class="form-section-title"><span class="section-icon">&#9881;</span> <span class="txt-ko">1. <span class="accent">환경</span> 확인</span><span class="txt-en" style="display:none;">1. <span class="accent">Environment</span> Check</span></div>
 
-            <!-- Step 2: 회사 기본 정보 -->
-            <div class="wizard-step" data-step="2">
-                <div class="wizard-header">
-                    <div class="wizard-step-label"><span class="txt-ko">2단계 / 4</span><span class="txt-en" style="display:none;">2 of 4</span></div>
-                    <h3><span class="txt-ko"><span class="accent">회사</span> 기본 정보</span><span class="txt-en" style="display:none;"><span class="accent">Company</span> Info</span></h3>
-                    <p><span class="txt-ko">AI 팀이 이해할 수 있도록 기본 정보를 알려주세요.</span><span class="txt-en" style="display:none;">Help your AI team understand your business.</span></p>
-                </div>
-                <div class="wizard-body">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><span class="txt-ko">회사(브랜드) 이름</span><span class="txt-en" style="display:none;">Company / Brand Name</span></label>
-                            <input type="text" name="companyName">
-                        </div>
-                        <div class="form-group">
-                            <label><span class="txt-ko">업종</span><span class="txt-en" style="display:none;">Industry</span></label>
-                            <input type="text" name="industry">
-                        </div>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><span class="txt-ko">주요 제품/서비스</span><span class="txt-en" style="display:none;">Main Product / Service</span></label>
-                            <input type="text" name="product">
-                        </div>
-                        <div class="form-group">
-                            <label><span class="txt-ko">타겟 고객</span><span class="txt-en" style="display:none;">Target Customer</span></label>
-                            <input type="text" name="targetCustomer">
-                        </div>
+                <div class="form-group">
+                    <label><span class="txt-ko">Mac을 사용하고 계신가요?</span><span class="txt-en" style="display:none;">Are you using a Mac?</span> <span class="required">*</span></label>
+                    <div class="radio-group" data-field="useMac">
+                        <label class="radio-option"><input type="radio" name="useMac" value="Yes" required>Yes</label>
+                        <label class="radio-option"><input type="radio" name="useMac" value="No">No</label>
                     </div>
                 </div>
-            </div>
 
-            <!-- Step 3: AI 팀 업무 -->
-            <div class="wizard-step" data-step="3">
-                <div class="wizard-header">
-                    <div class="wizard-step-label"><span class="txt-ko">3단계 / 4</span><span class="txt-en" style="display:none;">3 of 4</span></div>
-                    <h3><span class="txt-ko">AI 팀 <span class="accent">업무</span></span><span class="txt-en" style="display:none;">AI Team <span class="accent">Tasks</span></span></h3>
-                    <p><span class="txt-ko">맡기고 싶은 업무를 선택하고, 가장 급한 업무를 알려주세요.</span><span class="txt-en" style="display:none;">Select tasks you want AI to handle and your most urgent one.</span></p>
-                </div>
-                <div class="wizard-body">
+                <div class="form-grid">
                     <div class="form-group">
-                        <label><span class="txt-ko">맡기고 싶은 업무 (복수 선택)</span><span class="txt-en" style="display:none;">Tasks (multiple)</span></label>
-                        <div class="task-grid">
-                            <label class="task-card"><input type="checkbox" name="tasks" value="콘텐츠 기획/제작"><span class="task-icon">&#128221;</span><span class="task-label"><span class="txt-ko">콘텐츠 기획/제작</span><span class="txt-en" style="display:none;">Content</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="마케팅/광고 운영"><span class="task-icon">&#128226;</span><span class="task-label"><span class="txt-ko">마케팅/광고 운영</span><span class="txt-en" style="display:none;">Marketing/Ads</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="시장조사/경쟁사 분석"><span class="task-icon">&#128269;</span><span class="task-label"><span class="txt-ko">시장조사/경쟁사 분석</span><span class="txt-en" style="display:none;">Research</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="고객 응대/CS"><span class="task-icon">&#128172;</span><span class="task-label"><span class="txt-ko">고객 응대/CS</span><span class="txt-en" style="display:none;">CS</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="기획/전략 수립"><span class="task-icon">&#128200;</span><span class="task-label"><span class="txt-ko">기획/전략 수립</span><span class="txt-en" style="display:none;">Strategy</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="디자인"><span class="task-icon">&#127912;</span><span class="task-label"><span class="txt-ko">디자인</span><span class="txt-en" style="display:none;">Design</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="데이터 분석/보고서"><span class="task-icon">&#128202;</span><span class="task-label"><span class="txt-ko">데이터 분석/보고서</span><span class="txt-en" style="display:none;">Analytics</span></span><span class="task-check">&#10003;</span></label>
-                            <label class="task-card"><input type="checkbox" name="tasks" value="기타"><span class="task-icon">&#10024;</span><span class="task-label"><span class="txt-ko">기타</span><span class="txt-en" style="display:none;">Other</span></span><span class="task-check">&#10003;</span></label>
-                        </div>
+                        <label><span class="txt-ko">macOS 버전</span><span class="txt-en" style="display:none;">macOS Version</span></label>
+                        <input type="text" name="macosVersion" placeholder="예: Sequoia 15.4">
                     </div>
                     <div class="form-group">
-                        <label><span class="txt-ko">가장 급한 업무 1가지</span><span class="txt-en" style="display:none;">Most urgent task</span></label>
-                        <input type="text" name="urgentTask">
+                        <label><span class="txt-ko">텔레그램 ID</span><span class="txt-en" style="display:none;">Telegram ID</span></label>
+                        <input type="text" name="telegramId" placeholder="@username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><span class="txt-ko">Claude 구독 플랜</span><span class="txt-en" style="display:none;">Claude Subscription Plan</span></label>
+                    <div class="radio-group" data-field="claudePlan">
+                        <label class="radio-option"><input type="radio" name="claudePlan" value="무료">무료 / Free</label>
+                        <label class="radio-option"><input type="radio" name="claudePlan" value="Pro">Pro ($20)</label>
+                        <label class="radio-option"><input type="radio" name="claudePlan" value="Max">Max ($100)</label>
+                        <label class="radio-option"><input type="radio" name="claudePlan" value="Team">Team</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><span class="txt-ko">구글 워크스페이스 연동 필요 여부</span><span class="txt-en" style="display:none;">Need Google Workspace integration?</span></label>
+                    <div class="radio-group" data-field="needGWS">
+                        <label class="radio-option"><input type="radio" name="needGWS" value="Yes">Yes</label>
+                        <label class="radio-option"><input type="radio" name="needGWS" value="No">No</label>
+                    </div>
+                </div>
+
+                <!-- 섹션 2: 회사 기본 정보 -->
+                <div class="form-section-title form-section-gap"><span class="section-icon">&#127970;</span> <span class="txt-ko">2. <span class="accent">회사</span> 기본 정보</span><span class="txt-en" style="display:none;">2. <span class="accent">Company</span> Info</span></div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label><span class="txt-ko">회사(브랜드) 이름</span><span class="txt-en" style="display:none;">Company / Brand Name</span></label>
+                        <input type="text" name="companyName">
                     </div>
                     <div class="form-group">
-                        <label><span class="txt-ko">현재 담당자</span><span class="txt-en" style="display:none;">Current person in charge</span></label>
-                        <div class="radio-group" data-field="currentHandler">
-                            <label class="radio-option"><input type="radio" name="currentHandler" value="본인"><span class="txt-ko">본인</span><span class="txt-en" style="display:none;">Myself</span></label>
-                            <label class="radio-option"><input type="radio" name="currentHandler" value="직원"><span class="txt-ko">직원</span><span class="txt-en" style="display:none;">Employee</span></label>
-                            <label class="radio-option"><input type="radio" name="currentHandler" value="외주"><span class="txt-ko">외주</span><span class="txt-en" style="display:none;">Outsourced</span></label>
-                            <label class="radio-option"><input type="radio" name="currentHandler" value="안하고있음"><span class="txt-ko">안하고있음</span><span class="txt-en" style="display:none;">Nobody</span></label>
-                        </div>
+                        <label><span class="txt-ko">업종</span><span class="txt-en" style="display:none;">Industry</span></label>
+                        <input type="text" name="industry">
                     </div>
                 </div>
-            </div>
 
-            <!-- Step 4: AI 비서 캐릭터 -->
-            <div class="wizard-step" data-step="4">
-                <div class="wizard-header">
-                    <div class="wizard-step-label"><span class="txt-ko">4단계 / 4</span><span class="txt-en" style="display:none;">4 of 4</span></div>
-                    <h3><span class="txt-ko">AI 비서 <span class="accent">캐릭터</span></span><span class="txt-en" style="display:none;">AI Secretary <span class="accent">Character</span></span></h3>
-                    <p><span class="txt-ko">텔레그램으로 소통할 AI 비서 캐릭터를 선택하세요.</span><span class="txt-en" style="display:none;">Choose your AI secretary character for Telegram.</span></p>
-                </div>
-                <div class="wizard-body">
+                <div class="form-grid">
                     <div class="form-group">
-                        <div class="char-grid">
-                            <label class="char-card selected">
-                                <input type="radio" name="character" value="Ari" checked>
-                                <div class="char-check">&#10003;</div>
-                                <div class="char-avatar"><img src="assets/characters/final_svg/ari.svg" alt="Ari"></div>
-                                <div class="char-name">Ari</div>
-                                <div class="char-default"><span class="txt-ko">기본</span><span class="txt-en" style="display:none;">Default</span></div>
-                                <div class="char-desc"><span class="txt-ko">밝고 영민한 비서</span><span class="txt-en" style="display:none;">Bright & smart</span></div>
-                            </label>
-                            <label class="char-card">
-                                <input type="radio" name="character" value="Ollie">
-                                <div class="char-check">&#10003;</div>
-                                <div class="char-avatar"><img src="assets/characters/final_svg/ollie.svg" alt="Ollie"></div>
-                                <div class="char-name">Ollie</div>
-                                <div class="char-desc"><span class="txt-ko">지혜로운 관리자</span><span class="txt-en" style="display:none;">Wise manager</span></div>
-                            </label>
-                            <label class="char-card">
-                                <input type="radio" name="character" value="Luca">
-                                <div class="char-check">&#10003;</div>
-                                <div class="char-avatar"><img src="assets/characters/final_svg/luca.svg" alt="Luca"></div>
-                                <div class="char-name">Luca</div>
-                                <div class="char-desc"><span class="txt-ko">프로페셔널 비서</span><span class="txt-en" style="display:none;">Professional</span></div>
-                            </label>
-                            <label class="char-card">
-                                <input type="radio" name="character" value="Lumi">
-                                <div class="char-check">&#10003;</div>
-                                <div class="char-avatar"><img src="assets/characters/final_svg/lumi.svg" alt="Lumi"></div>
-                                <div class="char-name">Lumi</div>
-                                <div class="char-desc"><span class="txt-ko">따뜻한 길잡이</span><span class="txt-en" style="display:none;">Warm guide</span></div>
-                            </label>
-                            <label class="char-card">
-                                <input type="radio" name="character" value="Nova">
-                                <div class="char-check">&#10003;</div>
-                                <div class="char-avatar"><img src="assets/characters/final_svg/nova.svg" alt="Nova"></div>
-                                <div class="char-name">Nova</div>
-                                <div class="char-desc"><span class="txt-ko">에너지 넘치는 리더</span><span class="txt-en" style="display:none;">Energetic leader</span></div>
-                            </label>
-                        </div>
+                        <label><span class="txt-ko">주요 제품/서비스</span><span class="txt-en" style="display:none;">Main Product / Service</span></label>
+                        <input type="text" name="product">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="txt-ko">타겟 고객</span><span class="txt-en" style="display:none;">Target Customer</span></label>
+                        <input type="text" name="targetCustomer">
                     </div>
                 </div>
-            </div>
 
-            <!-- Wizard 네비게이션 -->
-            <div class="wizard-footer">
-                <button type="button" class="btn-prev" id="wizardPrev" disabled onclick="wizardNav(-1)"><span class="txt-ko">&larr; 이전</span><span class="txt-en" style="display:none;">&larr; Back</span></button>
-                <button type="button" class="btn-next" id="wizardNext" onclick="wizardNav(1)"><span class="txt-ko">다음 &rarr;</span><span class="txt-en" style="display:none;">Next &rarr;</span></button>
-            </div>
-        </div>
-        </form>
+                <!-- 섹션 3: AI 팀 업무 -->
+                <div class="form-section-title form-section-gap"><span class="section-icon">&#128187;</span> <span class="txt-ko">3. AI 팀 <span class="accent">업무</span></span><span class="txt-en" style="display:none;">3. AI Team <span class="accent">Tasks</span></span></div>
 
-        <div class="wizard-card" style="display:none;" id="applySuccessCard">
-            <div class="form-success" id="applySuccess" style="display:block;">
+                <div class="form-group">
+                    <label><span class="txt-ko">맡기고 싶은 업무 (복수 선택)</span><span class="txt-en" style="display:none;">Tasks you want AI to handle (multiple)</span></label>
+                    <div class="task-grid">
+                        <label class="task-card"><input type="checkbox" name="tasks" value="콘텐츠 기획/제작"><span class="task-icon">&#128221;</span><span class="task-label"><span class="txt-ko">콘텐츠 기획/제작</span><span class="txt-en" style="display:none;">Content</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="마케팅/광고 운영"><span class="task-icon">&#128226;</span><span class="task-label"><span class="txt-ko">마케팅/광고 운영</span><span class="txt-en" style="display:none;">Marketing/Ads</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="시장조사/경쟁사 분석"><span class="task-icon">&#128269;</span><span class="task-label"><span class="txt-ko">시장조사/경쟁사 분석</span><span class="txt-en" style="display:none;">Research</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="고객 응대/CS"><span class="task-icon">&#128172;</span><span class="task-label"><span class="txt-ko">고객 응대/CS</span><span class="txt-en" style="display:none;">CS</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="기획/전략 수립"><span class="task-icon">&#128200;</span><span class="task-label"><span class="txt-ko">기획/전략 수립</span><span class="txt-en" style="display:none;">Strategy</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="디자인"><span class="task-icon">&#127912;</span><span class="task-label"><span class="txt-ko">디자인</span><span class="txt-en" style="display:none;">Design</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="데이터 분석/보고서"><span class="task-icon">&#128202;</span><span class="task-label"><span class="txt-ko">데이터 분석/보고서</span><span class="txt-en" style="display:none;">Analytics</span></span><span class="task-check">&#10003;</span></label>
+                        <label class="task-card"><input type="checkbox" name="tasks" value="기타"><span class="task-icon">&#10024;</span><span class="task-label"><span class="txt-ko">기타</span><span class="txt-en" style="display:none;">Other</span></span><span class="task-check">&#10003;</span></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><span class="txt-ko">가장 급한 업무 1가지</span><span class="txt-en" style="display:none;">Most urgent task</span></label>
+                    <input type="text" name="urgentTask">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="txt-ko">현재 담당자</span><span class="txt-en" style="display:none;">Current person in charge</span></label>
+                    <div class="radio-group" data-field="currentHandler">
+                        <label class="radio-option"><input type="radio" name="currentHandler" value="본인"><span class="txt-ko">본인</span><span class="txt-en" style="display:none;">Myself</span></label>
+                        <label class="radio-option"><input type="radio" name="currentHandler" value="직원"><span class="txt-ko">직원</span><span class="txt-en" style="display:none;">Employee</span></label>
+                        <label class="radio-option"><input type="radio" name="currentHandler" value="외주"><span class="txt-ko">외주</span><span class="txt-en" style="display:none;">Outsourced</span></label>
+                        <label class="radio-option"><input type="radio" name="currentHandler" value="안하고있음"><span class="txt-ko">안하고있음</span><span class="txt-en" style="display:none;">Nobody</span></label>
+                    </div>
+                </div>
+
+                <!-- 섹션 4: AI 비서 캐릭터 -->
+                <div class="form-section-title form-section-gap"><span class="section-icon">&#129302;</span> <span class="txt-ko">4. AI 비서 <span class="accent">캐릭터</span></span><span class="txt-en" style="display:none;">4. AI Secretary <span class="accent">Character</span></span></div>
+
+                <div class="form-group">
+                    <label><span class="txt-ko">텔레그램으로 소통할 AI 비서 캐릭터를 선택하세요</span><span class="txt-en" style="display:none;">Choose your AI secretary character for Telegram</span></label>
+                    <div class="char-grid">
+                        <label class="char-card selected">
+                            <input type="radio" name="character" value="Ari" checked>
+                            <div class="char-check">&#10003;</div>
+                            <div class="char-avatar"><img src="assets/characters/final_svg/ari.svg" alt="Ari"></div>
+                            <div class="char-name">Ari</div>
+                            <div class="char-default"><span class="txt-ko">기본</span><span class="txt-en" style="display:none;">Default</span></div>
+                            <div class="char-desc"><span class="txt-ko">밝고 영민한 비서</span><span class="txt-en" style="display:none;">Bright & smart</span></div>
+                        </label>
+                        <label class="char-card">
+                            <input type="radio" name="character" value="Ollie">
+                            <div class="char-check">&#10003;</div>
+                            <div class="char-avatar"><img src="assets/characters/final_svg/ollie.svg" alt="Ollie"></div>
+                            <div class="char-name">Ollie</div>
+                            <div class="char-desc"><span class="txt-ko">지혜로운 관리자</span><span class="txt-en" style="display:none;">Wise manager</span></div>
+                        </label>
+                        <label class="char-card">
+                            <input type="radio" name="character" value="Luca">
+                            <div class="char-check">&#10003;</div>
+                            <div class="char-avatar"><img src="assets/characters/final_svg/luca.svg" alt="Luca"></div>
+                            <div class="char-name">Luca</div>
+                            <div class="char-desc"><span class="txt-ko">프로페셔널 비서</span><span class="txt-en" style="display:none;">Professional</span></div>
+                        </label>
+                        <label class="char-card">
+                            <input type="radio" name="character" value="Lumi">
+                            <div class="char-check">&#10003;</div>
+                            <div class="char-avatar"><img src="assets/characters/final_svg/lumi.svg" alt="Lumi"></div>
+                            <div class="char-name">Lumi</div>
+                            <div class="char-desc"><span class="txt-ko">따뜻한 길잡이</span><span class="txt-en" style="display:none;">Warm guide</span></div>
+                        </label>
+                        <label class="char-card">
+                            <input type="radio" name="character" value="Nova">
+                            <div class="char-check">&#10003;</div>
+                            <div class="char-avatar"><img src="assets/characters/final_svg/nova.svg" alt="Nova"></div>
+                            <div class="char-name">Nova</div>
+                            <div class="char-desc"><span class="txt-ko">에너지 넘치는 리더</span><span class="txt-en" style="display:none;">Energetic leader</span></div>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="applySubmitBtn">
+                    <span class="txt-ko">신청하기</span><span class="txt-en" style="display:none;">Submit Application</span>
+                </button>
+            </form>
+
+            <div class="form-success" id="applySuccess">
                 <div class="success-icon">&#10003;</div>
                 <h3><span class="txt-ko">신청이 완료되었습니다!</span><span class="txt-en" style="display:none;">Application submitted!</span></h3>
                 <p><span class="txt-ko">맞춤형 AI 팀 구성안을 준비하여 텔레그램으로 연락드리겠습니다.<br>감사합니다!</span><span class="txt-en" style="display:none;">We'll prepare a custom AI team plan and contact you via Telegram.<br>Thank you!</span></p>
@@ -2004,49 +1977,6 @@ function toggleOrchDetail(card) {
     panel.classList.add('show');
 }
 
-/* Wizard navigation */
-var wizardCurrentStep = 1;
-var wizardTotalSteps = 4;
-
-function wizardNav(dir) {
-    var nextStep = wizardCurrentStep + dir;
-    if (nextStep < 1 || nextStep > wizardTotalSteps) return;
-    if (nextStep > wizardTotalSteps) { document.getElementById('applyForm').dispatchEvent(new Event('submit')); return; }
-    wizardCurrentStep = nextStep;
-    updateWizard();
-}
-
-function updateWizard() {
-    document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
-    var active = document.querySelector('.wizard-step[data-step="' + wizardCurrentStep + '"]');
-    if (active) active.classList.add('active');
-
-    var dots = document.querySelectorAll('.wizard-dot');
-    dots.forEach(function(d, i) {
-        d.classList.remove('active', 'completed');
-        if (i + 1 === wizardCurrentStep) d.classList.add('active');
-        else if (i + 1 < wizardCurrentStep) d.classList.add('completed');
-    });
-
-    var prev = document.getElementById('wizardPrev');
-    var next = document.getElementById('wizardNext');
-    prev.disabled = (wizardCurrentStep === 1);
-    if (wizardCurrentStep === wizardTotalSteps) {
-        next.innerHTML = '<span class="txt-ko">신청하기 &#10003;</span><span class="txt-en" style="display:none;">Submit &#10003;</span>';
-        next.onclick = function() { document.getElementById('applyForm').requestSubmit(); };
-    } else {
-        next.innerHTML = '<span class="txt-ko">다음 &rarr;</span><span class="txt-en" style="display:none;">Next &rarr;</span>';
-        next.onclick = function() { wizardNav(1); };
-    }
-    var isEn = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isEn) {
-        next.querySelectorAll('.txt-ko').forEach(function(e){e.style.display='none';});
-        next.querySelectorAll('.txt-en').forEach(function(e){e.style.display='inline';});
-        prev.querySelectorAll('.txt-ko').forEach(function(e){e.style.display='none';});
-        prev.querySelectorAll('.txt-en').forEach(function(e){e.style.display='inline';});
-    }
-}
-
 /* Apply form — radio/checkbox/task/char selection UI */
 document.querySelectorAll('.apply-form .radio-option').forEach(function(opt) {
     opt.addEventListener('click', function() {
@@ -2117,9 +2047,8 @@ function submitApplyForm(e) {
 }
 
 function showFormSuccess() {
-    document.getElementById('wizardCard').style.display = 'none';
-    document.getElementById('wizardProgress').style.display = 'none';
-    document.getElementById('applySuccessCard').style.display = 'block';
+    document.getElementById('applyForm').style.display = 'none';
+    document.getElementById('applySuccess').style.display = 'block';
 }
 
 /* Scroll-triggered entrance animation for orchestration flow */
