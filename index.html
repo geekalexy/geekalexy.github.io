@@ -1030,208 +1030,96 @@
             .install-box code { font-size: 13px; }
             .container { padding: 0 16px; }
             .apply-form .form-grid { grid-template-columns: 1fr; }
-            .apply-form .form-section-title { font-size: 1rem; }
-            .char-options { grid-template-columns: 1fr; }
+            .task-grid { grid-template-columns: 1fr; }
+            .char-grid { grid-template-columns: repeat(3, 1fr); }
+            .wizard-header, .wizard-body, .wizard-footer { padding-left: 20px; padding-right: 20px; }
+            .char-card .char-avatar { width: 48px; height: 48px; }
         }
 
-        /* Apply Form Section */
-        .apply-form {
-            padding: 96px 0;
-        }
-        .apply-form h2 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: var(--text-white);
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-        }
+        /* Apply Form Section — Wizard */
+        .apply-form { padding: 96px 0; }
+        .apply-form h2 { font-size: 2.25rem; font-weight: 700; color: var(--text-white); letter-spacing: -0.02em; margin-bottom: 12px; }
         .apply-form h2 .accent { color: var(--accent); }
-        .apply-form .form-sub {
-            color: var(--text-muted);
-            margin-bottom: 48px;
-            font-size: 1.125rem;
-            line-height: 1.7;
+        .apply-form .form-sub { color: var(--text-muted); margin-bottom: 48px; font-size: 1.125rem; line-height: 1.7; }
+
+        /* Progress dots */
+        .wizard-progress { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 32px; }
+        .wizard-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: all 0.3s; }
+        .wizard-dot.active { background: var(--accent); transform: scale(1.2); }
+        .wizard-dot.completed { background: var(--accent); opacity: 0.5; }
+
+        /* Wizard card */
+        .wizard-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); overflow: hidden; }
+        .wizard-header { padding: 32px 40px 20px; }
+        .wizard-step-label { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 8px; }
+        .wizard-header h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-bottom: 6px; }
+        .wizard-header h3 .accent { color: var(--accent); }
+        .wizard-header p { color: var(--text-muted); font-size: 0.95rem; }
+        .wizard-body { padding: 0 40px 32px; }
+        .wizard-footer { display: flex; justify-content: space-between; padding: 0 40px 32px; gap: 12px; }
+        .wizard-footer .btn-prev, .wizard-footer .btn-next {
+            padding: 12px 28px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; border: none;
         }
-        .apply-form .form-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        .wizard-footer .btn-prev { background: var(--bg-primary); color: var(--text-muted); border: 1px solid var(--border); }
+        .wizard-footer .btn-prev:hover { border-color: var(--border-hover); color: var(--text-normal); }
+        .wizard-footer .btn-prev:disabled { opacity: 0; pointer-events: none; }
+        .wizard-footer .btn-next { background: var(--accent); color: #fff; margin-left: auto; }
+        .wizard-footer .btn-next:hover { background: var(--accent-hover); }
+
+        /* Wizard step content */
+        .wizard-step { display: none; }
+        .wizard-step.active { display: block; }
+
+        /* Form elements (shared) */
+        .apply-form .form-group { margin-bottom: 20px; }
+        .apply-form .form-group:last-child { margin-bottom: 0; }
+        .apply-form label { display: block; font-size: 14px; font-weight: 600; color: var(--text-white); margin-bottom: 8px; }
+        .apply-form label .required { color: #EF4444; margin-left: 2px; }
+        .apply-form input[type="text"], .apply-form textarea {
+            width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
+            background: var(--bg-primary); color: var(--text-normal); font-family: inherit; font-size: 15px; transition: border-color 0.2s; outline: none;
         }
-        .apply-form .form-section-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: var(--text-white);
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
+        .apply-form input[type="text"]:focus, .apply-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+        .apply-form .radio-group, .apply-form .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; }
+        .apply-form .radio-option, .apply-form .checkbox-option {
+            display: flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--border);
+            border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 14px; color: var(--text-normal); background: var(--bg-primary);
         }
-        .apply-form .form-section-title .accent { color: var(--accent); }
-        .apply-form .form-group {
-            margin-bottom: 20px;
-        }
-        .apply-form .form-group:last-child {
-            margin-bottom: 0;
-        }
-        .apply-form label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-white);
-            margin-bottom: 8px;
-        }
-        .apply-form label .required {
-            color: #EF4444;
-            margin-left: 2px;
-        }
-        .apply-form input[type="text"],
-        .apply-form textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--bg-primary);
-            color: var(--text-normal);
-            font-family: inherit;
-            font-size: 15px;
-            transition: border-color 0.2s;
-            outline: none;
-        }
-        .apply-form input[type="text"]:focus,
-        .apply-form textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        .apply-form textarea { resize: vertical; min-height: 80px; }
-        .apply-form .radio-group,
-        .apply-form .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .apply-form .radio-option,
-        .apply-form .checkbox-option {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-            color: var(--text-normal);
-            background: var(--bg-primary);
-        }
-        .apply-form .radio-option:hover,
-        .apply-form .checkbox-option:hover {
-            border-color: var(--border-hover);
-            background: var(--accent-glow);
-        }
-        .apply-form .radio-option.selected,
-        .apply-form .checkbox-option.selected {
-            border-color: var(--accent);
-            background: var(--accent-glow);
-            color: var(--accent);
-            font-weight: 600;
-        }
-        .apply-form .radio-option input,
-        .apply-form .checkbox-option input {
-            display: none;
-        }
-        .apply-form .form-section-gap {
-            margin-top: 40px;
-        }
-        .apply-form .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .char-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-        }
-        .char-option {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-        .char-option:hover { border-color: var(--border-hover); }
-        .char-option.selected {
-            border-color: var(--accent);
-            background: var(--accent-glow);
-            box-shadow: 0 0 0 2px var(--accent-glow);
-        }
-        .char-option input { display: none; }
-        .char-option .char-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-white);
-            margin-bottom: 4px;
-        }
-        .char-option .char-default {
-            font-size: 11px;
-            color: var(--accent);
-            font-weight: 700;
-        }
-        .char-option .char-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-        .apply-form .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            transition: background 0.2s;
-            margin-top: 32px;
-        }
-        .apply-form .submit-btn:hover { background: var(--accent-hover); }
-        .apply-form .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .apply-form .form-success {
-            display: none;
-            text-align: center;
-            padding: 48px 24px;
-        }
-        .apply-form .form-success .success-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: rgba(34,197,94,0.1);
-            border: 2px solid #22C55E;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-        }
-        .apply-form .form-success h3 {
-            font-size: 1.5rem;
-            color: var(--text-white);
-            margin-bottom: 12px;
-        }
-        .apply-form .form-success p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
+        .apply-form .radio-option:hover, .apply-form .checkbox-option:hover { border-color: var(--border-hover); background: var(--accent-glow); }
+        .apply-form .radio-option.selected, .apply-form .checkbox-option.selected { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); font-weight: 600; }
+        .apply-form .radio-option input, .apply-form .checkbox-option input { display: none; }
+        .apply-form .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        /* Task icon cards (시안 B) */
+        .task-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .task-card { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; background: var(--bg-primary); }
+        .task-card:hover { border-color: var(--border-hover); }
+        .task-card.selected { border-color: var(--accent); background: var(--accent-glow); }
+        .task-card input { display: none; }
+        .task-card .task-icon { font-size: 18px; flex-shrink: 0; }
+        .task-card .task-label { font-size: 13px; font-weight: 600; color: var(--text-normal); flex: 1; }
+        .task-card .task-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: transparent; flex-shrink: 0; }
+        .task-card.selected .task-check { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+        /* Character grid cards (시안 A style — 5 columns with SVG) */
+        .char-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        .char-card { position: relative; background: var(--bg-primary); border: 2px solid var(--border); border-radius: 12px; padding: 20px 12px 16px; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .char-card:hover { border-color: var(--border-hover); }
+        .char-card.selected { border-color: var(--accent); background: var(--accent-glow); }
+        .char-card input { display: none; }
+        .char-card .char-check { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; display: none; align-items: center; justify-content: center; }
+        .char-card.selected .char-check { display: flex; }
+        .char-card .char-avatar { width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 12px; overflow: hidden; }
+        .char-card .char-avatar img { width: 100%; height: 100%; }
+        .char-card .char-name { font-size: 15px; font-weight: 700; color: var(--text-white); margin-bottom: 2px; }
+        .char-card .char-default { font-size: 11px; color: var(--accent); font-weight: 700; }
+        .char-card .char-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        /* Success */
+        .apply-form .form-success { display: none; text-align: center; padding: 48px 24px; }
+        .apply-form .form-success .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,0.1); border: 2px solid #22C55E; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+        .apply-form .form-success h3 { font-size: 1.5rem; color: var(--text-white); margin-bottom: 12px; }
+        .apply-form .form-success p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
     </style>
 </head>
 <body>
@@ -1808,153 +1696,196 @@
 
 <hr class="sep">
 
-<!-- AI팀 세팅 신청 폼 -->
+<!-- AI팀 세팅 신청 폼 — 멀티스텝 위자드 -->
 <div class="apply-form section" id="apply">
     <div class="container">
         <h2><span class="txt-ko">AI팀 세팅 <span class="accent">신청</span></span><span class="txt-en" style="display:none;">AI Team Setup <span class="accent">Application</span></span></h2>
-        <p class="form-sub"><span class="txt-ko">아래 질문에 답변해주시면 맞춤형 AI 팀을 세팅해드립니다. 모르는 항목은 비워두셔도 됩니다.</span><span class="txt-en" style="display:none;">Answer the questions below and we'll set up a custom AI team for you. Feel free to leave unknown fields blank.</span></p>
+        <p class="form-sub"><span class="txt-ko">아래 질문에 답변해주시면 맞춤형 AI 팀을 세팅해드립니다.</span><span class="txt-en" style="display:none;">Answer the questions below and we'll set up a custom AI team for you.</span></p>
 
-        <div class="form-card">
-            <form id="applyForm" onsubmit="return submitApplyForm(event)">
+        <!-- 프로그레스 도트 -->
+        <div class="wizard-progress" id="wizardProgress">
+            <div class="wizard-dot active"></div>
+            <div class="wizard-dot"></div>
+            <div class="wizard-dot"></div>
+            <div class="wizard-dot"></div>
+        </div>
 
-                <!-- 섹션 1: 환경 확인 -->
-                <div class="form-section-title"><span class="txt-ko">1. <span class="accent">환경</span> 확인</span><span class="txt-en" style="display:none;">1. <span class="accent">Environment</span> Check</span></div>
+        <form id="applyForm" onsubmit="return submitApplyForm(event)">
+        <div class="wizard-card" id="wizardCard">
 
-                <div class="form-group">
-                    <label><span class="txt-ko">Mac을 사용하고 계신가요?</span><span class="txt-en" style="display:none;">Are you using a Mac?</span> <span class="required">*</span></label>
-                    <div class="radio-group" data-field="useMac">
-                        <label class="radio-option"><input type="radio" name="useMac" value="Yes" required>Yes</label>
-                        <label class="radio-option"><input type="radio" name="useMac" value="No">No</label>
-                    </div>
+            <!-- Step 1: 환경 확인 -->
+            <div class="wizard-step active" data-step="1">
+                <div class="wizard-header">
+                    <div class="wizard-step-label"><span class="txt-ko">1단계 / 4</span><span class="txt-en" style="display:none;">1 of 4</span></div>
+                    <h3><span class="txt-ko"><span class="accent">환경</span> 확인</span><span class="txt-en" style="display:none;"><span class="accent">Environment</span> Check</span></h3>
+                    <p><span class="txt-ko">mycrew 설치에 필요한 기본 환경을 확인합니다.</span><span class="txt-en" style="display:none;">Let's check the basics needed to install mycrew.</span></p>
                 </div>
-
-                <div class="form-grid">
+                <div class="wizard-body">
                     <div class="form-group">
-                        <label><span class="txt-ko">macOS 버전</span><span class="txt-en" style="display:none;">macOS Version</span></label>
-                        <input type="text" name="macosVersion" placeholder="예: Sequoia 15.4">
+                        <label><span class="txt-ko">Mac을 사용하고 계신가요?</span><span class="txt-en" style="display:none;">Are you using a Mac?</span> <span class="required">*</span></label>
+                        <div class="radio-group" data-field="useMac">
+                            <label class="radio-option"><input type="radio" name="useMac" value="Yes" required>Yes</label>
+                            <label class="radio-option"><input type="radio" name="useMac" value="No">No</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><span class="txt-ko">텔레그램 ID</span><span class="txt-en" style="display:none;">Telegram ID</span></label>
-                        <input type="text" name="telegramId" placeholder="@username">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label><span class="txt-ko">Claude 구독 플랜</span><span class="txt-en" style="display:none;">Claude Subscription Plan</span></label>
-                    <div class="radio-group" data-field="claudePlan">
-                        <label class="radio-option"><input type="radio" name="claudePlan" value="무료">무료 / Free</label>
-                        <label class="radio-option"><input type="radio" name="claudePlan" value="Pro">Pro ($20)</label>
-                        <label class="radio-option"><input type="radio" name="claudePlan" value="Max">Max ($100)</label>
-                        <label class="radio-option"><input type="radio" name="claudePlan" value="Team">Team</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label><span class="txt-ko">구글 워크스페이스 연동 필요 여부</span><span class="txt-en" style="display:none;">Need Google Workspace integration?</span></label>
-                    <div class="radio-group" data-field="needGWS">
-                        <label class="radio-option"><input type="radio" name="needGWS" value="Yes">Yes</label>
-                        <label class="radio-option"><input type="radio" name="needGWS" value="No">No</label>
-                    </div>
-                </div>
-
-                <!-- 섹션 2: 회사 기본 정보 -->
-                <div class="form-section-title form-section-gap"><span class="txt-ko">2. <span class="accent">회사</span> 기본 정보</span><span class="txt-en" style="display:none;">2. <span class="accent">Company</span> Info</span></div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label><span class="txt-ko">회사(브랜드) 이름</span><span class="txt-en" style="display:none;">Company / Brand Name</span></label>
-                        <input type="text" name="companyName" placeholder="">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><span class="txt-ko">macOS 버전</span><span class="txt-en" style="display:none;">macOS Version</span></label>
+                            <input type="text" name="macosVersion" placeholder="예: Sequoia 15.4">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="txt-ko">텔레그램 ID</span><span class="txt-en" style="display:none;">Telegram ID</span></label>
+                            <input type="text" name="telegramId" placeholder="@username">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label><span class="txt-ko">업종</span><span class="txt-en" style="display:none;">Industry</span></label>
-                        <input type="text" name="industry" placeholder="">
-                    </div>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label><span class="txt-ko">주요 제품/서비스</span><span class="txt-en" style="display:none;">Main Product / Service</span></label>
-                        <input type="text" name="product" placeholder="">
+                        <label><span class="txt-ko">Claude 구독 플랜</span><span class="txt-en" style="display:none;">Claude Subscription Plan</span></label>
+                        <div class="radio-group" data-field="claudePlan">
+                            <label class="radio-option"><input type="radio" name="claudePlan" value="무료">무료 / Free</label>
+                            <label class="radio-option"><input type="radio" name="claudePlan" value="Pro">Pro ($20)</label>
+                            <label class="radio-option"><input type="radio" name="claudePlan" value="Max">Max ($100)</label>
+                            <label class="radio-option"><input type="radio" name="claudePlan" value="Team">Team</label>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label><span class="txt-ko">타겟 고객</span><span class="txt-en" style="display:none;">Target Customer</span></label>
-                        <input type="text" name="targetCustomer" placeholder="">
+                        <label><span class="txt-ko">구글 워크스페이스 연동 필요 여부</span><span class="txt-en" style="display:none;">Need Google Workspace integration?</span></label>
+                        <div class="radio-group" data-field="needGWS">
+                            <label class="radio-option"><input type="radio" name="needGWS" value="Yes">Yes</label>
+                            <label class="radio-option"><input type="radio" name="needGWS" value="No">No</label>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 섹션 3: AI 팀 업무 -->
-                <div class="form-section-title form-section-gap"><span class="txt-ko">3. AI 팀 <span class="accent">업무</span></span><span class="txt-en" style="display:none;">3. AI Team <span class="accent">Tasks</span></span></div>
-
-                <div class="form-group">
-                    <label><span class="txt-ko">맡기고 싶은 업무 (복수 선택)</span><span class="txt-en" style="display:none;">Tasks you want AI to handle (multiple)</span></label>
-                    <div class="checkbox-group" data-field="tasks">
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="콘텐츠 기획/제작"><span class="txt-ko">콘텐츠 기획/제작</span><span class="txt-en" style="display:none;">Content</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="마케팅/광고 운영"><span class="txt-ko">마케팅/광고 운영</span><span class="txt-en" style="display:none;">Marketing/Ads</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="시장조사/경쟁사 분석"><span class="txt-ko">시장조사/경쟁사 분석</span><span class="txt-en" style="display:none;">Research</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="고객 응대/CS"><span class="txt-ko">고객 응대/CS</span><span class="txt-en" style="display:none;">CS</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="기획/전략 수립"><span class="txt-ko">기획/전략 수립</span><span class="txt-en" style="display:none;">Strategy</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="디자인"><span class="txt-ko">디자인</span><span class="txt-en" style="display:none;">Design</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="데이터 분석/보고서"><span class="txt-ko">데이터 분석/보고서</span><span class="txt-en" style="display:none;">Analytics</span></label>
-                        <label class="checkbox-option"><input type="checkbox" name="tasks" value="기타"><span class="txt-ko">기타</span><span class="txt-en" style="display:none;">Other</span></label>
+            <!-- Step 2: 회사 기본 정보 -->
+            <div class="wizard-step" data-step="2">
+                <div class="wizard-header">
+                    <div class="wizard-step-label"><span class="txt-ko">2단계 / 4</span><span class="txt-en" style="display:none;">2 of 4</span></div>
+                    <h3><span class="txt-ko"><span class="accent">회사</span> 기본 정보</span><span class="txt-en" style="display:none;"><span class="accent">Company</span> Info</span></h3>
+                    <p><span class="txt-ko">AI 팀이 이해할 수 있도록 기본 정보를 알려주세요.</span><span class="txt-en" style="display:none;">Help your AI team understand your business.</span></p>
+                </div>
+                <div class="wizard-body">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><span class="txt-ko">회사(브랜드) 이름</span><span class="txt-en" style="display:none;">Company / Brand Name</span></label>
+                            <input type="text" name="companyName">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="txt-ko">업종</span><span class="txt-en" style="display:none;">Industry</span></label>
+                            <input type="text" name="industry">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><span class="txt-ko">주요 제품/서비스</span><span class="txt-en" style="display:none;">Main Product / Service</span></label>
+                            <input type="text" name="product">
+                        </div>
+                        <div class="form-group">
+                            <label><span class="txt-ko">타겟 고객</span><span class="txt-en" style="display:none;">Target Customer</span></label>
+                            <input type="text" name="targetCustomer">
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label><span class="txt-ko">가장 급한 업무 1가지</span><span class="txt-en" style="display:none;">Most urgent task</span></label>
-                    <input type="text" name="urgentTask" placeholder="">
+            <!-- Step 3: AI 팀 업무 -->
+            <div class="wizard-step" data-step="3">
+                <div class="wizard-header">
+                    <div class="wizard-step-label"><span class="txt-ko">3단계 / 4</span><span class="txt-en" style="display:none;">3 of 4</span></div>
+                    <h3><span class="txt-ko">AI 팀 <span class="accent">업무</span></span><span class="txt-en" style="display:none;">AI Team <span class="accent">Tasks</span></span></h3>
+                    <p><span class="txt-ko">맡기고 싶은 업무를 선택하고, 가장 급한 업무를 알려주세요.</span><span class="txt-en" style="display:none;">Select tasks you want AI to handle and your most urgent one.</span></p>
                 </div>
-
-                <div class="form-group">
-                    <label><span class="txt-ko">현재 담당자</span><span class="txt-en" style="display:none;">Current person in charge</span></label>
-                    <div class="radio-group" data-field="currentHandler">
-                        <label class="radio-option"><input type="radio" name="currentHandler" value="본인"><span class="txt-ko">본인</span><span class="txt-en" style="display:none;">Myself</span></label>
-                        <label class="radio-option"><input type="radio" name="currentHandler" value="직원"><span class="txt-ko">직원</span><span class="txt-en" style="display:none;">Employee</span></label>
-                        <label class="radio-option"><input type="radio" name="currentHandler" value="외주"><span class="txt-ko">외주</span><span class="txt-en" style="display:none;">Outsourced</span></label>
-                        <label class="radio-option"><input type="radio" name="currentHandler" value="안하고있음"><span class="txt-ko">안하고있음</span><span class="txt-en" style="display:none;">Nobody</span></label>
+                <div class="wizard-body">
+                    <div class="form-group">
+                        <label><span class="txt-ko">맡기고 싶은 업무 (복수 선택)</span><span class="txt-en" style="display:none;">Tasks (multiple)</span></label>
+                        <div class="task-grid">
+                            <label class="task-card"><input type="checkbox" name="tasks" value="콘텐츠 기획/제작"><span class="task-icon">&#128221;</span><span class="task-label"><span class="txt-ko">콘텐츠 기획/제작</span><span class="txt-en" style="display:none;">Content</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="마케팅/광고 운영"><span class="task-icon">&#128226;</span><span class="task-label"><span class="txt-ko">마케팅/광고 운영</span><span class="txt-en" style="display:none;">Marketing/Ads</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="시장조사/경쟁사 분석"><span class="task-icon">&#128269;</span><span class="task-label"><span class="txt-ko">시장조사/경쟁사 분석</span><span class="txt-en" style="display:none;">Research</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="고객 응대/CS"><span class="task-icon">&#128172;</span><span class="task-label"><span class="txt-ko">고객 응대/CS</span><span class="txt-en" style="display:none;">CS</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="기획/전략 수립"><span class="task-icon">&#128200;</span><span class="task-label"><span class="txt-ko">기획/전략 수립</span><span class="txt-en" style="display:none;">Strategy</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="디자인"><span class="task-icon">&#127912;</span><span class="task-label"><span class="txt-ko">디자인</span><span class="txt-en" style="display:none;">Design</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="데이터 분석/보고서"><span class="task-icon">&#128202;</span><span class="task-label"><span class="txt-ko">데이터 분석/보고서</span><span class="txt-en" style="display:none;">Analytics</span></span><span class="task-check">&#10003;</span></label>
+                            <label class="task-card"><input type="checkbox" name="tasks" value="기타"><span class="task-icon">&#10024;</span><span class="task-label"><span class="txt-ko">기타</span><span class="txt-en" style="display:none;">Other</span></span><span class="task-check">&#10003;</span></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="txt-ko">가장 급한 업무 1가지</span><span class="txt-en" style="display:none;">Most urgent task</span></label>
+                        <input type="text" name="urgentTask">
+                    </div>
+                    <div class="form-group">
+                        <label><span class="txt-ko">현재 담당자</span><span class="txt-en" style="display:none;">Current person in charge</span></label>
+                        <div class="radio-group" data-field="currentHandler">
+                            <label class="radio-option"><input type="radio" name="currentHandler" value="본인"><span class="txt-ko">본인</span><span class="txt-en" style="display:none;">Myself</span></label>
+                            <label class="radio-option"><input type="radio" name="currentHandler" value="직원"><span class="txt-ko">직원</span><span class="txt-en" style="display:none;">Employee</span></label>
+                            <label class="radio-option"><input type="radio" name="currentHandler" value="외주"><span class="txt-ko">외주</span><span class="txt-en" style="display:none;">Outsourced</span></label>
+                            <label class="radio-option"><input type="radio" name="currentHandler" value="안하고있음"><span class="txt-ko">안하고있음</span><span class="txt-en" style="display:none;">Nobody</span></label>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 섹션 4: AI 비서 캐릭터 -->
-                <div class="form-section-title form-section-gap"><span class="txt-ko">4. AI 비서 <span class="accent">캐릭터</span></span><span class="txt-en" style="display:none;">4. AI Secretary <span class="accent">Character</span></span></div>
-
-                <div class="form-group">
-                    <label><span class="txt-ko">텔레그램으로 소통할 AI 비서 캐릭터를 선택하세요</span><span class="txt-en" style="display:none;">Choose your AI secretary character for Telegram</span></label>
-                    <div class="char-options">
-                        <label class="char-option selected">
-                            <input type="radio" name="character" value="Ari" checked>
-                            <div class="char-name">Ari</div>
-                            <div class="char-default"><span class="txt-ko">기본</span><span class="txt-en" style="display:none;">Default</span></div>
-                            <div class="char-desc"><span class="txt-ko">밝고 영민한 비서</span><span class="txt-en" style="display:none;">Bright & smart secretary</span></div>
-                        </label>
-                        <label class="char-option">
-                            <input type="radio" name="character" value="Ollie">
-                            <div class="char-name">Ollie</div>
-                            <div class="char-desc"><span class="txt-ko">지혜로운 관리자</span><span class="txt-en" style="display:none;">Wise manager</span></div>
-                        </label>
-                        <label class="char-option">
-                            <input type="radio" name="character" value="Luca">
-                            <div class="char-name">Luca</div>
-                            <div class="char-desc"><span class="txt-ko">프로페셔널 비서</span><span class="txt-en" style="display:none;">Professional secretary</span></div>
-                        </label>
-                        <label class="char-option">
-                            <input type="radio" name="character" value="Lumi">
-                            <div class="char-name">Lumi</div>
-                            <div class="char-desc"><span class="txt-ko">따뜻한 길잡이</span><span class="txt-en" style="display:none;">Warm guide</span></div>
-                        </label>
-                        <label class="char-option">
-                            <input type="radio" name="character" value="Nova">
-                            <div class="char-name">Nova</div>
-                            <div class="char-desc"><span class="txt-ko">에너지 넘치는 리더</span><span class="txt-en" style="display:none;">Energetic leader</span></div>
-                        </label>
+            <!-- Step 4: AI 비서 캐릭터 -->
+            <div class="wizard-step" data-step="4">
+                <div class="wizard-header">
+                    <div class="wizard-step-label"><span class="txt-ko">4단계 / 4</span><span class="txt-en" style="display:none;">4 of 4</span></div>
+                    <h3><span class="txt-ko">AI 비서 <span class="accent">캐릭터</span></span><span class="txt-en" style="display:none;">AI Secretary <span class="accent">Character</span></span></h3>
+                    <p><span class="txt-ko">텔레그램으로 소통할 AI 비서 캐릭터를 선택하세요.</span><span class="txt-en" style="display:none;">Choose your AI secretary character for Telegram.</span></p>
+                </div>
+                <div class="wizard-body">
+                    <div class="form-group">
+                        <div class="char-grid">
+                            <label class="char-card selected">
+                                <input type="radio" name="character" value="Ari" checked>
+                                <div class="char-check">&#10003;</div>
+                                <div class="char-avatar"><img src="assets/characters/final_svg/ari.svg" alt="Ari"></div>
+                                <div class="char-name">Ari</div>
+                                <div class="char-default"><span class="txt-ko">기본</span><span class="txt-en" style="display:none;">Default</span></div>
+                                <div class="char-desc"><span class="txt-ko">밝고 영민한 비서</span><span class="txt-en" style="display:none;">Bright & smart</span></div>
+                            </label>
+                            <label class="char-card">
+                                <input type="radio" name="character" value="Ollie">
+                                <div class="char-check">&#10003;</div>
+                                <div class="char-avatar"><img src="assets/characters/final_svg/ollie.svg" alt="Ollie"></div>
+                                <div class="char-name">Ollie</div>
+                                <div class="char-desc"><span class="txt-ko">지혜로운 관리자</span><span class="txt-en" style="display:none;">Wise manager</span></div>
+                            </label>
+                            <label class="char-card">
+                                <input type="radio" name="character" value="Luca">
+                                <div class="char-check">&#10003;</div>
+                                <div class="char-avatar"><img src="assets/characters/final_svg/luca.svg" alt="Luca"></div>
+                                <div class="char-name">Luca</div>
+                                <div class="char-desc"><span class="txt-ko">프로페셔널 비서</span><span class="txt-en" style="display:none;">Professional</span></div>
+                            </label>
+                            <label class="char-card">
+                                <input type="radio" name="character" value="Lumi">
+                                <div class="char-check">&#10003;</div>
+                                <div class="char-avatar"><img src="assets/characters/final_svg/lumi.svg" alt="Lumi"></div>
+                                <div class="char-name">Lumi</div>
+                                <div class="char-desc"><span class="txt-ko">따뜻한 길잡이</span><span class="txt-en" style="display:none;">Warm guide</span></div>
+                            </label>
+                            <label class="char-card">
+                                <input type="radio" name="character" value="Nova">
+                                <div class="char-check">&#10003;</div>
+                                <div class="char-avatar"><img src="assets/characters/final_svg/nova.svg" alt="Nova"></div>
+                                <div class="char-name">Nova</div>
+                                <div class="char-desc"><span class="txt-ko">에너지 넘치는 리더</span><span class="txt-en" style="display:none;">Energetic leader</span></div>
+                            </label>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <button type="submit" class="submit-btn" id="applySubmitBtn">
-                    <span class="txt-ko">신청하기</span><span class="txt-en" style="display:none;">Submit Application</span>
-                </button>
-            </form>
+            <!-- Wizard 네비게이션 -->
+            <div class="wizard-footer">
+                <button type="button" class="btn-prev" id="wizardPrev" disabled onclick="wizardNav(-1)"><span class="txt-ko">&larr; 이전</span><span class="txt-en" style="display:none;">&larr; Back</span></button>
+                <button type="button" class="btn-next" id="wizardNext" onclick="wizardNav(1)"><span class="txt-ko">다음 &rarr;</span><span class="txt-en" style="display:none;">Next &rarr;</span></button>
+            </div>
+        </div>
+        </form>
 
-            <div class="form-success" id="applySuccess">
+        <div class="wizard-card" style="display:none;" id="applySuccessCard">
+            <div class="form-success" id="applySuccess" style="display:block;">
                 <div class="success-icon">&#10003;</div>
                 <h3><span class="txt-ko">신청이 완료되었습니다!</span><span class="txt-en" style="display:none;">Application submitted!</span></h3>
                 <p><span class="txt-ko">맞춤형 AI 팀 구성안을 준비하여 텔레그램으로 연락드리겠습니다.<br>감사합니다!</span><span class="txt-en" style="display:none;">We'll prepare a custom AI team plan and contact you via Telegram.<br>Thank you!</span></p>
@@ -2073,32 +2004,64 @@ function toggleOrchDetail(card) {
     panel.classList.add('show');
 }
 
-/* Apply form — radio/checkbox selection UI */
+/* Wizard navigation */
+var wizardCurrentStep = 1;
+var wizardTotalSteps = 4;
+
+function wizardNav(dir) {
+    var nextStep = wizardCurrentStep + dir;
+    if (nextStep < 1 || nextStep > wizardTotalSteps) return;
+    if (nextStep > wizardTotalSteps) { document.getElementById('applyForm').dispatchEvent(new Event('submit')); return; }
+    wizardCurrentStep = nextStep;
+    updateWizard();
+}
+
+function updateWizard() {
+    document.querySelectorAll('.wizard-step').forEach(function(s) { s.classList.remove('active'); });
+    var active = document.querySelector('.wizard-step[data-step="' + wizardCurrentStep + '"]');
+    if (active) active.classList.add('active');
+
+    var dots = document.querySelectorAll('.wizard-dot');
+    dots.forEach(function(d, i) {
+        d.classList.remove('active', 'completed');
+        if (i + 1 === wizardCurrentStep) d.classList.add('active');
+        else if (i + 1 < wizardCurrentStep) d.classList.add('completed');
+    });
+
+    var prev = document.getElementById('wizardPrev');
+    var next = document.getElementById('wizardNext');
+    prev.disabled = (wizardCurrentStep === 1);
+    if (wizardCurrentStep === wizardTotalSteps) {
+        next.innerHTML = '<span class="txt-ko">신청하기 &#10003;</span><span class="txt-en" style="display:none;">Submit &#10003;</span>';
+        next.onclick = function() { document.getElementById('applyForm').requestSubmit(); };
+    } else {
+        next.innerHTML = '<span class="txt-ko">다음 &rarr;</span><span class="txt-en" style="display:none;">Next &rarr;</span>';
+        next.onclick = function() { wizardNav(1); };
+    }
+    var isEn = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isEn) {
+        next.querySelectorAll('.txt-ko').forEach(function(e){e.style.display='none';});
+        next.querySelectorAll('.txt-en').forEach(function(e){e.style.display='inline';});
+        prev.querySelectorAll('.txt-ko').forEach(function(e){e.style.display='none';});
+        prev.querySelectorAll('.txt-en').forEach(function(e){e.style.display='inline';});
+    }
+}
+
+/* Apply form — radio/checkbox/task/char selection UI */
 document.querySelectorAll('.apply-form .radio-option').forEach(function(opt) {
     opt.addEventListener('click', function() {
-        var group = this.closest('.radio-group, .char-options');
-        if (group) {
-            group.querySelectorAll('.radio-option, .char-option').forEach(function(o) { o.classList.remove('selected'); });
-        }
+        var group = this.closest('.radio-group');
+        if (group) { group.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); }); }
         this.classList.add('selected');
     });
 });
-document.querySelectorAll('.apply-form .checkbox-option').forEach(function(opt) {
-    opt.addEventListener('click', function() {
-        var cb = this.querySelector('input[type="checkbox"]');
-        if (cb) {
-            setTimeout(function() {
-                opt.classList.toggle('selected', cb.checked);
-            }, 0);
-        }
-    });
+document.querySelectorAll('.task-card').forEach(function(opt) {
+    opt.addEventListener('click', function() { this.classList.toggle('selected'); });
 });
-document.querySelectorAll('.apply-form .char-option').forEach(function(opt) {
+document.querySelectorAll('.char-card').forEach(function(opt) {
     opt.addEventListener('click', function() {
-        var group = this.closest('.char-options');
-        if (group) {
-            group.querySelectorAll('.char-option').forEach(function(o) { o.classList.remove('selected'); });
-        }
+        var grid = this.closest('.char-grid');
+        if (grid) { grid.querySelectorAll('.char-card').forEach(function(o) { o.classList.remove('selected'); }); }
         this.classList.add('selected');
     });
 });
@@ -2154,8 +2117,9 @@ function submitApplyForm(e) {
 }
 
 function showFormSuccess() {
-    document.getElementById('applyForm').style.display = 'none';
-    document.getElementById('applySuccess').style.display = 'block';
+    document.getElementById('wizardCard').style.display = 'none';
+    document.getElementById('wizardProgress').style.display = 'none';
+    document.getElementById('applySuccessCard').style.display = 'block';
 }
 
 /* Scroll-triggered entrance animation for orchestration flow */

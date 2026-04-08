@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="512" height="512" shape-rendering="crispEdges">
+  <!-- Ollie - Orange/Brown Owl Character -->
+  <!-- Ears -->
+  <rect x="4" y="1" width="1" height="2" fill="#8B5E00"/>
+  <rect x="11" y="1" width="1" height="2" fill="#8B5E00"/>
+  <!-- Head top -->
+  <rect x="5" y="1" width="6" height="1" fill="#D4870E"/>
+  <!-- Head -->
+  <rect x="4" y="2" width="8" height="1" fill="#D4870E"/>
+  <rect x="3" y="3" width="9" height="1" fill="#D4870E"/>
+  <!-- Eyes -->
+  <rect x="4" y="3" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="5" y="3" width="1" height="1" fill="#D4870E"/>
+  <rect x="5" y="4" width="1" height="1" fill="#8B5E00"/>
+  <rect x="10" y="3" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="10" y="3" width="1" height="1" fill="#D4870E"/>
+  <rect x="10" y="4" width="1" height="1" fill="#8B5E00"/>
+  <rect x="6" y="3" width="4" height="1" fill="#D4870E"/>
+  <!-- Beak/nose -->
+  <rect x="6" y="4" width="4" height="1" fill="#D4870E"/>
+  <rect x="7" y="4" width="2" height="1" fill="#CC8400"/>
+  <!-- Body/Belly -->
+  <rect x="3" y="5" width="10" height="1" fill="#D4870E"/>
+  <rect x="4" y="5" width="8" height="5" fill="#D4870E"/>
+  <rect x="5" y="5" width="6" height="5" fill="#FFF3C4"/>
+  <rect x="5" y="6" width="6" height="4" fill="#FFE082"/>
+  <!-- Arms -->
+  <rect x="2" y="6" width="1" height="1" fill="#8B5E00"/>
+  <rect x="2" y="7" width="2" height="1" fill="#D4870E"/>
+  <rect x="13" y="6" width="1" height="1" fill="#8B5E00"/>
+  <rect x="12" y="7" width="2" height="1" fill="#D4870E"/>
+  <!-- Bottom -->
+  <rect x="5" y="10" width="6" height="1" fill="#F5A623"/>
+</svg>
